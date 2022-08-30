@@ -1,0 +1,63 @@
+﻿<header id="header_outer">
+    <div class="container">
+        <div class="header_section">
+            <div class="logo"><a href="javascript:void(0)"><img src="~/img/logob.png" alt=""></a></div>
+            <nav class="nav" id="nav">
+                <a class="res-nav_click animated wobble wow animated" href="javascript:void(0)" style="visibility: visible; animation-name: wobble;"><i class="fa-bars"></i></a>
+
+
+                <ul class="toggle">
+                    <li><a href="#top_content">خانه</a></li>
+                    <li><a href="#service">خدمات ما</a></li>
+                    <li><a href="#Portfolio">مشتریان ما</a></li>
+                    <li><a href="#pricing">تعرفه هاست</a></li>
+                    <li><a href="#client_outer">دامنه ها</a></li>
+                    <li><a href="#team">ابر هاست</a></li>
+                    <li><a href="#contact">تماس با ما</a></li>
+                    <li><a href="#contact">حساب کاربری</a></li>
+
+
+                </ul>
+                <ul class="costum-menu-header">
+
+
+                    <li><a href="#top_content">خانه</a></li>
+                    <li><a href="#service">خدمات </a></li>
+                    <li><a href="#Portfolio">مشتریان ما</a></li>
+                    <li><a href="#pricing">تعرفه هاست</a></li>
+                    <li><a href="#client_outer">دامنه </a></li>
+                    <li><a href="#team">ابر هاست</a></li>
+                    <li><a href="#contact">تماس با ما</a></li>
+                    
+               
+                    @*کلاس بدم که لاگین بود و نبود چه شکلی باشه منو.فایل 4 مداینی*@
+
+                    <li class="dropdown menu-behavior--hover d-none d-lg-block">
+                        <!--<span class="fx-font-size-base-xs fx-color--main">Hello. Sign in</span>-->
+                        <br>
+                        <a href="javascript:void(0)" id="dropdownSignIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toogle btn btn-link"><span>  حساب کاربری</span></a>
+                        <div aria-labelledby="dropdownSignIn" id="log-in-block" class="dropdown-menu animated fx-animation-fadeInDown20px" data-animate="fx-animation-fadeInDown20px">
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register"  rel="nofollow noopener">  ورود</a>
+                            <br />
+                            <div class="text-sign-in text-center fx-color--secondary direct-register-link">   ثبت نام نکرده اید؟
+                                <a asp-controller="Account" asp-action="Register" target="_blank"   rel="nofollow noopener">  ثبت نام</a></div>
+                        </div>
+
+                    </li>
+                   
+                    <li>
+                       
+                            <a asp-controller="Account" asp-action="Register" class="btn btn-outline btn-outline-primary btn-register   direct-register-link" target="_blank" rel="nofollow noopener">ثبت نام</a>
+
+
+                      
+                    </li>
+                   
+                </ul>
+                 
+            </nav>
+            <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa-bars"></i></a>
+        </div>
+    </div>
+
+</header>

@@ -1,0 +1,64 @@
+﻿@model AryanITC.Domain.ViewModels.Account.LoginUserViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">  آریان ITC</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> ورود به سایت</li>
+    </ul>
+</nav>
+
+
+
+<section class="">
+    <div class="main sign-custom">
+        
+        @if (ViewBag.IsSuccess != null)
+
+        {
+            <div class=" alert alert-success">
+                <p class="help-block"> ورود با موفقیت انجام شد</p>
+            </div>
+
+            <script>
+                // Your delay in milliseconds
+                var delay = 3000; 
+                setTimeout(function () { window.location = "https://localhost:44385/"; }, delay);
+            </script>
+        }
+        <div class="sign ">
+            <a hre="Register">ثبت نام </a>
+            <a class="active" href="Login">ورود </a>
+        </div>
+
+        <form class="form1 " asp-action="Login" method="post">
+
+
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+            <span class="field-validation-valid login-error" data-valmsg-for="Error" data-valmsg-replace="true"></span>
+
+            <p class="p1 margin-p ">ایمیل</p>
+            <input asp-for="Email" class="un text-box single-line password text-center"></><span class="field-validation-valid col-md-12 text-danger"></span>
+            <span asp-validation-for="Email" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <p class="p1 margin-p ">رمز عبور</p>
+            <input type="password" asp-for="Password" class="un text-box single-line password text-center"></><span class="field-validation-valid col-md-12 text-danger"></span>
+            <span asp-validation-for="Password" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <button class="submit-login  text-center" onclick="SendVerificationCode.html"> ورود</button>
+            <p class="forgot text-center"><a href="ForgotPassword">رمز ورود خود را فراموش کردم!</a></p>
+
+        </form>
+    </div>
+</section>
+<div class="row">
+    <div class="col-4">
+   
+    </div>
+    <div style="float: left" class="col-8 left">
+
+    </div>
+</div>
+

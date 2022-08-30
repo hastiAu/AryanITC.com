@@ -1,0 +1,36 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <title>آریان ITC | @ViewData["Title"]</title>
+
+
+    <partial name="_MetaTags" />
+    <partial name="_Styles" />
+    <partial name="Scripts" />
+</head>
+
+<body>
+
+    <!--Header_section--MainMenu-->
+
+    <partial name="_MainMenu" />
+
+    <!--Header_section-->
+
+    @RenderBody()
+
+    <partial name="_Footer" />
+
+<partial name="_FooterRefrence" />
+
+@RenderSection("Scripts", false)
+
+
+    @RenderSection("SearchBox", false)
+
+    <partial name="_Notification" />
+    <partial name="_ValidationScriptsPartial" />
+
+</body>
+</html>

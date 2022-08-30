@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model AryanITC.Domain.ViewModels.Account.RegisterUserViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">  آریان ITC</a></li>
+        <li class="breadcrumb-item active" aria-current="page">عضویت در سایت</li>
+    </ul>
+</nav>
+<section>
+    <div class="main-register">
+        <div class="sign">
+            <a class="active" href="./Registration.html">ثبت نام  </a>
+            <a href="./log%20in.html"> @Localizer["Login"]  </a>
+        </div>
+        <form asp-controller="Account" asp-action="Register" method="post" class="form1">
+
+            <input asp-for="FirstName" class="un   form-control pass text-center" placeholder="نام">
+            <span asp-validation-for="FirstName" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <input asp-for="LastName" class="un   form-control pass text-center" placeholder="نام خانوادگی">
+            <span asp-validation-for="LastName" class="field-validation-valid col-md-12 text-danger"></span>
+            
+            <input asp-for="Email" class="un    form-control pass text-center" placeholder="ایمیل">
+            <span asp-validation-for="Email" class="field-validation-valid col-md-12 text-danger"></span>
+         
+
+            <input asp-for="Mobile" class="un   form-control pass text-center" placeholder="موبایل" onkeyup="toEnglishNumber(this.value,'Mobile')">
+            <span asp-validation-for="Mobile" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <input asp-for="Password" type="password" class="un   form-control pass text-center" placeholder="رمز عبور">
+            <span asp-validation-for="Password" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <input asp-for="ConfirmPassword" type="password" class="pass   form-control password" placeholder="تکرار رمز عبور">
+            <span asp-validation-for="ConfirmPassword" class="field-validation-valid col-md-12 text-danger"></span>
+
+            <button type="submit" class="submit text-center">عضویت در سایت  </button>
+            <p class="forgot text-center"><a href="./log%20in.html">بازگشت به صفحه ورود</a></p>
+            <p class="forgot text-center"><a href="./ForgetPassword.html">رمز ورود خود را فراموش کردم!</a></p>
+        </form>
+    </div>
+</section>
+
+
+ 
