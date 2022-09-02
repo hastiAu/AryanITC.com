@@ -1,0 +1,147 @@
+﻿/*.main-articles__top-slide__item__img img {
+    width: 100% !important;
+    height: 100% !important;
+}*/
+#Reservationform {
+    box-shadow: 8px 10px 8px 10px #e6bc3db8;
+    max-width: 500px;
+    margin: 7em auto;
+}
+
+.field-validation-error {
+    color: red !important;
+    padding-right: 50px !important;
+}
+
+
+
+.timer-quick {
+    display: inline-flex !important;
+    direction: ltr !important;
+    flex-direction: row !important;
+}
+
+#border-bottom-single-article, #border-bottom-single-article p {
+    font-size: 16px;
+    line-height: 32px;
+    margin: 32px 0;
+    text-align: justify;
+    /*    font-family: IRANSansWeb;
+*/ /*font-size: 1rem;
+            line-height: 2rem;*/
+    color: #6b7074;
+    /*font-weight: 800;*/
+}
+
+.tableofcontents-head, .collapsibleContainer div {
+    margin: 0 !important;
+}
+
+.tableOfContents div {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+#border-bottom-single-article div {
+    margin: 5px 0 10px 0;
+}
+
+#border-bottom-single-article p {
+    margin: 5px 0 32px 0;
+}
+
+#border-bottom-single-article ul {
+    padding: 15px;
+    margin-right: 25px;
+    line-height: 35px;
+}
+
+.tableOfContents {
+    border-radius: 10px;
+    border: solid 1px #cccccc;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: RGB(248,249,251);
+    margin-bottom: 30px !important;
+}
+
+.tableofcontents-head {
+    padding: 10px;
+    border-bottom: solid 1px #000;
+}
+
+.tableOfContents div {
+    padding-right: 20px;
+    display: list-item;
+    list-style-position: inside;
+}
+
+    .tableOfContents div::marker {
+        color: #959595;
+    }
+
+.tableOfContents a {
+    color: #959595;
+}
+
+#Green01 {
+    color: #009688;
+}
+
+.comment-exercises {
+    font-size: 2.28em !important;
+    font-weight: bold;
+}
+
+.modalTitleCustom {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ReservationModal {
+    box-shadow: 8px 10px 8px 10px #e6bc3db8;
+}
+
+.orange_custom_border {
+    border: #f58a42 1px solid;
+}
+
+
+.collapsibleContainer {
+    border-radius: 10px !important;
+    border: solid 1px #cccccc !important;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%) !important;
+    background-color: RGB(248,249,251) !important;
+}
+
+.collapsible.active {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-bottom: solid 1px #000 !important;
+}
+
+#grayBtnCustom {
+    background-color: #c5cece;
+    border-color: #e6e33491;
+}
+
+/* This is purely for the demo */
+.Player-Plyr {
+    max-width: 800px !important;
+    margin: 0 auto;
+}
+
+.plyr {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+#video-text {
+    font-size: 2.28em !important;
+    font-weight: bold !important;
+}
+
+#player {
+    --plyr-color-main: #00b3ff !important;
+}

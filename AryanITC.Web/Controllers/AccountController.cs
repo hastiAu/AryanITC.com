@@ -52,21 +52,24 @@ namespace AryanITC.Web.Controllers
                 switch (result)
                 {
                     case RegisterUserResult.Error:
-                        ModelState.AddModelError(string.Empty,"شکست");
+                        ModelState.AddModelError(string.Empty, "شکست");
                         TempData[ErrorMessage] = "شکست";
                         break;
 
                     case RegisterUserResult.UserExist:
-                        ModelState.AddModelError(string.Empty,"شما قبلا ثبت نام کردید");
-                        TempData[WarningMessage] = "شما قبلا ثبت نام کردید";
-                     
+                        ModelState.AddModelError("Email", "بجه قبلا ثبت نام کردید");
+                        TempData[WarningMessage] = "بچه جون قبلا ثبت نام کردید";
+
                         break;
 
                     case RegisterUserResult.Success:
-                        TempData["Email"] = registerUserViewModel.Email;
+                        //TempData["Email"] = registerUserViewModel.Email;
                         TempData[SuccessMessage] = "با موفقیت ثبت نام کردید";
-                        return View("SuccessRegister", registerUserViewModel);
+                        //return RedirectToAction("Index", "Home");
+                        break
 
+                        ;
+ 
 
 
                 }
@@ -77,85 +80,85 @@ namespace AryanITC.Web.Controllers
 
         #endregion
 
-        #region Login
+        //#region Login
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginUserViewModel loginUserViewModel)
-        { 
+        //[HttpPost]
+        //public async Task<IActionResult> Login(LoginUserViewModel loginUserViewModel)
+        //{ 
 
-            if (ModelState.IsValid)
-            {
-                var result = await _userService.LoginUser(loginUserViewModel);
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await _userService.LoginUser(loginUserViewModel);
 
-                switch (result)
-                {
-                    case LoginUserResult.Error:
-                    {
-                        ModelState.AddModelError("Email","کاربر عزیز ایمیل وارد شده اشتباه است");
-                        break;
-                    }
+        //        switch (result)
+        //        {
+        //            case LoginUserResult.Error:
+        //            {
+        //                ModelState.AddModelError("Email","کاربر عزیز ایمیل وارد شده اشتباه است");
+        //                break;
+        //            }
 
-                    case LoginUserResult.NotActive:
-                    {
-                        ModelState.AddModelError("Email", "حساب کاربری شما هنوز فعال نشده است");
-                        TempData[InfoMessage] = "حساب کاربری شما هنوز فعال نشده است";
-                            break;
-                        }
+        //            case LoginUserResult.NotActive:
+        //            {
+        //                ModelState.AddModelError("Email", "حساب کاربری شما هنوز فعال نشده است");
+        //                TempData[InfoMessage] = "حساب کاربری شما هنوز فعال نشده است";
+        //                    break;
+        //                }
 
-                    case LoginUserResult.UserNotFound:
-                    {
-                        ModelState.AddModelError("Email", "کاربر مورد نظر یافت نشد ");
-                        break;
-                        }
+        //            case LoginUserResult.UserNotFound:
+        //            {
+        //                ModelState.AddModelError("Email", "کاربر مورد نظر یافت نشد ");
+        //                break;
+        //                }
 
-                    case LoginUserResult.Success:
-                    {
-                        ModelState.AddModelError("Email", "ورود با موفقیت انجام شد");
-                        ViewBag.IsSuccess = true;
-                        return View();
+        //            case LoginUserResult.Success:
+        //            {
+        //                ModelState.AddModelError("Email", "ورود با موفقیت انجام شد");
+        //                ViewBag.IsSuccess = true;
+        //                return View();
                             
-                    }
-                }
-            }
+        //            }
+        //        }
+        //    }
 
            
-            return View(loginUserViewModel);
-        }
-        #endregion
+        //    return View(loginUserViewModel);
+        //}
+        //#endregion
 
-        #region SuccessRegister  
+        //#region SuccessRegister  
 
-        //[HttpGet("active-Account")]
-        public IActionResult SuccessRegister()
-        {
-            ViewBag.email = TempData["Email"];
+        ////[HttpGet("active-Account")]
+        ////public IActionResult SuccessRegister()
+        ////{
+        ////    ViewBag.email = TempData["Email"];
 
-            //if (TempData["CheckOtpCode"] == null)
-            //{
-            //    return RedirectToAction("Register", "Account");
+        ////    if (TempData["CheckOtpCode"] == null)
+        ////    {
+        ////        return RedirectToAction("Register", "Account");
 
-            //}
-            return View();
+        ////    }
+        ////    return View();
 
-        }
+        ////}
 
-        #endregion
+        //#endregion
 
-        #region ActiveEmailAccount
+        //#region ActiveEmailAccount
 
 
-        public IActionResult ActiveEmailAccount( string activeEmailAccount)
-        {
+        //public IActionResult ActiveEmailAccount( string activeEmailAccount)
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        #endregion
+        //#endregion
 
 
     }

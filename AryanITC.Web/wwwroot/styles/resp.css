@@ -1,0 +1,779 @@
+/* xl */
+
+@media only screen and (max-width: 1200px) {
+    .btn--orange,
+    .btn--outline {
+        padding: 7px 7%;
+    }
+
+    .container.slick-slide {
+        max-height: 480px !important;
+    }
+
+    .main__food__body__item--telegram {
+        bottom: 28.5%;
+        left: 47.09%;
+    }
+
+    .main__food__body__item--site {
+        right: 26.09%;
+        top: 38.5%;
+    }
+
+    .main__food__body__item--whats {
+        left: 25.09%;
+        top: 45.5%;
+    }
+
+
+    .slick-dotted.slick-slider {
+        max-width: 1350px !important;
+    }
+}
+
+/* lg */
+@media only screen and (max-width: 992px) {
+    .header {
+        height: 65px;
+    }
+
+    .header__logo a {
+        width: 110px;
+    }
+
+    .header__search-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+        .header__search-btn svg {
+            width: 15px;
+        }
+
+    .main__top-slider__item__title {
+        width: 100%;
+    }
+
+    .main__top-slider__item__p {
+        text-align: center;
+    }
+
+    #top-slick .slick-next {
+        right: 30% !important;
+    }
+
+    #top-slick .slick-prev {
+        left: 30% !important;
+    }
+
+    #top-slick .slick-dots {
+        width: 92.5% !important;
+    }
+
+    .main__curve {
+        background-image: url("../assets/img/girl-full.png");
+        background-color: #f4bd4d;
+        background-position: right;
+        opacity: 1;
+        background-position: 65% 45px;
+        /* background-size: cover; */
+    }
+
+    .main__food {
+        margin-top: 75px;
+    }
+
+    .main__choice {
+        margin-top: 100px;
+    }
+
+    .main__services,
+    .main__profession {
+        margin-top: 75px;
+    }
+
+    .footer__middle {
+        align-items: initial;
+    }
+
+    .footer__box {
+        border-radius: 16px;
+        box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.07);
+        background-color: #ffffff;
+        padding: 20px 28px;
+        height: 140px;
+        width: 157px !important;
+    }
+
+    .main-articles__top-slide__item__body h2 {
+        font-size: 2.6em;
+    }
+
+    .main-workout__footer a {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+        .main-workout__footer a button {
+            margin: 10px 0;
+            width: 100%;
+            font-size: 1.4em;
+        }
+
+    .main-workout__body {
+        height: 350px;
+        /* width: 255px; */
+    }
+
+
+        .main-workout__body .item._2 {
+            top: 93px;
+            right: 10%;
+        }
+
+        .main-workout__body .item._1 {
+            top: 32px;
+            right: 10%;
+        }
+
+        .main-workout__body .item._3 {
+            top: 70px;
+            right: 10%;
+        }
+
+        .main-workout__body .item._4 {
+            bottom: 135px;
+            right: 4%;
+        }
+        .main-workout__body .item._8 {
+            right: 0.5%;
+            top: 121px;
+        }
+
+        .main-workout__body .item._9 {
+            right: -5%;
+            bottom: 209px;
+        }
+
+        .main-workout__body .item._10 {
+            left: -3.5%;
+            bottom: 69px;
+        }
+
+        .main-workout__body .item._11 {
+            left: -4%;
+            bottom: 213px;
+        }
+
+        .main-workout__body .item._12 {
+            left: -9%;
+            bottom: 461px;
+        }
+
+        .main-workout__body .item._13 {
+            left: 2%;
+            top: 50px;
+        } 
+        .main-workout__body .item._13 {
+            left: 2%;
+            top: 50px;
+        }
+        .main-workout__body .item._14 {
+            left: 1% !important;
+            top: 378px !important;
+        }
+
+
+        .main-workout__body .item {
+            font-size: 0.7em;
+        }
+
+    .main-workout-boxes__body > div {
+        flex-basis: 48%;
+    }
+}
+
+/* md */
+@media only screen and (max-width: 768px) {
+    body,
+    html {
+        font-size: 12px !important;
+    }
+
+    .main__curve {
+        background-position: 65% 45px;
+    }
+
+    button.btn--outline:nth-child(1) {
+        width: 100%;
+    }
+
+    .main__curve__body {
+        width: 57%;
+    }
+
+    .main-articles__top-slide__item__img {
+        max-width: 140px;
+        max-height: 160px;
+        left: 5%;
+        top: 10px;
+    }
+
+    .main-articles__top-slide__item__body {
+        height: 200px !important;
+    }
+
+        .main-articles__top-slide__item__body h2 {
+            font-size: 1.6em;
+        }
+
+        .main-articles__top-slide__item__body p,
+        .main-articles__top-slide__item__body h4 {
+            font-size: 0.66em;
+        }
+
+    .main-articles__top-slide__item {
+        height: 230px !important;
+    }
+
+    #slick-articles .slick-dots {
+        top: unset;
+        bottom: 11.5%;
+        left: 20%;
+        right: unset;
+    }
+
+        #slick-articles .slick-dots .slick-active button {
+            border: #f4bd4d solid 2px;
+        }
+
+            #slick-articles .slick-dots .slick-active button::after {
+                background-color: #f4bd4d;
+            }
+
+        #slick-articles .slick-dots li button {
+            border: solid 2px #ccc;
+        }
+
+    .article-single__quote p {
+        padding-top: 17%;
+        padding-bottom: 12%;
+        background-size: 55px, 43px;
+        padding-right: initial;
+        padding-left: initial;
+    }
+    .main__food__body__item--telegram {
+        bottom: 32.5%;
+        left: 46.05%;
+    }
+
+    .main__food__body__item--site {
+        right: 25.09%;
+        top: 38.5%;
+    }
+
+    .main__food__body__item--whats {
+        left: 24.09%;
+        top: 45.5%;
+    
+    }
+    .main-workout-boxes__body > div {
+        flex-basis: 48% !important;
+    }
+    section .temp{
+        margin: 50px;
+    }
+ 
+}
+@media only screen and (max-width: 608px) {
+    body,
+    html {
+        font-size: 10px;
+    }
+
+    .main-workout__body {
+        height: 359px !important;
+        width: 320px !important;
+    }
+        .main-workout__body .bg {
+            right: 125px !important;
+        }
+
+            .main-workout__body .bg.bg--back {
+                right: 125px !important;
+               
+            } 
+        .main-workout__body .item._1 {
+            top: 17px !important;
+            right: 10% !important;
+        }
+
+        .main-workout__body .item._2 {
+            top: 57px !important;
+            right: 5% !important;
+        }
+
+
+        .main-workout__body .item._3 {
+            top: 101px !important;
+            right: 3% !important;
+        }
+
+        .main-workout__body .item._4 {
+            bottom: 72px !important;
+            right: 1% !important;
+        }
+
+        .main-workout__body .item._5 {
+            bottom: 56px !important;
+            left: -2% !important;
+        }
+
+        .main-workout__body .item._6 {
+            bottom: 213px !important;
+            left: -11% !important;
+        }
+
+        .main-workout__body .item._7 {
+            top: 20px !important;
+            left: 17% !important;
+        }
+
+        .main-workout__body .item._8 {
+            right: 1.5% !important;
+            top: 47px !important;
+        }
+
+        .main-workout__body .item._9 {
+            right: 2% !important;
+            bottom: 88px !important;
+        }
+
+        .main-workout__body .item._10 {
+            left: -3.5% !important;
+            bottom: 23px !important;
+        }
+
+        .main-workout__body .item._11 {
+            left: -4% !important;
+            bottom: 89px !important;
+        }
+
+        .main-workout__body .item._12 {
+            left: -14% !important;
+            bottom: 206px !important;
+        }
+
+        .main-workout__body .item._13 {
+            left: 2% !important;
+            top: 19px !important;
+        }
+
+        .main-workout__body .item._14 {
+            left: -2% !important;
+            top: 169px !important;
+        }
+
+        .main-workout__body .item {
+            font-size: 0.7em;
+        }
+
+    .main-workout-boxes__body > div {
+        flex-basis: 48% !important;
+    }
+    .Registration{
+        border-radius: 0px;
+    
+    }
+    .Registration .inp1{
+        width: 80%;
+    }
+    section .temp{
+        margin: 30px 0px;
+    }
+    section .temp p {
+        margin: 10px 20%;
+        text-align-last: justify;
+        font-size: 13px;
+    }
+    .temp .number{
+        margin-right: 43%;
+    }
+    
+}
+    /* sm */
+    @media only screen and (max-width: 576px) {
+        body,
+        html {
+            font-size: 10px;
+        }
+
+        .main__curve__body {
+            padding-left: initial;
+        }
+
+        .main__curve {
+            height: 450px;
+            font-size: 8px;
+        }
+
+        .main__curve__body h2 {
+            font-size: 2em;
+            /* font-weight: bold; */
+        }
+
+        .main__curve__body div {
+            font-size: 1.25em;
+        }
+
+        .btn.btn--outline.btn--outline--white {
+            font-size: 1.5em;
+            border: 2px solid white;
+        }
+
+        .main__success__body {
+            width: 80%;
+        }
+
+        .main__success__slider__item {
+            height: 270px;
+        }
+
+        .profession__img {
+            width: 75px !important;
+            height: 75px !important;
+        }
+
+        #profession-slick .main__success__slider__item {
+            height: 160px;
+            border-radius: 10px;
+        }
+
+        .main__food__body__item {
+            /*width: 93px;
+    height: 93px;
+    border: solid 5px #dbaa45; */
+            font-size: 0.6em;
+        }
+
+            .main__food__body__item svg {
+                width: 25px;
+                height: 25px;
+            }
+
+        .main__food__body {
+            height: 300px;
+        }
+
+        .main__food__body__item--telegram {
+            left: 46%;
+            top: 50.09%;
+        }
+
+        .main__food__body__item--site {
+            right: 25.09%;
+            top: 38%;
+        }
+
+        .main__food__body__item--whats {
+            left: 24.09%;
+            top: 44.5%;
+        }
+
+        .main-articles__top-slide__item__body {
+            padding-bottom: 20px !important;
+        }
+
+        .comment__display__item__rep {
+            margin-right: initial;
+        }
+
+        .main-workout__heder {
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .main-workout-boxes__body > div {
+            flex-basis: 100%;
+        }
+
+        .main-workout-boxes__header > div {
+            flex-basis: 100%;
+            text-align: center;
+        }
+
+        .bread-crumb {
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .main-workout-boxes__body > div {
+            flex-basis: 48% !important;
+        }
+        section .temp{
+            border-radius: 0px;
+        }
+        
+        
+    }
+
+    @media only screen and (max-width: 425px) {
+        body,
+        html {
+            font-size: 10px;
+        }
+
+        .main-workout__body {
+            height: 359px !important;
+            width: 320px !important;
+        }
+
+            .main-workout__body .item._1 {
+                top: 17px !important;
+                right: 10% !important;
+            }
+
+            .main-workout__body .item._2 {
+                top: 57px !important;
+                right: 5% !important;
+            }
+
+
+            .main-workout__body .item._3 {
+                top: 101px !important;
+                right: 6% !important;
+            }
+
+            .main-workout__body .item._4 {
+                bottom: 72px !important;
+                right: 1% !important;
+            }
+
+            .main-workout__body .item._5 {
+                bottom: 56px !important;
+                left: -2% !important;
+            }
+
+            .main-workout__body .item._6 {
+                bottom: 213px !important;
+                left: -11% !important;
+            }
+
+            .main-workout__body .item._7 {
+                top: 20px !important;
+                left: 17% !important;
+            }
+
+            .main-workout__body .item._8 {
+                right: 1.5% !important;
+                top: 47px !important;
+            }
+
+            .main-workout__body .item._9 {
+                right: 2% !important;
+                bottom: 88px !important;
+            }
+
+            .main-workout__body .item._10 {
+                left: -3.5% !important;
+                bottom: 23px !important;
+            }
+
+            .main-workout__body .item._11 {
+                left: -4% !important;
+                bottom: 89px !important;
+            }
+
+            .main-workout__body .item._12 {
+                left: -14% !important;
+                bottom: 206px !important;
+            }
+
+            .main-workout__body .item._13 {
+                left: 2% !important;
+                top: 19px !important;
+            }
+
+            .main-workout__body .item._14 {
+                left: -2% !important;
+                top: 169px !important;
+            }
+
+            .main-workout__body .item {
+                font-size: 0.7em;
+            }
+
+        .main-workout-boxes__body > div {
+            flex-basis: 97% !important;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .main-workout__body {
+            height: 359px !important;
+            width: 280px !important;
+        }
+
+            .main-workout__body .bg {
+                right: 55px !important;
+
+            }
+
+                .main-workout__body .bg.bg--back {
+                    right: 55px !important;
+                }
+
+            .main-workout__body .item._3 {
+                top: 101px !important;
+                right: 1% !important;
+            }
+        .main-workout-boxes__body > div {
+            flex-basis: 97% !important;
+        }
+        .main {
+            border-radius: 0px;
+            height: 450px;
+        }
+        .sign{
+            text-align: -webkit-center;
+            display: block;
+        }
+        .sign button{
+            margin: 10px 0;
+        }
+       .Registration{
+           height: 800px;
+       }
+    }
+
+    @media (max-width: 375px) {
+        .main-workout__body {
+            height: 359px !important;
+            width: 280px !important;
+        }
+
+            .main-workout__body .bg {
+                right: 35px !important;
+            }
+
+                .main-workout__body .bg.bg--back {
+                    right: 35px !important;
+                }
+        .main-workout-boxes__body > div {
+            flex-basis: 97% !important;
+        }
+        .temp .sub {
+            margin-right: 33%;
+        }
+    }
+
+    @media (max-width: 320px) {
+        body,
+        html {
+            font-size: 9px;
+        }
+
+        .main-workout__body .bg {
+            right: unset !important;
+        }
+
+            .main-workout__body .bg.bg--back {
+                right: unset !important;
+            }
+
+        .main-workout__heder {
+            padding: 10px 15px !important;
+            margin: 0 5px !important;
+        }
+
+        .main__food__body__item--telegram {
+            left: 46%;
+            top: 46%;
+        }
+
+        .main-workout__body {
+            height: 359px !important;
+            width: 280px !important;
+        }
+
+            .main-workout__body .item._1 {
+                top: 17px !important;
+                right: 10% !important;
+            }
+
+            .main-workout__body .item._2 {
+                top: 57px !important;
+                right: 5% !important;
+            }
+
+
+            .main-workout__body .item._3 {
+                top: 101px !important;
+                right: 1% !important;
+            }
+
+            .main-workout__body .item._4 {
+                bottom: 72px !important;
+                right: 1% !important;
+            }
+
+            .main-workout__body .item._5 {
+                bottom: 56px !important;
+                left: 8% !important;
+            }
+
+            .main-workout__body .item._6 {
+                bottom: 213px !important;
+                left: -11% !important;
+            }
+
+            .main-workout__body .item._7 {
+                top: 20px !important;
+                left: 17% !important;
+            }
+
+            .main-workout__body .item._8 {
+                right: 1.5% !important;
+                top: 47px !important;
+            }
+
+            .main-workout__body .item._9 {
+                right: 0% !important;
+                bottom: 88px !important;
+            }
+
+            .main-workout__body .item._10 {
+                left: -9.5% !important;
+                bottom: 23px !important;
+            }
+
+            .main-workout__body .item._11 {
+                left: -12% !important;
+                bottom: 89px !important;
+            }
+
+            .main-workout__body .item._12 {
+                left: -14% !important;
+                bottom: 206px !important;
+            }
+
+            .main-workout__body .item._13 {
+                left: 2% !important;
+                top: 19px !important;
+            }
+
+            .main-workout__body .item._14 {
+                left: -7% !important;
+                top: 170px !important;
+            }
+
+            .main-workout__body .item {
+                font-size: 0.7em;
+            }
+
+        .main-workout-boxes__body > div {
+            flex-basis: 97% !important;
+        }
+        .temp .sub {
+            margin-right: 33%;
+        }
+    }

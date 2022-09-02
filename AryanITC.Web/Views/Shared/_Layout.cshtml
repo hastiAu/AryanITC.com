@@ -4,13 +4,21 @@
 <head>
     <title>آریان ITC | @ViewData["Title"]</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 
     <partial name="_MetaTags" />
     <partial name="_Styles" />
-    <partial name="Scripts" />
-</head>
 
+    @RenderSection("Styles", false)
+
+
+
+
+
+</head>
 <body>
+
 
     <!--Header_section--MainMenu-->
 
@@ -22,15 +30,21 @@
 
     <partial name="_Footer" />
 
-<partial name="_FooterRefrence" />
-
-@RenderSection("Scripts", false)
+    <partial name="_FooterRefrence" />
+     <partial name="Scripts" />
+    @RenderSection("Scripts", false)
 
 
     @RenderSection("SearchBox", false)
 
     <partial name="_Notification" />
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
+ 
+
+
+ 
+ 
+
 
 </body>
 </html>

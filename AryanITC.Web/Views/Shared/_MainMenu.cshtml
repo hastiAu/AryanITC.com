@@ -30,17 +30,31 @@
                     <li><a href="#contact">تماس با ما</a></li>
                     
                
-                    @*کلاس بدم که لاگین بود و نبود چه شکلی باشه منو.فایل 4 مداینی*@
+                    @*کلاس بدم که لاگین بود و نبود چه شکلی باشه منو.فایل 8 مداینی*@
 
                     <li class="dropdown menu-behavior--hover d-none d-lg-block">
                         <!--<span class="fx-font-size-base-xs fx-color--main">Hello. Sign in</span>-->
                         <br>
                         <a href="javascript:void(0)" id="dropdownSignIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toogle btn btn-link"><span>  حساب کاربری</span></a>
                         <div aria-labelledby="dropdownSignIn" id="log-in-block" class="dropdown-menu animated fx-animation-fadeInDown20px" data-animate="fx-animation-fadeInDown20px">
-                            <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register"  rel="nofollow noopener">  ورود</a>
-                            <br />
-                            <div class="text-sign-in text-center fx-color--secondary direct-register-link">   ثبت نام نکرده اید؟
-                                <a asp-controller="Account" asp-action="Register" target="_blank"   rel="nofollow noopener">  ثبت نام</a></div>
+                           
+                            <div class="header__profile d-flex align-items-center">
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="header__name">@User.Identity.Name خوش آمدید!</div>
+                                }
+
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register"  rel="nofollow noopener">  ورود</a>
+                                    <br />
+                                    <div class="text-sign-in text-center fx-color--secondary direct-register-link">   ثبت نام نکرده اید؟
+                                        <a asp-controller="Account" asp-action="Register" target="_blank"   rel="nofollow noopener">  ثبت نام</a></div>
+                           
+                                }
+                            </div>
+
                         </div>
 
                     </li>

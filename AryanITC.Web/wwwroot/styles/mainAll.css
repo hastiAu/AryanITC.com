@@ -1,0 +1,322 @@
+
+@font-face {
+    font-family: 'iranyekan_fa';
+    src: local(yekan-Bold), url(../assets/fonts/iranyekan_fa/woff/iranyekanwebbold.woff) format("woff"), url(../assets/fonts/iranyekan_fa/eot/iranyekanwebbold.eot) format("eot"), url(../assets/fonts/iranyekan_fa/ttf/iranyekanwebbold.ttf) format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+}
+.btn-slide{
+font-size: 1.2em;
+}
+
+.seperator--{
+    height: 80%;
+}
+.seperator-{
+    opacity: .5;
+}
+.description-{
+    font-size: .85em;
+}
+
+
+.mt-n9{
+    margin-top: -35px;
+}
+
+
+.description-footer{
+    color: #787878;
+}
+.social--{
+    width: max-content;
+}
+.enamad-title{
+    font-size: .6em;
+}
+
+.mt-10{
+    padding-top: 90px;
+}
+.reservation-cell-menu {
+    left: unset;
+    right: 10px;
+}
+
+.resavation--{
+    display: block; padding-right: 17px;
+}
+.modal-backdrop {
+    background-color: lightyellow;
+}
+
+.resavation-content{
+    box-shadow: 8px 10px 8px  10px #e6bc3db8 ;
+}
+.resavation-title{
+    font-weight:bold;font-size:20px;
+}
+.btn-reservation{
+    background-color:#f58a42
+}
+
+.seperator---{
+    right: 29.5%;justify-content: normal;align-items: center;height: 50%;
+}
+
+.article-style{
+    height: 80%;
+}
+.share-style{
+    width: 66%;
+}
+.share-title{
+    color: #959595;
+}
+.subtitle-article{
+    color: #959595
+}
+.summery-article{
+    color: #6f6f6f
+}
+.side-title-header--{
+    font-size: .85em; font-weight: bold;
+}
+.side-subtitle-header--{
+    font-size: .7em; 
+    color:#959595;
+}
+.img-side{
+    width: 80px; height: 80px; margin-left: 15px;
+}
+.title-follow{
+    font-weight: normal; font-size: .8em; color: #6c63ff
+}
+.follow-sec{
+    flex-basis: 33%; text-align: center;
+}
+.favorite {
+    color: #959595;
+    font-weight: bold;
+    margin-left: 8px;
+  
+}
+
+
+.fanum {
+    font-family: iranyekan_fa;
+}
+
+.title-comment{
+    color:rgba(51, 51, 51, 0.87);
+}
+
+.btn-comment{
+    padding: 10px 50px;
+}
+
+.sort-item{
+    font-weight: bold; font-size: 1.1em; margin-left: 10px;
+}
+.title-header-detail{
+    font-size: 2.28em;
+}
+.footer-article{
+    border-radius: 15px; padding:16px 0;
+}
+
+
+.footer_curve--{
+width: 100%; position: absolute; top: -1px;
+}
+    .contact-img {
+        width: 100%;
+        height: unset;
+        display: block;
+    }
+
+    .main-food-site {
+        right: 20.5%;
+        top: 24.8%;
+        width: 17%;
+        height: 33%;
+        position: absolute;
+        border-radius: 100%;
+    }
+
+    .main-food-telegram {
+        right: 41.3%;
+        top: 51.5%;
+        width: 17%;
+        height: 33%;
+        position: absolute;
+        border-radius: 100%;
+    }
+
+    .main-food-whatsapp {
+        right: 63.7%;
+        top: 37.2%;
+        width: 17%;
+        height: 33%;
+        position: absolute;
+        border-radius: 100%;
+    }
+
+    .main__top-slider__item__title {
+        min-height: 80px;
+    }
+
+    .w-101 {
+        width: 80% !important;
+        margin: auto;
+    }
+    .form-search {
+transform: translate(0%,0%);
+transition: all 1s;
+width: 50px;
+height: 50px;
+background: #ebebeb;
+box-sizing: border-box;
+border-radius: 25px;
+border: 4px solid white;
+padding: 0px;
+}
+
+.form-search input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 43px 0 15px;
+    z-index: -1;
+}
+
+.form-search:hover {
+    cursor: pointer;
+}
+
+
+    .form-search:hover input {
+    }
+
+
+    .form-search:hover .header__search-btn {
+        background-image: linear-gradient(to right, #f4bd4d, #f4ac4a 38%, #f58341);
+        color: white;
+    }
+
+    .form-search:hover .prefix__cls-1__x {
+        fill: none;
+        stroke: #FFF !important;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px
+    }
+
+.header__search-btn {
+border: 0;
+}
+
+@media only screen and (max-width: 992px) {
+.form-search input {
+    height: 30px;
+}
+
+.form-search {
+    width: 40px;
+    height: 40px;
+}
+}
+/*open search -----------------*/
+.form-search-open {
+width: 200px !important;
+}
+
+.form-search-open input {
+    display: block;
+    background: #ebebeb;
+}
+
+.form-search-open .header__search-btn {
+    background-image: linear-gradient(to right, #f4bd4d, #f4ac4a 38%, #f58341);
+    color: white;
+}
+
+.form-search-open .prefix__cls-1__x {
+    fill: none;
+    stroke: #FFF !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5px
+}
+.textbox-footer{
+     box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1); position: relative; border-radius: 30px;
+                             overflow: hidden;
+ }
+ .input-textbox-footer{
+     opacity: .5; border-radius: 30px; font-size: 1em; height: 45px;
+ }
+ .boxx{
+width: 65px; margin-left: 15px;
+}
+
+.up-curver{
+width: 100%; position: absolute; top: -1px;
+}
+.mobile-curve-top{
+width: 100%; position: absolute; top: -1px; transform: scale(1.5)
+}
+.curve-bottom{
+width: 100%; position: absolute; bottom: -1px;transform: rotate(180deg);
+}
+.mobile-curve-bottom{
+width: 100%; position: absolute; bottom: -1px;transform:scale(1.5) rotate(180deg);
+}
+.up-curver--{
+width: 100%; position: absolute; top: -1px;
+}
+.mobile-curve-top--{
+width: 100%; position: absolute; top: -1px; transform: scale(1.5)
+}
+.curve-bottom--{
+width: 100%; position: absolute; bottom: -1px;transform: rotate(180deg);
+}
+.mobile-curve-bottom--{
+width: 100%; position: absolute; bottom: -1px;transform:scale(1.5) rotate(180deg);
+}
+.title-header{
+font-size: 2.28em;text-align: center; font-weight: bold;
+}
+.title-subheader{
+font-size: 2em; font-weight: bold;
+}
+.title-sub-subheader{
+font-size: 1.22em;
+}
+.img__{
+width: 155px; height: 155px; display: flex; justify-content: center; align-items: center;
+}
+
+.title-header--{
+font-size: 1.42em; font-weight: bold;
+}
+
+.subheader-service {
+    font-size: 2.28em;
+    text-align: center;
+    font-weight: bold;
+}
+.title-comment2 {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+ 
