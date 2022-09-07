@@ -63,8 +63,11 @@ namespace AryanITC.Domain.Entities.Account
         [MaxLength(200, ErrorMessage = "MaxLength")]
         public string UserAvatar { get; set; }
 
+        //[Display(Name = "IsActive")]
+        //public bool IsActive  { get; set; }
 
-        [Display(Name = "IsDelete")] public bool IsDelete { get; set; }
+        [Display(Name = "IsDelete")]
+        public bool IsDelete { get; set; }
 
         #endregion
 

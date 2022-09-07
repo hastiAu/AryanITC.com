@@ -26,6 +26,9 @@ namespace AryanITC.Domain.ViewModels.Account
 
         [Display(Name = "RememberMe")]
         public bool RememberMe { get; set; }
+
+        //[Display(Name = "IsActive")]
+        //public bool IsActive { get; set; }
         #endregion
 
         #region LoginUserREsult

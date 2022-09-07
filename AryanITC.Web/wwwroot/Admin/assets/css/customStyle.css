@@ -1,0 +1,67 @@
+﻿.red_custom {
+    color: #eb215a;
+}
+.green_Custom {
+    color: #4caf50!important;
+}
+
+.pink_custom {
+    color: #ff4d8e!important;
+}
+
+.dark_green {
+    color: #219e96!important;
+}
+.margin-bottom-0 {
+    margin-bottom: 0px !important;
+}
+
+.padding-0px {
+    padding: 0px !important;
+}
+
+.custom-btn-create {
+    display: block !important;
+    border: none !important;
+    text-align: center;
+    padding: 12px 5px !important;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: .1875rem !important;
+}
+
+.field-validation-error {
+    color: #fa1111 !important;
+    font-size: 12px !important;
+    margin-top: 5px !important;
+    display: block !important;
+}
+
+.ck-editor__editable {
+    min-height: 200px!important;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+
+.collapsibleContainer {
+    border-radius: 10px;
+    border: solid 1px #cccccc;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
+    background-color: RGB(248,249,251);
+}
+
+.collapsible.active {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: solid 1px #000;
+}

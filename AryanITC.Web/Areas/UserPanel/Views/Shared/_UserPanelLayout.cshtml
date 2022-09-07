@@ -1,0 +1,35 @@
+﻿<html lang="fa">
+
+<head>
+    <partial name="_MetaTags" />
+    <title>Aryan ITC</title>
+    <partial name="_HeaderRefrence" />
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+
+</head>
+
+
+<body class="main-body--height d-flex">
+
+    
+<partial name="_NavMenu" />
+   
+<main class="main-cont col-lg-10 pr-lg-0 py-lg-2 px-0 pl-lg-2 position-relative">
+    <div class="main get-program__main bg-white ml-lg-4 d-flex flex-column">
+        <!-- mobile header -->
+        <!-- header -->
+        <partial name="UserPanelHeader" />
+
+        <!-- main conten -->
+        @RenderBody()
+    </div>
+</main>
+
+<partial name="_FooterRefrence"/>
+<partial name="_Notification"/>
+
+@*@RenderSection("Scripts", false)*@
+</body>
+
+
+</html>

@@ -8,6 +8,7 @@
 }
 
 
+
 <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">  آریان ITC</a></li>
@@ -41,22 +42,14 @@
             <input asp-for="Password" type="password" class="un   form-control pass text-center" placeholder="رمز عبور">
             <span asp-validation-for="Password" class="field-validation-valid col-md-12 text-danger"></span>
 
-            <input asp-for="ConfirmPassword" type="password" class="pass   form-control password" placeholder="تکرار رمز عبور">
+            <input asp-for="ConfirmPassword" type="password" class="pass   form-control " placeholder="تکرار رمز عبور">
             <span asp-validation-for="ConfirmPassword" class="field-validation-valid col-md-12 text-danger"></span>
 
-            <button type="submit" class="submit text-center" onclick="ShowMessage()">عضویت در سایت  </button>
+            <button type="submit" class="submit text-center">عضویت در سایت  </button>
             <p class="forgot text-center"><a href="./log%20in.html">بازگشت به صفحه ورود</a></p>
             <p class="forgot text-center"><a href="./ForgetPassword.html">رمز ورود خود را فراموش کردم!</a></p>
         </form>
     </div>
 </section>
 
-
-
-@section Scripts
-{
-    <script src="/lib/jquery/dist/jquery.js"></script>
-
-
-}
-    <partial name="Scripts" />
+ 

@@ -4,9 +4,9 @@
 <head>
     <title>آریان ITC | @ViewData["Title"]</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
 
-
+    @*Partials are Razor Views*@
     <partial name="_MetaTags" />
     <partial name="_Styles" />
 
@@ -31,20 +31,16 @@
     <partial name="_Footer" />
 
     <partial name="_FooterRefrence" />
-     <partial name="Scripts" />
+    <partial name="Scripts" />
     @RenderSection("Scripts", false)
 
 
-    @RenderSection("SearchBox", false)
+    @*@RenderSection("SearchBox", false)*@
 
     <partial name="_Notification" />
-<partial name="_ValidationScriptsPartial" />
- 
-
+    <partial name="_ValidationScriptsPartial" />
 
  
  
-
-
 </body>
 </html>

@@ -11,6 +11,7 @@ using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.Account;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
 using static AryanITC.Domain.ViewModels.Account.EmailActiveAccountViewModel;
@@ -45,9 +46,7 @@ namespace AryanITC.Core.Services.Implementations
             //{
             //    return RegisterUserResult.UserExist;
             //}
-
-
-
+ 
             var emailExist = await _userRepository.IsEmailExist(registerUserViewModel.Email);
             if (emailExist)
             {
@@ -60,19 +59,23 @@ namespace AryanITC.Core.Services.Implementations
                 FirstName = registerUserViewModel.FirstName.SanitizeText(),
                 LastName = registerUserViewModel.LastName.SanitizeText(),
                 //OtpCode = otpCode,
+                EmailActiveCode = NameGenerator.GenerateUniqCode(),
                 Password = PasswordHellper.EncodePasswordMd5(registerUserViewModel.Password).SanitizeText(),
                 Mobile = registerUserViewModel.Mobile.SanitizeText(),
                 UserState = UserState.NotActive,
                 RegisterDate = DateTime.Now,
                 OtpExpireTime = DateTime.Now.AddMinutes(2),
-                Email = registerUserViewModel.Email
+                Email = registerUserViewModel.Email,
+                //UserAvatar = "Default.png",
+               
+                
 
             };
 
             await _userRepository.AddUser(user);
             await _userRepository.SaveChange();
             //SendOtpCode(user.Mobile, user.OtpCode);
-
+           
             return RegisterUserResult.Success;
         }
 

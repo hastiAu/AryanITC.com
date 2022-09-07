@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using AryanITC.Infra.Data.Context;
 using AryanITC.Infra.IOC.Dependency;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,17 @@ namespace AryanITC.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region data protection
+
+            services.AddDataProtection()
+                // This helps surviving a restart: a same app will find back its keys. Just ensure to create the folder.
+                .PersistKeysToFileSystem(new DirectoryInfo(Directory.GetCurrentDirectory() + "\\wwwroot\\Auth\\"))
+                // This helps surviving a site update: each app has its own store, building the site creates a new app
+                .SetApplicationName("AryanITC")
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(30));
+
+            #endregion
+
             #region Authentication
 
             services.AddAuthentication(options =>

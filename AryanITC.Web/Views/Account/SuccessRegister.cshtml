@@ -1,6 +1,7 @@
-﻿
+﻿@using AryanITC.Domain.Entities.Account
 @using Microsoft.AspNetCore.Mvc.Localization
-@model AryanITC.Domain.ViewModels.Account.SuccessRegisterViewModel
+@model AryanITC.Domain.ViewModels.Account.RegisterUserViewModel
+
 @inject IViewLocalizer Localizer
 
 @{
@@ -15,10 +16,10 @@
         <li class="breadcrumb-item active" aria-current="page"> فعال سازی حساب کاربری </li>
     </ul>
 </nav>
- 
+
 <div class="alert alert-success">
-    <h3> @Model.LastName عزیز !</h3>
+    <h3> @Model.FirstName  @Model.LastName عزیز !</h3>
     <p>ثبت نام شما با موفقیت انجام شد ، ایمیلی حاوی لینک فعالسازی به ایمیل "@Model.Email" ارسال شد .</p>
     <p>جهت ادامه ثبت نام وارد ایمیل خود شوید و روی لینک فعالسازی کلیک کنید .</p>
 </div>
- 
+

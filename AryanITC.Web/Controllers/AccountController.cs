@@ -33,15 +33,15 @@ namespace AryanITC.Web.Controllers
 
         #region RegisterUser
 
-     
-        //[Route("Register")]
+
+        [Route("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost( )]
-        //[HttpPost("Register")]
+        [HttpPost()]
+        [Route("Register")]
         public async Task<IActionResult> Register(RegisterUserViewModel registerUserViewModel)
         {
             if (ModelState.IsValid)
@@ -59,23 +59,22 @@ namespace AryanITC.Web.Controllers
                     case RegisterUserResult.UserExist:
                         ModelState.AddModelError("Email", "بجه قبلا ثبت نام کردید");
                         TempData[WarningMessage] = "بچه جون قبلا ثبت نام کردید";
-
-                        break;
+                        return View(registerUserViewModel);
+ 
 
                     case RegisterUserResult.Success:
+                        //ModelState.AddModelError("Email", "ب موفقیت ثبت نام کردید");
                         //TempData["Email"] = registerUserViewModel.Email;
-                        TempData[SuccessMessage] = "با موفقیت ثبت نام کردید";
-                        //return RedirectToAction("Index", "Home");
-                        break
-
-                        ;
+                        //TempData[SuccessMessage] = "با موفقیت ثبت نام کردید";
+                        return View("SuccessRegister", registerUserViewModel);
  
+
 
 
                 }
 
             }
-            return View(registerUserViewModel);
+            return RedirectToAction("Index", "Home");
         }
 
         #endregion
@@ -121,31 +120,31 @@ namespace AryanITC.Web.Controllers
         //                ModelState.AddModelError("Email", "ورود با موفقیت انجام شد");
         //                ViewBag.IsSuccess = true;
         //                return View();
-                            
+
         //            }
         //        }
         //    }
 
-           
+
         //    return View(loginUserViewModel);
         //}
         //#endregion
 
         //#region SuccessRegister  
 
-        ////[HttpGet("active-Account")]
-        ////public IActionResult SuccessRegister()
-        ////{
-        ////    ViewBag.email = TempData["Email"];
+        //[HttpGet("active-Account")]
+        //public IActionResult SuccessRegister()
+        //{
+        //    ViewBag.email = TempData["Email"];
 
-        ////    if (TempData["CheckOtpCode"] == null)
-        ////    {
-        ////        return RedirectToAction("Register", "Account");
+        //    if (TempData["CheckOtpCode"] == null)
+        //    {
+        //        return RedirectToAction("Register", "Account");
 
-        ////    }
-        ////    return View();
+        //    }
+        //    return View();
 
-        ////}
+        //}
 
         //#endregion
 

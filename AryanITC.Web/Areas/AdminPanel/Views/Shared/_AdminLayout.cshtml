@@ -1,0 +1,62 @@
+﻿ 
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<head>
+    <partial name="_MetaTags" />
+    <title> قالب</title>
+    <partial name="Styles" />
+    <script src="/Admin/assets/js/jquery.min.3.6.0.js"></script>
+    @RenderSection("Styles", false)
+</head>
+<body class="theme-cyan">
+
+ Page Loader Partial 
+<partial name="_PageLoader" />
+
+ Overlay For Sidebars 
+<div class="overlay"></div>
+
+ Top Navbar Partial 
+<partial name="_TopNavBar" />
+
+ Left Side Bar Partial 
+<partial name="_LeftSideBar" />
+
+ Right Side Bar Partial 
+<partial name="_RightSideBar" />
+
+ Chat launcher Partial 
+<partial name="_Chatlauncher" />
+
+ Main Content 
+<section class="content home">
+
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>
+                    تایتل قالب
+                    <small class="text-muted">تایتل ثالب</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                @RenderSection("AdminBreadCrumb", false)
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+</section>
+
+
+ Scripts Partial 
+<partial name="Scripts" />
+
+@RenderSection("Scripts", false)
+
+</body>
+
+</html>

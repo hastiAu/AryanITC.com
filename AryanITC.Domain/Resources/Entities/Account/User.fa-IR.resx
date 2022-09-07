@@ -129,6 +129,9 @@
   <data name="FirstName" xml:space="preserve">
     <value>نام</value>
   </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال است</value>
+  </data>
   <data name="IsDelete" xml:space="preserve">
     <value>حذف شده</value>
   </data>

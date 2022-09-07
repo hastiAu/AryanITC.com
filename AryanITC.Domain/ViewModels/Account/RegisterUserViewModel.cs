@@ -33,7 +33,7 @@ namespace AryanITC.Domain.ViewModels.Account
         [Display(Name = "Password")]
         [MaxLength(100, ErrorMessage = "MaxLength")]
         [Required(ErrorMessage = "Required")]
-        [MinLength(6, ErrorMessage = "PasswordRegularExpertion")]
+        [MinLength(6, ErrorMessage = "PasswordRegularExpression")]
         public string Password { get; set; }
 
 
@@ -41,7 +41,7 @@ namespace AryanITC.Domain.ViewModels.Account
         [MaxLength(100, ErrorMessage = "MaxLength")]
         [Required(ErrorMessage = "Required")]
         [Compare("Password", ErrorMessage = "Compare")]
-        [MinLength(6, ErrorMessage = "PasswordRegularExpertion")]
+        [MinLength(6, ErrorMessage = "PasswordRegularExpression")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Email")]
@@ -49,6 +49,9 @@ namespace AryanITC.Domain.ViewModels.Account
         [Required(ErrorMessage = "Required")]
         [EmailAddress(ErrorMessage = "EmailAddress")]
         public string Email { get; set; }
+
+        //[Display(Name = "IsActive")]
+        //public bool IsActive { get; set; }
     }
 
     #endregion

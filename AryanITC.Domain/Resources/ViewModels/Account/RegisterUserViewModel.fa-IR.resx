@@ -135,6 +135,9 @@
   <data name="FirstName" xml:space="preserve">
     <value>نام</value>
   </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال است</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>نام خانوادگی</value>
   </data>
@@ -153,7 +156,7 @@
   <data name="Password" xml:space="preserve">
     <value>کلمه عبور</value>
   </data>
-  <data name="PasswordRegularExpertion" xml:space="preserve">
+  <data name="PasswordRegularExpression" xml:space="preserve">
     <value>کلمه عبور نباید کمتر از 6  کاراکتر باشد</value>
   </data>
   <data name="Required" xml:space="preserve">

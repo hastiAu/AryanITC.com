@@ -1,0 +1,57 @@
+﻿@using AryanITC.Core.Services.Interfaces
+ 
+ 
+ 
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+    <div class="menu">
+        <ul class="list">
+            <li>
+                <div class="user-info">
+                    <div class="image"><a><img src="/Images/UserAvatar/default.jpg" alt=" کاربر"></a></div>
+                    <div class="detail">
+                        <h4>کاربر</h4>
+                        <small> ادمین</small>
+                     </div>
+                     <a asp-controller="Package" asp-action="Index" title=" "><i class="zmdi zmdi-calendar"></i></a>
+                    <a asp-controller="Ticket" asp-action="Index" title=" "><i class="zmdi zmdi-email"></i></a>
+                    <a asp-controller="User" asp-action="Index" title=" "><i class="zmdi zmdi-account-box-phone"></i></a>
+                    <a asp-controller="Notification" asp-action="Index" title="  "><i class="zmdi zmdi-comments"></i></a>
+                    <a href="/LogOut" title="خروح"> <i class="zmdi zmdi-power"></i></a> 
+                </div> 
+          
+
+            <a asp-controller=" " asp-action=" "><i class="zmdi zmdi-home"></i><span>خانه</span></a>
+
+             
+                <a href="javascript:void(0);" class="menu-toggle">  <i class="zmdi zmdi-home"></i><span>داشبورد</span> </a>
+                <ul class="ml-menu">
+                    <li><a asp-controller=" " asp-action=" " class=" waves-effect waves-block">صغحه اصلی</a> </li>
+                    @*<li><a asp-controller="Home" asp-action="SocialMedia" class=" waves-effect waves-block">داشبورد رسانه اجتماعی</a></li>*@
+                    @*<li><a href="dashboard-rtl.html" class=" waves-effect waves-block">@_localizer["SellReport"]</a></li>*@
+
+
+                    @*<li><a href="index2.html" class=" waves-effect waves-block"> افقی </a></li>*@
+
+                    @*<li><a href="blog-dashboard.html" class=" waves-effect waves-block">وبلاگ</a></li>*@
+                
+            
+
+            
+    <a href="javascript:void(0);" class="menu-toggle">نقش </a>
+    <ul class="ml-menu">
+        <li><a  >"Index">لیست نقش</a> </li>
+       
+<li><a asp-controller=" " asp-action=" "> اضافه کردن</a> </li>
+    </ul>
+ 
+
+ 
+<li>
+    <a href="javascript:void(0);" class="menu-toggle">خبرنامه</a>
+    <ul class="ml-menu">
+        <li><a asp-controller=" " asp-action=" "> خبرنامه</a> </li></ul></ul></ul>
+
+
+    </div>
+</aside>

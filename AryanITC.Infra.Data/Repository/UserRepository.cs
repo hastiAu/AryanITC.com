@@ -42,6 +42,7 @@ namespace AryanITC.Infra.Data.Repository
             await _context.Users.AddAsync(user);
         }
 
+
         public async Task<bool> CheckOtpCode(string otpCode)
         {
             return await _context.Users.AnyAsync(U => U.OtpCode == otpCode);
@@ -79,6 +80,8 @@ namespace AryanITC.Infra.Data.Repository
             await _context.SaveChangesAsync();
         }
 
+    
+         
         #endregion
 
     }

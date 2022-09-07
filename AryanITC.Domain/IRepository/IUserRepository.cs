@@ -14,6 +14,7 @@ namespace AryanITC.Domain.IRepository
         Task<bool> IsExistMobileNumber(string mobileNumber);
         Task<bool> IsEmailExist(string email);
         Task AddUser(User user);
+
         Task<bool> CheckOtpCode(string otpCode);
 
         Task<User> GetUserByMobil(string mobile);
