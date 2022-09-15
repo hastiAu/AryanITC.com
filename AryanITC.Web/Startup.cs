@@ -47,6 +47,8 @@ namespace AryanITC.Web
 
             #endregion
 
+
+            //For Identity _Login
             #region Authentication
 
             services.AddAuthentication(options =>
@@ -61,6 +63,7 @@ namespace AryanITC.Web
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
+                //for RememberMe 1 Month
 
             });
 
@@ -115,6 +118,7 @@ namespace AryanITC.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+ 
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

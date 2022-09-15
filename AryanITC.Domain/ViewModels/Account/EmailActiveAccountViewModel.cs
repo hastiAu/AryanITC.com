@@ -7,26 +7,28 @@ using System.Threading.Tasks;
 
 namespace AryanITC.Domain.ViewModels.Account
 {
-   public class EmailActiveAccountViewModel
+    #region ActiveEmailAccount
+    public class EmailActiveAccountViewModel
     {
-        #region ActiveEmail
 
-        [Display(Name = "EmailActiveCode")]
-        [Required(ErrorMessage = "Required")]
-        [MaxLength(200, ErrorMessage = "MaxLength")]
+        [Display(Name = "عنوان")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string EmailActiveCode { get; set; }
 
-        #endregion
-
-        #region ActiveEmailResult
-
-        public enum ActiveEmailResult
-        {
-            error,
-            Notfound,
-            Success
-        }
-
-        #endregion
     }
+    #endregion
+
+    #region ActiveEmailResult
+    public enum ActiveEmailResult
+    {
+
+        Success,
+        NotActive,
+        Error,
+    }
+
+    #endregion
+
+
 }

@@ -19,13 +19,16 @@ namespace AryanITC.Core.Services.Interfaces
         Task<RegisterUserResult> RegisterUser(RegisterUserViewModel registerUserViewModel);
         Task<bool> CheckOtpCode(string otpCode);
         Task<User> GetUserByMobil(string mobile);
+        Task<User> GetUserByEmail(string email);
 
         #endregion
 
         #region Login
-
+ 
         Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel);
-       //Task<EmailActiveAccountViewModel> EmailActiveAccount(string emailActiveAccount);
+        Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel active);
+  
+        Task<User> GetUserByActiveCode(string activeCode);
 
         #endregion
 

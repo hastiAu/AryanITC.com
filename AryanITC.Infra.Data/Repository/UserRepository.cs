@@ -42,6 +42,10 @@ namespace AryanITC.Infra.Data.Repository
             await _context.Users.AddAsync(user);
         }
 
+        public void UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+        }
 
         public async Task<bool> CheckOtpCode(string otpCode)
         {
@@ -54,22 +58,33 @@ namespace AryanITC.Infra.Data.Repository
 
 
 
+
         #endregion
 
         #region Loging
-
         public async Task<User> GetUSerForLogin(string email, string password)
         {
             return await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password);
         }
 
-        public async Task<bool> ActiveAccount(string emailActiveAccount)
-        {
-          return await _context.Users.AnyAsync(u => u.EmailActiveCode == emailActiveAccount);
 
-        
+
+        public async Task<User> GetUserByActiveCode(string activeCode)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.EmailActiveCode == activeCode);
         }
 
+        public async Task<bool> CheckEmailActiveCode(string activeCode)
+        {
+             return await _context.Users.AnyAsync(u => u.EmailActiveCode == activeCode);
+             
+        }
+
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+        }
 
         #endregion
 
@@ -80,8 +95,6 @@ namespace AryanITC.Infra.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-    
-         
         #endregion
 
     }

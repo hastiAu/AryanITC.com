@@ -18,27 +18,31 @@
         @if (ViewBag.IsSuccess != null)
 
         {
-            <div class=" alert alert-success">
-                <p class="help-block"> ورود با موفقیت انجام شد</p>
+            <div class="alert alert-success">
+                <p> ورود با موفقیت انجام شد</p>
+
             </div>
 
             <script>
                 // Your delay in milliseconds
-                var delay = 3000; 
+                var delay = 3000;
                 setTimeout(function () { window.location = "https://localhost:44385/"; }, delay);
             </script>
         }
+ 
         <div class="sign ">
-            <a hre="Register">ثبت نام </a>
-            <a class="active" href="Login">ورود </a>
-          
+            <a asp-controller="Account" asp-action="Register">ثبت نام </a>
+            <a asp-controller="Account" asp-action="Login">ورود </a>
+
 
         </div>
+        
+    
 
         <form class="form1 " asp-action="Login" method="post">
 
 
-            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+            <input type="hidden" name=" " value= ""/>
             <span class="field-validation-valid login-error" data-valmsg-for="Error" data-valmsg-replace="true"></span>
 
             <p class="p1 margin-p ">ایمیل</p>
@@ -51,6 +55,7 @@
 
             <button class="submit-login  text-center" onclick="SendVerificationCode.html"> ورود</button>
             <p class="forgot text-center"><a href="ForgotPassword">رمز ورود خود را فراموش کردم!</a></p>
+            <br/>
 
         </form>
     </div>

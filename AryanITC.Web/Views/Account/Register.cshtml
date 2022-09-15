@@ -19,9 +19,9 @@
 <section>
     <div class="main-register">
         <div class="sign">
-            <a class="active" href="./Registration.html">ثبت نام  </a>
+            <a asp-controller="Account" asp-action="Register" >ثبت نام  </a>
 
-            <a href="./log%20in.html"> @Localizer["Login"]  </a>
+            <a asp-controller="Account" asp-action="Login" > @Localizer["Login"]  </a>
         </div>
         <form asp-controller="Account" asp-action="Register" method="post" class="form1">
             <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />

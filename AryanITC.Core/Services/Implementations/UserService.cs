@@ -46,7 +46,7 @@ namespace AryanITC.Core.Services.Implementations
             //{
             //    return RegisterUserResult.UserExist;
             //}
- 
+
             var emailExist = await _userRepository.IsEmailExist(registerUserViewModel.Email);
             if (emailExist)
             {
@@ -67,15 +67,15 @@ namespace AryanITC.Core.Services.Implementations
                 OtpExpireTime = DateTime.Now.AddMinutes(2),
                 Email = registerUserViewModel.Email,
                 //UserAvatar = "Default.png",
-               
-                
+
+
 
             };
 
             await _userRepository.AddUser(user);
             await _userRepository.SaveChange();
             //SendOtpCode(user.Mobile, user.OtpCode);
-           
+
             return RegisterUserResult.Success;
         }
 
@@ -89,11 +89,18 @@ namespace AryanITC.Core.Services.Implementations
             return await _userRepository.GetUserByMobil(mobile);
         }
 
-        public async Task<LoginUserViewModel.LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel)
+
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _userRepository.GetUserByEmail(email);
+        }
+
+        public async Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel)
+
         {
             string hashPassword = PasswordHellper.EncodePasswordMd5(loginUserViewModel.Password);
             var user = await _userRepository.GetUSerForLogin(loginUserViewModel.Email, hashPassword);
-
             if (user != null)
             {
                 if (user.UserState == UserState.NotActive)
@@ -107,19 +114,34 @@ namespace AryanITC.Core.Services.Implementations
             }
         }
 
-//        public async Task<EmailActiveAccountViewModel> EmailActiveAccount(string emailActiveAccount)
-//        {
-//            var result = _userRepository.ActiveAccount(emailActiveAccount);
-//            if (result == null)
-//                return null;
-//            else
-//            {
-
-//            }
 
 
-//        }
-//}
+        public async Task<User> GetUserByActiveCode(string activeCode)
+        {
+            return await _userRepository.GetUserByActiveCode(activeCode);
+        }
+
+        public async Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel active)
+        {
+            var activeEmailExist=await _userRepository.CheckEmailActiveCode(active.EmailActiveCode);
+
+            var user = await _userRepository.GetUserByActiveCode(active.EmailActiveCode);
+
+            if (active.EmailActiveCode == null)
+                return ActiveEmailResult.Error;
+
+            if (activeEmailExist)
+            {
+                //user.EmailActiveCode = NameGenerator.GenerateUniqCode();
+              
+                user.UserState = UserState.Active;
+                _userRepository.UpdateUser(user);
+                await _userRepository.SaveChange();
+                return   ActiveEmailResult.Success;
+            }
+           
+            return ActiveEmailResult.NotActive;
+        }
 
         #endregion
 

@@ -14,7 +14,7 @@
                     <li><a href="#client_outer">دامنه ها</a></li>
                     <li><a href="#team">ابر هاست</a></li>
                     <li><a href="#contact">تماس با ما</a></li>
-                    <li><a href="#contact" >حساب کاربری</a></li>
+                    <li><a href="#contact">حساب کاربری</a></li>
 
 
                 </ul>
@@ -28,50 +28,44 @@
                     <li><a href="#client_outer">دامنه </a></li>
                     <li><a href="#team">ابر هاست</a></li>
                     <li><a href="#contact">تماس با ما</a></li>
-                    
-               
-                    @*کلاس بدم که لاگین بود و نبود چه شکلی باشه منو.فایل 8 مداینی*@
-
                     <li class="dropdown menu-behavior--hover d-none d-lg-block">
-                        <!--<span class="fx-font-size-base-xs fx-color--main">Hello. Sign in</span>-->
-                        <br>
-                        <a href="javascript:void(0)" id="dropdownSignIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-outline btn-outline-primary btn-register "><span>  حساب کاربری</span></a>
-                        <div aria-labelledby="dropdownSignIn" id="log-in-block" class="dropdown-menu animated fx-animation-fadeInDown20px" data-animate="fx-animation-fadeInDown20px">
-                           
-                            <div class="header__profile d-flex align-items-center">
-
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <div class="header__name">@User.Identity.Name خوش آمدید!</div>
-                                }
-
-                                else
-                                {
-                                    <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register"  rel="nofollow noopener">  ورود</a>
-                                    <br />
-                                    <div class="text-sign-in text-center fx-color--secondary direct-register-link">   ثبت نام نکرده اید؟
-                                        <a asp-controller="Account" asp-action="Register" target="_blank"   rel="nofollow noopener">  ثبت نام</a></div>
-                           
-                                }
-                            </div>
-
-                        </div>
-
-                    </li>
-                   
-                    <li>
-                       
-                            <a asp-controller="Account" asp-action="Register" class="btn btn-outline btn-outline-primary btn-register   direct-register-link" target="_blank" rel="nofollow noopener">ثبت نام</a>
 
 
-                      
-                    </li>
-                   
-                </ul>
-                 
+                    @*<div class="header__profile d-flex  align-items-center">*@
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <div class="  btn btn-login btn-block btn-register">@User.Identity.Name خوش آمدید!</div>
+
+                            <li >
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register "> خروج </a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li>
+                                <a asp-controller="Account" asp-action="Login" id="dropdownSignIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-outline btn-outline-primary btn-register ">
+                                    <span> حساب کاربری</span>
+                                </a>
+                            </li>
+                            <li>
+
+                                <a asp-controller="Account" asp-action="Register" class="btn btn-outline btn-outline-primary btn-register   direct-register-link" rel="nofollow noopener">ثبت نام</a>
+                            </li>
+
+                        }
+               
+
+                    @*</div>*@
+                    </ul>
+
+
             </nav>
-            <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa-bars"></i></a>
-        </div>
-    </div>
+   
+                <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa-bars"></i></a>
+            </div></div>
 
 </header>
