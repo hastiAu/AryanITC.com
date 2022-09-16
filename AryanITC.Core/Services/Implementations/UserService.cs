@@ -130,11 +130,12 @@ namespace AryanITC.Core.Services.Implementations
             if (active.EmailActiveCode == null)
                 return ActiveEmailResult.Error;
 
+
             if (activeEmailExist)
             {
-                //user.EmailActiveCode = NameGenerator.GenerateUniqCode();
-              
+                
                 user.UserState = UserState.Active;
+                user.EmailActiveCode = NameGenerator.GenerateUniqCode();
                 _userRepository.UpdateUser(user);
                 await _userRepository.SaveChange();
                 return   ActiveEmailResult.Success;

@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "فعال سازی حساب";
 
-    //var result = (TempData["Active"]);
+    //EmailActiveAccountViewModel result = (TempData["Active"]) as EmailActiveAccountViewModel;
 
 }
 
@@ -18,9 +18,6 @@
     </ul>
 </nav>
 
-
- 
-
  
 
 
@@ -32,7 +29,8 @@
 
 
         {
-            <div class="alert alert-success">کاربر عزیز خساب شما @ViewData["Active"] است</div>
+            <div class="alert alert-success"> @ViewData.ModelState["CustomError"].Errors[0].ErrorMessage </div>
+           
 
             <p>
                 <a href="/login"></a>

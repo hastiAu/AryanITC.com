@@ -22,7 +22,7 @@ namespace AryanITC.Domain.ViewModels.Account
     #region ActiveEmailResult
     public enum ActiveEmailResult
     {
-
+ 
         Success,
         NotActive,
         Error,

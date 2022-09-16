@@ -181,37 +181,40 @@ namespace AryanITC.Web.Controllers
 
         #endregion
 
+
         #region ActiveEmailAccount
 
+        [Route("Active")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult>ActiveEmailAccount(EmailActiveAccountViewModel active)
-        //{
-        //    if (ModelState.IsValid)
         {
-            var result = await _userService.ActiveAccount(active);
-            switch (result)
+            if (ModelState.IsValid)
+
             {
-                case ActiveEmailResult.Error:
-                    ModelState.AddModelError("email", "حطا");
-                    //TempData[WarningMessage] = "Error";
+                var result = await _userService.ActiveAccount(active);
+                switch (result)
+                {
+                    case ActiveEmailResult.Error:
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، درخواست شما با خطا مواجه شد ");
+                        TempData[WarningMessage] = "کاربر عزیز، درخواست شما با خطا مواجه شد";
 
-                    break;
+                        break;
 
-                case ActiveEmailResult.NotActive:
-                    ModelState.AddModelError("string", "فعال نیست");
-                    TempData[ErrorMessage] = "NotActive";
-                    break;
+                    case ActiveEmailResult.NotActive:
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما فعال نمی باشد ");
+                        TempData[ErrorMessage] = "کاربر عزیز، حساب شما فعال نمی باشد";
+                        break;
 
-                case ActiveEmailResult.Success:
-                    ModelState.AddModelError(string.Empty, "  یوزر فعال شدی  ");
-                    TempData[SuccessMessage] = "فعال شدی";
-                    break;
+                    case ActiveEmailResult.Success:
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما با موفقیت فعال شد ");
+                        TempData[SuccessMessage] = "کاربر عزیز، حساب شما با موفقیت فعال شد";
+                        break;
 
+                }
+
+                ViewData["active"] = result;
 
             }
-
-            ViewData["active"] = result;
-
-
 
 
             return View(active);
