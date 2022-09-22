@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Core.Convertor;
 using AryanITC.Core.Services.Implementations;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.IRepository;
@@ -19,7 +20,7 @@ namespace AryanITC.Infra.IOC.Dependency
             #region Services Injection
 
             service.AddScoped<IUserService, UserService>();
-
+            service.AddScoped<IViewRenderService, RenderViewToString>();
 
             #endregion
 

@@ -10,6 +10,7 @@ namespace AryanITC.Domain.ViewModels.Account
     #region ActiveEmailAccount
     public class EmailActiveAccountViewModel
     {
+ 
 
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

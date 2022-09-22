@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Core.Convertor;
 using AryanITC.Core.Extensions;
 using AryanITC.Core.Generator;
 using AryanITC.Core.Security;
 using AryanITC.Core.Sender;
+using AryanITC.Core.Senders;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.Account;
+using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
@@ -24,12 +27,15 @@ namespace AryanITC.Core.Services.Implementations
         #region Constructor
 
         private readonly IUserRepository _userRepository;
+        private readonly IViewRenderService _viewRender;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IViewRenderService viewRender)
         {
             _userRepository = userRepository;
+            _viewRender = viewRender;   
         }
 
+       
         #endregion
 
         #region Account
@@ -47,6 +53,8 @@ namespace AryanITC.Core.Services.Implementations
             //    return RegisterUserResult.UserExist;
             //}
 
+
+        
             var emailExist = await _userRepository.IsEmailExist(registerUserViewModel.Email);
             if (emailExist)
             {
@@ -67,16 +75,18 @@ namespace AryanITC.Core.Services.Implementations
                 OtpExpireTime = DateTime.Now.AddMinutes(2),
                 Email = registerUserViewModel.Email,
                 //UserAvatar = "Default.png",
-
+            
 
 
             };
 
-            await _userRepository.AddUser(user);
+            await  _userRepository.AddUser(user);
             await _userRepository.SaveChange();
             //SendOtpCode(user.Mobile, user.OtpCode);
-
+            string body = _viewRender.RenderToStringAsync("SuccessRegister", registerUserViewModel);
+            SendEmail.Send(registerUserViewModel.Email, "فعالسازی", body);
             return RegisterUserResult.Success;
+
         }
 
         public async Task<bool> CheckOtpCode(string otpCode)
@@ -121,26 +131,29 @@ namespace AryanITC.Core.Services.Implementations
             return await _userRepository.GetUserByActiveCode(activeCode);
         }
 
-        public async Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel active)
+        
+
+        public async Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode)
         {
-            var activeEmailExist=await _userRepository.CheckEmailActiveCode(active.EmailActiveCode);
+            var activeEmailExist=await _userRepository.CheckEmailActiveCode(activeCode.EmailActiveCode);
 
-            var user = await _userRepository.GetUserByActiveCode(active.EmailActiveCode);
+            var user = await _userRepository.GetUserByActiveCode(activeCode.EmailActiveCode);
 
-            if (active.EmailActiveCode == null)
+            if (user == null)
                 return ActiveEmailResult.Error;
 
 
             if (activeEmailExist)
             {
-                
+
                 user.UserState = UserState.Active;
                 user.EmailActiveCode = NameGenerator.GenerateUniqCode();
                 _userRepository.UpdateUser(user);
                 await _userRepository.SaveChange();
-                return   ActiveEmailResult.Success;
+                return ActiveEmailResult.Success;
+
             }
-           
+
             return ActiveEmailResult.NotActive;
         }
 

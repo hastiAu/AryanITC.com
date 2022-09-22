@@ -26,13 +26,19 @@ namespace AryanITC.Core.Services.Interfaces
         #region Login
  
         Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel);
-        Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel active);
-  
-        Task<User> GetUserByActiveCode(string activeCode);
 
         #endregion
 
+        #region ActiveEmailAccount
 
+        Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode);
+        Task<User> GetUserByActiveCode(string activeCode);
+
+       
+        //Task<string> SendActivetionCode(string to, RegisterUserViewModel registerUserViewModel);
+
+
+        #endregion
 
         #region Send otpCode
 
@@ -43,6 +49,7 @@ namespace AryanITC.Core.Services.Interfaces
         #region Random Number
 
         //Task<string> SendRandomNumber();
+        //Task<string> SendActiveCode();
 
         #endregion
 

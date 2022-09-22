@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AryanITC.Domain.Entities.Account;
+using AryanITC.Domain.ViewModels.Account;
 
 namespace AryanITC.Domain.IRepository
 {
@@ -25,6 +26,7 @@ namespace AryanITC.Domain.IRepository
         Task<User> GetUserByEmail(string email);
 
         Task<User> GetUserByActiveCode(string activeCode);
+       
 
         #endregion
 

@@ -1,12 +1,12 @@
-﻿ 
+﻿
 @using AryanITC.Domain.Entities.Account
 @using AryanITC.Domain.ViewModels.Account
 @model AryanITC.Domain.ViewModels.Account.EmailActiveAccountViewModel
+
 @{
     ViewData["Title"] = "فعال سازی حساب";
 
-    //EmailActiveAccountViewModel result = (TempData["Active"]) as EmailActiveAccountViewModel;
-
+    //EmailActiveAccountViewModel result = ViewData["active"] as EmailActiveAccountViewModel;
 }
 
 
@@ -18,33 +18,42 @@
     </ul>
 </nav>
 
- 
+
 
 
 <p class=" text-center">
     <div class="container">
-
+ 
+        @*<div class="alert @ViewData["AlertClass"]">
+            @Html.ValidationMessage("CustomError")
+        </div>*@
 
         @if (ViewData["Active"] != null)
 
 
-        {
-            <div class="alert alert-success"> @ViewData.ModelState["CustomError"].Errors[0].ErrorMessage </div>
-           
+                {
+                    <div class="alert alert-success">
+                        <div class="alert @ViewData["AlertClass"]">
+                            @Html.ValidationMessage("CustomError")
+                        </div>
+                       
+                       <br />
 
-            <p>
-                <a href="/login"></a>
-            </p>
-        }
+                       <p>
+                           از  <a asp-controller="Account" asp-action="Login">  اینجا</a> می توانید وارد پنل کاربری خود شود.
+                        </p>
+                    </div>
+                }
+
+     
 
         else
         {
-            <div class="alert alert-success"> کاربری با مشخصات ارسال شده یافت نشد.</div>
+        <div class="alert alert-danger"> کاربری با مشخصات ارسال شده یافت نشد.</div>
         }
 
 
 
     </div>
 </p>
- 
- 
+

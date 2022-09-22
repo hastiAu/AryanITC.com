@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AryanITC.Core.Convertor;
 using AryanITC.Core.Generator;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.Account;
@@ -27,11 +28,14 @@ namespace AryanITC.Web.Controllers
         private readonly IUserService _userService;
         private readonly IStringLocalizer<AccountController> _localizer;
 
-        public AccountController(IUserService userService, IStringLocalizer<AccountController> localizer)
+
+        public AccountController(IUserService userService, IStringLocalizer<AccountController> localizer )
         {
             _userService = userService;
             _localizer = localizer;
+            
         }
+      
 
         #endregion
 
@@ -50,13 +54,14 @@ namespace AryanITC.Web.Controllers
         {
             if (ModelState.IsValid)
 
-            {
+            {       
                 var result = await _userService.RegisterUser(registerUserViewModel);
 
                 switch (result)
                 {
                     case RegisterUserResult.Error:
                         ModelState.AddModelError(string.Empty, "شکست");
+
                         TempData[ErrorMessage] = "شکست";
                         break;
 
@@ -69,17 +74,21 @@ namespace AryanITC.Web.Controllers
                     case RegisterUserResult.Success:
                         //ModelState.AddModelError("Email", "ب موفقیت ثبت نام کردید");
                         //TempData["Email"] = registerUserViewModel.Email;
-                        //TempData[SuccessMessage] = "با موفقیت ثبت نام کردید";
-                        return View("SuccessRegister", registerUserViewModel);
+                        //TempData[SuccessMessage] = "با موفقیت ثبت نام کردید"; 
 
+                      
+                        var user = await _userService.GetUserByEmail(registerUserViewModel.Email);
+                        var x = user.EmailActiveCode;
 
-
-
+                        ViewBag.active = x;
+                        return View("SuccessRegister",registerUserViewModel);
+ 
                 }
 
             }
+             
 
-            return RedirectToAction("Index", "Home");
+            return View(registerUserViewModel);
         }
 
         #endregion
@@ -182,42 +191,46 @@ namespace AryanITC.Web.Controllers
         #endregion
 
 
+
         #region ActiveEmailAccount
 
+ 
+
         [Route("Active")]
+ 
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult>ActiveEmailAccount(EmailActiveAccountViewModel active)
-        {
+        public async Task<IActionResult>ActiveEmailAccount(EmailActiveAccountViewModel activeCode)
+        {  
             if (ModelState.IsValid)
 
             {
-                var result = await _userService.ActiveAccount(active);
+                var result = await _userService.ActiveAccount(activeCode);
                 switch (result)
                 {
                     case ActiveEmailResult.Error:
-                        ModelState.AddModelError("CustomError", "کاربر عزیز، درخواست شما با خطا مواجه شد ");
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، درخواست شما با خطا مواجه شد. ");
                         TempData[WarningMessage] = "کاربر عزیز، درخواست شما با خطا مواجه شد";
 
                         break;
 
                     case ActiveEmailResult.NotActive:
-                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما فعال نمی باشد ");
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما فعال نمی باشد. ");
                         TempData[ErrorMessage] = "کاربر عزیز، حساب شما فعال نمی باشد";
                         break;
 
                     case ActiveEmailResult.Success:
-                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما با موفقیت فعال شد ");
+                        ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما با موفقیت فعال شد. ");
                         TempData[SuccessMessage] = "کاربر عزیز، حساب شما با موفقیت فعال شد";
                         break;
 
                 }
 
-                ViewData["active"] = result;
+                ViewData["Active"] = result;
 
             }
 
 
-            return View(active);
+            return View();
         
     }
 
@@ -228,7 +241,7 @@ namespace AryanITC.Web.Controllers
 
 
         [Authorize]
-        [Route("Test")]
+         [Route("Test")]
         public IActionResult Test()
         {
 
