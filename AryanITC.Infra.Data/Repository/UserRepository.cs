@@ -71,14 +71,14 @@ namespace AryanITC.Infra.Data.Repository
 
         public async Task<User> GetUserByActiveCode(string activeCode)
         {
-            var x= await _context.Users.SingleOrDefaultAsync(u => u.EmailActiveCode == activeCode);
-            return x;
+            var user= await _context.Users.SingleOrDefaultAsync(u => u.EmailActiveCode == activeCode);
+            return user;
         }
 
         public async Task<bool> CheckEmailActiveCode(string activeCode)
         {
-             var x= await _context.Users.AnyAsync(u => u.EmailActiveCode == activeCode);
-             return x;
+             var active= await _context.Users.AnyAsync(u => u.EmailActiveCode == activeCode);
+             return active;
         }
 
 

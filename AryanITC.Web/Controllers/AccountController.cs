@@ -60,27 +60,25 @@ namespace AryanITC.Web.Controllers
                 switch (result)
                 {
                     case RegisterUserResult.Error:
-                        ModelState.AddModelError(string.Empty, "شکست");
+                        ModelState.AddModelError(string.Empty, "کاربر گرامی،ثبت نام شما با خطا مواجه شد.");
 
-                        TempData[ErrorMessage] = "شکست";
+                        TempData[ErrorMessage] = "کاربر گرامی،ثبت نام شما با خطا مواجه شد.";
                         break;
 
                     case RegisterUserResult.UserExist:
-                        ModelState.AddModelError("Email", "بجه قبلا ثبت نام کردید");
-                        TempData[WarningMessage] = "بچه جون قبلا ثبت نام کردید";
+                        ModelState.AddModelError("Email", "کاربر گرامی، شما قبلا با ایمیل ثبت نام کرده اید.");
+                        TempData[WarningMessage] = "کاربر گرامی، شما قبلا با ایمیل ثبت نام کرده اید.";
                         return View(registerUserViewModel);
-
+                      
 
                     case RegisterUserResult.Success:
-                        //ModelState.AddModelError("Email", "ب موفقیت ثبت نام کردید");
-                        //TempData["Email"] = registerUserViewModel.Email;
-                        //TempData[SuccessMessage] = "با موفقیت ثبت نام کردید"; 
+                        TempData[SuccessMessage] = "کاربر گرامی،ثبت نام شما قبلا با موفقیت انجام شد.";
 
-                      
+
                         var user = await _userService.GetUserByEmail(registerUserViewModel.Email);
-                        var x = user.EmailActiveCode;
+                        var activeCode = user.EmailActiveCode;
 
-                        ViewBag.active = x;
+                        ViewBag.active = activeCode;
                         return View("SuccessRegister",registerUserViewModel);
  
                 }
@@ -194,8 +192,6 @@ namespace AryanITC.Web.Controllers
 
         #region ActiveEmailAccount
 
- 
-
         [Route("Active")]
  
         //[ValidateAntiForgeryToken]
@@ -209,24 +205,25 @@ namespace AryanITC.Web.Controllers
                 {
                     case ActiveEmailResult.Error:
                         ModelState.AddModelError("CustomError", "کاربر عزیز، درخواست شما با خطا مواجه شد. ");
-                        TempData[WarningMessage] = "کاربر عزیز، درخواست شما با خطا مواجه شد";
-
+                        //TempData[WarningMessage] = "کاربر عزیز، درخواست شما با خطا مواجه شد";
+                        ViewData["AlertClass"] = "alert-danger";
                         break;
 
                     case ActiveEmailResult.NotActive:
                         ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما فعال نمی باشد. ");
-                        TempData[ErrorMessage] = "کاربر عزیز، حساب شما فعال نمی باشد";
+                        //TempData[ErrorMessage] = "کاربر عزیز، حساب شما فعال نمی باشد";
+                        ViewData["AlertClass"] = "alert-warning";
                         break;
 
                     case ActiveEmailResult.Success:
                         ModelState.AddModelError("CustomError", "کاربر عزیز، حساب شما با موفقیت فعال شد. ");
-                        TempData[SuccessMessage] = "کاربر عزیز، حساب شما با موفقیت فعال شد";
+                        //TempData[SuccessMessage] = "کاربر عزیز، حساب شما با موفقیت فعال شد";
+                        ViewData["AlertClass"] = "alert-success";
                         break;
 
                 }
 
-                ViewData["Active"] = result;
-
+                ViewBag.active = result;
             }
 
 
@@ -234,7 +231,17 @@ namespace AryanITC.Web.Controllers
         
     }
 
-        //خروج را بنویسم
+        #region LogOut
+
+        [Route("LogOut")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            TempData[InfoMessage] = "با موفقیت خارج شدید";
+            return RedirectToAction("Login", "Account");
+        }
+
+        #endregion
 
 
         #endregion

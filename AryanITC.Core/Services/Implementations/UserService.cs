@@ -43,18 +43,6 @@ namespace AryanITC.Core.Services.Implementations
         public async Task<RegisterUserResult> RegisterUser(RegisterUserViewModel registerUserViewModel)
         {
 
-            //*******Add It after Active SMS Panel
-
-            //var mobileExist = await _userRepository.IsExistMobileNumber(registerUserViewModel.Mobile);
-            ////var otpCode = await SendRandomNumber();
-
-            //if (mobileExist)
-            //{
-            //    return RegisterUserResult.UserExist;
-            //}
-
-
-        
             var emailExist = await _userRepository.IsEmailExist(registerUserViewModel.Email);
             if (emailExist)
             {
@@ -77,12 +65,11 @@ namespace AryanITC.Core.Services.Implementations
                 //UserAvatar = "Default.png",
             
 
-
             };
 
             await  _userRepository.AddUser(user);
             await _userRepository.SaveChange();
-            //SendOtpCode(user.Mobile, user.OtpCode);
+        
             string body = _viewRender.RenderToStringAsync("SuccessRegister", registerUserViewModel);
             SendEmail.Send(registerUserViewModel.Email, "فعالسازی", body);
             return RegisterUserResult.Success;
@@ -152,42 +139,12 @@ namespace AryanITC.Core.Services.Implementations
                 await _userRepository.SaveChange();
                 return ActiveEmailResult.Success;
 
-            }
-
+            } 
             return ActiveEmailResult.NotActive;
         }
 
         #endregion
-
-
-
-        #region Send otpCode
-
-        //public bool SendOtpCode(string mobile, string otpCode)
-        //{
-        //    var result = Senders.SendVerificationCodeSms.SendVerificationCode(mobile, otpCode);
-        //    return false;
-        //}
-
-
-        #endregion
-
-        #region Send RandomNumber
-
-
-        //public async Task<string> SendRandomNumber()
-        //{
-        //var otpCode = RandomNumber.Random(100000, 999999).ToString();
-
-        //    while (await _userRepository.CheckOtpCode(otpCode))
-        //{
-        //    otpCode = RandomNumber.Random(100000, 999999).ToString();
-        //}
-        //return otpCode;
-        //}
-
-        #endregion
-
+         
 
     }
 }

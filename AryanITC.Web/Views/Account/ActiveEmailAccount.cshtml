@@ -5,10 +5,8 @@
 
 @{
     ViewData["Title"] = "فعال سازی حساب";
-
-    //EmailActiveAccountViewModel result = ViewData["active"] as EmailActiveAccountViewModel;
+    
 }
-
 
 
 <nav aria-label="breadcrumb">
@@ -18,42 +16,75 @@
     </ul>
 </nav>
 
-
-
-
-<p class=" text-center">
-    <div class="container">
  
-        @*<div class="alert @ViewData["AlertClass"]">
-            @Html.ValidationMessage("CustomError")
-        </div>*@
+    @if (ViewBag.active == ActiveEmailResult.Success)
 
-        @if (ViewData["Active"] != null)
-
-
-                {
-                    <div class="alert alert-success">
-                        <div class="alert @ViewData["AlertClass"]">
-                            @Html.ValidationMessage("CustomError")
-                        </div>
-                       
-                       <br />
-
-                       <p>
-                           از  <a asp-controller="Account" asp-action="Login">  اینجا</a> می توانید وارد پنل کاربری خود شود.
-                        </p>
-                    </div>
-                }
-
-     
-
-        else
-        {
-        <div class="alert alert-danger"> کاربری با مشخصات ارسال شده یافت نشد.</div>
-        }
-
+    {
+        <script>
+            // Your delay in milliseconds
+            var delay = 10000;
+            setTimeout(function () { window.location = "https://localhost:44385/"; }, delay);
+        </script>
+    }
+ 
+@if (ViewData["AlertClass"] != null)
+{
+    <div class="alert @ViewData["AlertClass"]">
+        @Html.ValidationMessage("CustomError")
+        از<a asp-controller="Account" asp-action="Login">  اینجا</a> می توانید وارد پنل کاربری خود شود.
 
 
     </div>
-</p>
+
+}
+
+else
+{
+    <div>
+        <a asp-controller="Home" asp-action="NotFound"> درخواست شما با خطا مواجه شد.</a>
+    </div>
+}
+   
+
+@*<p class=" text-center">
+            <div class="container">
+
+
+                @if (ViewBag.active == ActiveEmailResult.Error)
+
+                {
+                    <div class="alert alert-danger">
+                        <p>کاربر عزیز، درخواست شما با خطا مواجه شد</p>
+                    </div>
+                }
+
+
+                @if (ViewBag.active == ActiveEmailResult.Success)
+
+                {
+                    <div class="alert alert-success">
+                        <p>کاربر عزیز، حساب شما با موفقیت فعال شد</p>
+                        از<a asp-controller="Account" asp-action="Login">  اینجا</a> می توانید وارد پنل کاربری خود شود.
+
+                    </div>
+                }
+
+                @if (ViewBag.active == ActiveEmailResult.NotActive)
+
+                {
+                    <div class="alert alert-warning">
+                        <p>کاربر عزیز، حساب شما فعال نمی باشد</p>
+                    </div>
+                }
+
+
+                else
+                {
+                    <div class="alert alert-danger"> کاربری با مشخصات ارسال شده یافت نشد.</div>
+                }
+            </div>
+        </p>*@
+
+
+
 

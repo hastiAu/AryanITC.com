@@ -37,10 +37,10 @@
                         @if (User.Identity.IsAuthenticated)
                         {
 
-                            <div class="  btn btn-login btn-block btn-register">@User.Identity.Name خوش آمدید!</div>
+                        <div class="  btn btn-login btn-block btn-register">@User.Identity.Name  خوش آمدید!</div>
 
                             <li >
-                                <a asp-controller="Account" asp-action="Login" class="btn btn-login btn-block btn-register "> خروج </a>
+                                <a asp-controller="Account" asp-action="Logout" class="btn btn-login btn-block btn-register "> خروج </a>
                             </li>
                         }
 
