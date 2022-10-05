@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AryanITC.Core.Convertor;
 using AryanITC.Core.Generator;
+using AryanITC.Core.Senders;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.Account;
 using Microsoft.AspNetCore.Authentication;
@@ -29,13 +30,13 @@ namespace AryanITC.Web.Controllers
         private readonly IStringLocalizer<AccountController> _localizer;
 
 
-        public AccountController(IUserService userService, IStringLocalizer<AccountController> localizer )
+        public AccountController(IUserService userService, IStringLocalizer<AccountController> localizer)
         {
             _userService = userService;
             _localizer = localizer;
-            
+
         }
-      
+
 
         #endregion
 
@@ -54,7 +55,7 @@ namespace AryanITC.Web.Controllers
         {
             if (ModelState.IsValid)
 
-            {       
+            {
                 var result = await _userService.RegisterUser(registerUserViewModel);
 
                 switch (result)
@@ -69,22 +70,24 @@ namespace AryanITC.Web.Controllers
                         ModelState.AddModelError("Email", "کاربر گرامی، شما قبلا با ایمیل ثبت نام کرده اید.");
                         TempData[WarningMessage] = "کاربر گرامی، شما قبلا با ایمیل ثبت نام کرده اید.";
                         return View(registerUserViewModel);
-                      
+
 
                     case RegisterUserResult.Success:
-                        TempData[SuccessMessage] = "کاربر گرامی،ثبت نام شما قبلا با موفقیت انجام شد.";
+                        TempData[SuccessMessage] = "کاربر گرامی،ثبت نام شما با موفقیت انجام شد.";
 
 
                         var user = await _userService.GetUserByEmail(registerUserViewModel.Email);
                         var activeCode = user.EmailActiveCode;
 
                         ViewBag.active = activeCode;
-                        return View("SuccessRegister",registerUserViewModel);
- 
+
+
+                        return View("SuccessRegister", registerUserViewModel);
+
                 }
 
             }
-             
+
 
             return View(registerUserViewModel);
         }
@@ -111,53 +114,55 @@ namespace AryanITC.Web.Controllers
                 switch (result)
                 {
                     case LoginUserResult.Error:
-                    {
-                        ModelState.AddModelError("Email", "خطا داد");
-                        break;
-                    }
+                        {
+                            ModelState.AddModelError("Email", "کاربر گرامی، درخواست شما با خطا مواجه شد");
+                            TempData[ErrorMessage] = "کاربر گرامی، درخواست شما با خطا مواجه شد";
+                            break;
+                        }
 
                     case LoginUserResult.NotActive:
-                    {
-                        ModelState.AddModelError("Email", "کاریر فعال نیست  ");
-                        break;
-                    }
+                        {
+                            ModelState.AddModelError("Email", "کاریر گرامی، حساب کاربری شما فعال نیست");
+                            TempData[WarningMessage]=  "کاریر گرامی، حساب کاربری شما فعال نیست " ;
+                            break;
+                        }
                     case LoginUserResult.UserNotFound:
-                    {
-                        ModelState.AddModelError("Email", "کاربر پیدا نشد");
-                        break;
+                        {
+                            ModelState.AddModelError("Email", "کاربر پیدا نشد");
+                            TempData[WarningMessage] = "کاربری با مشحصات ارسالی یافت نشد";
 
-                    }
+                            break;
+
+                        }
                     case LoginUserResult.Success:
 
-                    {
+                        { 
+                            ViewBag.IsSuccess = true;
+                     
 
-                        ////ModelState.AddModelError("Email", "ورود با موفقیت انجام شد");
-                        ViewBag.IsSuccess = true;
-                        //TempData[SuccessMessage] = "ورود موفق";
+                            var email = loginUserViewModel.Email;
+                            var user = await _userService.GetUserByEmail(email);
 
-                        var email = loginUserViewModel.Email;
-                        var user = await _userService.GetUserByEmail(email);
-
-                        var claims = new List<Claim>()
+                            var claims = new List<Claim>()
                         {
                             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                             new Claim(ClaimTypes.Email, user.Email),
                             new Claim(ClaimTypes.Name, user.FirstName + user.LastName),
 
                         };
-                        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                        var principal = new ClaimsPrincipal(identity);
+                            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            var principal = new ClaimsPrincipal(identity);
 
-                        var properties = new AuthenticationProperties
-                        {
-                            IsPersistent = loginUserViewModel.RememberMe
-                        };
-                        TempData[SuccessMessage] = "موفق";
-                        await HttpContext.SignInAsync(principal, properties);
+                            var properties = new AuthenticationProperties
+                            {
+                                IsPersistent = loginUserViewModel.RememberMe
+                            };
+                            TempData[SuccessMessage] = "ورود شما با موفقیت انجام شد";
+                            await HttpContext.SignInAsync(principal, properties);
 
-                        break;
+                            break;
 
-                    }
+                        }
                 }
             }
 
@@ -189,14 +194,13 @@ namespace AryanITC.Web.Controllers
         #endregion
 
 
-
         #region ActiveEmailAccount
 
         [Route("Active")]
- 
+
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult>ActiveEmailAccount(EmailActiveAccountViewModel activeCode)
-        {  
+        public async Task<IActionResult> ActiveEmailAccount(EmailActiveAccountViewModel activeCode)
+        {
             if (ModelState.IsValid)
 
             {
@@ -227,9 +231,9 @@ namespace AryanITC.Web.Controllers
             }
 
 
-            return View();
-        
-    }
+            return View(activeCode);
+
+        }
 
         #region LogOut
 
@@ -237,7 +241,7 @@ namespace AryanITC.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            TempData[InfoMessage] = "با موفقیت خارج شدید";
+            TempData[InfoMessage] = "کاربر عزیز، شما با موفقیت خارج شدید";
             return RedirectToAction("Login", "Account");
         }
 
@@ -247,8 +251,100 @@ namespace AryanITC.Web.Controllers
         #endregion
 
 
+
+        #region ForgotPassword
+
+        [Route("ForgotPassword")]
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel forget)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.ForgotPassword(forget);
+                switch (result)
+                {
+                    case ForgotPasswordResult.Error:
+                        ModelState.AddModelError("Email", "کاریر گرامی ، درخواست شما با خطا مواجه شد");
+                        TempData[ErrorMessage] = "کاربر گرامی، درخواست شما با خطا مواجه شد";
+                        break;
+                    case ForgotPasswordResult.EmailNotValid:
+                        ModelState.AddModelError("Email", "کاریر گرامی ،ایمیلی با مشخصات وارد شده یافت نشد");
+                        TempData[WarningMessage] = "کاریر گرامی ،ایمیلی با مشخصات وارد شده یافت نشد";
+                        break;
+                    case ForgotPasswordResult.Success:
+                        ModelState.AddModelError("Email", "کاریر گرامی ، ایمیل با موفقیت جهت بازبابی کلمه عبور برای شما ارسال شد");
+                        TempData[SuccessMessage] =
+                            "کاریر گرامی ، ایمیل با موفقیت جهت بازبابی کلمه عبور برای شما ارسال شد";
+                        ViewBag.IsSuccess = true;   
+                        var user = await _userService.GetUserByEmail(forget.Email);
+                        if (user == null)
+                            return RedirectToAction("NotFound", "Home");
+                        break;
+                }
+
+            }
+
+            return View(forget);
+
+        }
+        #endregion
+
+        #region Reset Password
+
+        [Route("ResetPassword")]
+        [HttpGet]
+        public IActionResult ResetPassword(string emailActiveCode)
+        {
+            var reset = new ResetPasswordViewModel
+            {
+                EmailActiveCode = emailActiveCode
+            };
+            return View(reset);
+        }
+
+        [Route("ResetPassword")]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel reset)
+        {
+            if (ModelState.IsValid)
+                
+            {
+                var result = await _userService.ResetPassword(reset);
+
+                switch (result)
+                {
+                    case ResetPasswordResult.NotValid:
+                        ModelState.AddModelError("Email", "کاریر گرامی ، درخواست شما با خطا مواجه شد");
+                        TempData[WarningMessage] = "کاربر عزیز، درخواست شما با خطا مواجه شد";
+                        return View(reset);
+
+                    case ResetPasswordResult.Error:
+                        ModelState.AddModelError("Email", "کاریر گرامی ،ایمیلی با مشخصات وارد شده یافت نشد");
+                        TempData[ErrorMessage] = "کاریر گرامی ،ایمیلی با مشخصات وارد شده یافت نشد";
+                        return View(reset);
+
+                    case ResetPasswordResult.Success:
+                        ModelState.AddModelError("Email", "کاریر گرامی ، کلمه عبور شما با موفقیت تغییر کرد. می توانید وارد حساب کاربری خود شوید");
+                        TempData[SuccessMessage] =
+                            "کاریر گرامی ، کلمه عبور شما با موفقیت تغییر کرد. می توانید وارد حساب کاربری خود شوید";
+                        return RedirectToAction("Login", "Account");  
+                }
+              
+            }
+
+            return View(reset);
+        }
+        #endregion
+
         [Authorize]
-         [Route("Test")]
+        [Route("Test")]
         public IActionResult Test()
         {
 

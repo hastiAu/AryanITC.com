@@ -13,11 +13,8 @@ using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.Account;
-using Microsoft.AspNetCore.Routing.Template;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
-using static AryanITC.Domain.ViewModels.Account.EmailActiveAccountViewModel;
+
 
 
 namespace AryanITC.Core.Services.Implementations
@@ -49,29 +46,30 @@ namespace AryanITC.Core.Services.Implementations
                 return RegisterUserResult.UserExist;
             }
 
+
             User user = new User()
             {
-                //EmailActiveCode = NameGenerator.GenerateUniqCode(),
                 FirstName = registerUserViewModel.FirstName.SanitizeText(),
                 LastName = registerUserViewModel.LastName.SanitizeText(),
-                //OtpCode = otpCode,
                 EmailActiveCode = NameGenerator.GenerateUniqCode(),
                 Password = PasswordHellper.EncodePasswordMd5(registerUserViewModel.Password).SanitizeText(),
                 Mobile = registerUserViewModel.Mobile.SanitizeText(),
                 UserState = UserState.NotActive,
                 RegisterDate = DateTime.Now,
-                OtpExpireTime = DateTime.Now.AddMinutes(2),
                 Email = registerUserViewModel.Email,
+                
                 //UserAvatar = "Default.png",
             
 
             };
 
-            await  _userRepository.AddUser(user);
+            await _userRepository.AddUser(user);
             await _userRepository.SaveChange();
-        
-            string body = _viewRender.RenderToStringAsync("SuccessRegister", registerUserViewModel);
-            SendEmail.Send(registerUserViewModel.Email, "فعالسازی", body);
+            
+            
+            string body = _viewRender.RenderToStringAsync("ActiveEmail", user );
+            SendEmail.Send(user.Email, "فعالسازی", body);
+          
             return RegisterUserResult.Success;
 
         }
@@ -87,10 +85,33 @@ namespace AryanITC.Core.Services.Implementations
         }
 
 
-
         public async Task<User> GetUserByEmail(string email)
         {
             return await _userRepository.GetUserByEmail(email);
+        }
+
+        public async Task<ForgotPasswordResult> ForgotPassword(ForgotPasswordViewModel forgot)
+        {  
+            var user = await _userRepository.GetUserByEmail(forgot.Email);
+            if (user == null)
+            {
+                return ForgotPasswordResult.Error;
+            }
+
+            var resetPass = new ResetPasswordViewModel()
+                {
+                Password =  user.Password,
+                EmailActiveCode = user.EmailActiveCode
+                }
+                ;
+            string body = _viewRender.RenderToStringAsync("_ForgotPassword", resetPass);
+            SendEmail.Send(user.Email, "بازیابی کلمه عبور", body);
+
+            _userRepository.UpdateUser(user);
+            await _userRepository.SaveChange();
+     
+        return ForgotPasswordResult.Success;
+            
         }
 
         public async Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel)
@@ -118,7 +139,23 @@ namespace AryanITC.Core.Services.Implementations
             return await _userRepository.GetUserByActiveCode(activeCode);
         }
 
-        
+        public async Task<ResetPasswordResult> ResetPassword(ResetPasswordViewModel reset)
+        {
+            var user = await _userRepository.GetUserByActiveCode(reset.EmailActiveCode);
+      
+
+            if (user != null)
+
+            {
+                string hashNewPassword = PasswordHellper.EncodePasswordMd5(reset.Password).SanitizeText();
+                user.Password = hashNewPassword;
+                _userRepository.UpdateUser(user);
+                await _userRepository.SaveChange();
+                return ResetPasswordResult.Success;
+            }
+            return ResetPasswordResult.NotValid;
+        }
+
 
         public async Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode)
         {

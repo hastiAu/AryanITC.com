@@ -18,16 +18,11 @@ namespace AryanITC.Domain.IRepository
         void UpdateUser(User user);
         Task<bool> CheckOtpCode(string otpCode);
         Task<User> GetUserByMobil(string mobile);
-
         Task<User> GetUSerForLogin(string email, string password);
-
-     
         Task<bool> CheckEmailActiveCode(string activeCode);
         Task<User> GetUserByEmail(string email);
-
         Task<User> GetUserByActiveCode(string activeCode);
        
-
         #endregion
 
 

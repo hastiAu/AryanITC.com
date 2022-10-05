@@ -6,7 +6,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "فعال سازی حساب کاربری";
+    ViewData["Title"] = " ثبت نام موفق";
     
 }
   
@@ -25,9 +25,9 @@
     <div class="alert alert-success">
         <h3> @Model.FirstName  @Model.LastName عزیز !</h3>
         <p>ثبت نام شما با موفقیت انجام شد ، ایمیلی حاوی لینک فعالسازی به ایمیل "@Model.Email" ارسال شد .</p>
-        <p>
-            <a href="https://localhost:44385/active?EmailActiveCode=@ViewBag.active">فعالسازی حساب کاربری</a>
-        </p>
+        <p>جهت ادامه ثبت نام وارد ایمیل خود شوید و روی لینک کلیک کنید .</p>
+        @*<a href="https://localhost:44385/active?EmailActiveCode=@ViewBag.active">فعالسازی حساب کاربری</a>     </p>*@
+
     </div>
  
     

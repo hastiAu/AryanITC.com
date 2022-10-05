@@ -17,6 +17,7 @@ namespace AryanITC.Core.Senders
             mail.Subject = subject;
             mail.Body = body;
             mail.IsBodyHtml = true;
+            
 
             //System.Net.Mail.Attachment attachment;
             // attachment = new System.Net.Mail.Attachment("c:/textfile.txt");

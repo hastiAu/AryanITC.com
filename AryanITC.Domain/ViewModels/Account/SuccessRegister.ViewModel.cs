@@ -11,17 +11,10 @@ namespace AryanITC.Domain.ViewModels.Account
     {
 
 
-        [Display(Name = "FirstName")]
-        [MaxLength(100, ErrorMessage = "MaxLength")]
+        [Display(Name = "Email")]
+        [MaxLength(50, ErrorMessage = "MaxLength")]
         [Required(ErrorMessage = "Required")]
-        public string FirstName { get; set; }
-
-
-        [Display(Name = "LastName")]
-        [MaxLength(100, ErrorMessage = "MaxLength")]
-        [Required(ErrorMessage = "Required")]
-        public string LastName { get; set; }
-
+        [EmailAddress(ErrorMessage = "EmailAddress")]
         public string Email { get; set; }
     }
 }

@@ -20,38 +20,22 @@ namespace AryanITC.Core.Services.Interfaces
         Task<bool> CheckOtpCode(string otpCode);
         Task<User> GetUserByMobil(string mobile);
         Task<User> GetUserByEmail(string email);
-
+       
         #endregion
 
         #region Login
  
         Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel);
-
-        #endregion
-
-        #region ActiveEmailAccount
-
         Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode);
         Task<User> GetUserByActiveCode(string activeCode);
-
-       
-        //Task<string> SendActivetionCode(string to, RegisterUserViewModel registerUserViewModel);
-
+        Task<ForgotPasswordResult> ForgotPassword(ForgotPasswordViewModel forgot);
+        Task<ResetPasswordResult> ResetPassword(ResetPasswordViewModel reset);
 
         #endregion
 
-        #region Send otpCode
 
-        //Task<bool> SendOtpCode(string mobile, string otpCode);
 
-        #endregion
 
-        #region Random Number
-
-        //Task<string> SendRandomNumber();
-        //Task<string> SendActiveCode();
-
-        #endregion
 
 
     }

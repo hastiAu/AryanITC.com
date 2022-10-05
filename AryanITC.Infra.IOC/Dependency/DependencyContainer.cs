@@ -27,7 +27,7 @@ namespace AryanITC.Infra.IOC.Dependency
             #region Repositories Injection 
 
             service.AddScoped<IUserRepository, UserRepository>();
-
+         
 
             #endregion
         }

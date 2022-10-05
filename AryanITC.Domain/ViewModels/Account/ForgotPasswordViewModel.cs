@@ -7,29 +7,26 @@ using System.Threading.Tasks;
 
 namespace AryanITC.Domain.ViewModels.Account
 {
-    #region ActiveEmailAccount
-    public class EmailActiveAccountViewModel
+    #region ForgotPassword
+    public class ForgotPasswordViewModel
     {
-  
-
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string EmailActiveCode { get; set; }
-
+        public string Email { get; set; }
     }
+
     #endregion
 
-    #region ActiveEmailResult
-    public enum ActiveEmailResult
+    #region ForgotPasswordResult
+
+    public enum ForgotPasswordResult
     {
- 
-        Success,
-        NotActive,
         Error,
+        EmailNotValid,
+        Success
     }
 
     #endregion
-
 
 }

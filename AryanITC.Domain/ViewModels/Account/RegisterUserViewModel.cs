@@ -49,6 +49,8 @@ namespace AryanITC.Domain.ViewModels.Account
         [Required(ErrorMessage = "Required")]
         [EmailAddress(ErrorMessage = "EmailAddress")]
         public string Email { get; set; }
+ 
+
 
         //[Display(Name = "IsActive")]
         //public bool IsActive { get; set; }
