@@ -1,0 +1,197 @@
+﻿@using System.Web.Mvc
+@using AryanITC.Core.FilePath
+@model AryanITC.Domain.ViewModels.ManagementUser.FilterUserViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section AdminBreadCrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index"> لیست کاربران </a></li>
+    </ul>
+}
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-3 col-sm-12">
+
+            <div>
+                <a class="btn-success custom-btn-create"> افزودن کاربر جدید</a>
+            </div>
+
+            <div class="card">
+                <div class="header">
+                    <h2> فیلتر کاربران</h2>
+                </div>
+                <div class="body">
+                    <form asp-action="Index" method="post">
+                        <div class="row clearfix">
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label> نام و نام خانوادگی</label>
+                                    <input type="text" asp-for="FullName" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label> شماره موبایل</label>
+                                    <input type="text" asp-for="MobileNumber" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="margin-bottom-0" asp-for="UserState">وضعیت</label>
+                                    <select class="form-control show-tick" tabindex="-98" asp-for="FilterUserState">
+                                        <option value="0">همه</option>
+                                        <option value="1">فعال</option>
+                                        <option value="2">غیرفعال</option>
+                                        <option value="3">حذف شده</option>
+                                        <option value="4">مسدود</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-raised btn-primary btn-round waves-effect">جستجو</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2>کاربران<strong> آریان ITC </strong></h2>
+                </div>
+                <div class="body">
+
+                    @if (Model.AllEntitiesCount > 0)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>عکس</th>
+                                                <th>نام</th>
+                                                <th>نام خانوادگی</th>
+                                                <th>شماره تماس</th>
+                                                <th>وضعیت</th>
+                                                <th>حذف شده</th>
+                                                <th>عملیات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var user in Model.Users)
+                                            {
+                                                <tr>
+                                                    @if (user.UserAvatar == null)
+                                                    {
+                                                        <td>
+                                                            <img class="thumbnail" src="@(FilePath.UserAvatarImage + user.UserAvatar + "Default.jpg")" style="max-width: 50px" />
+
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <img class="thumbnail" src="@(FilePath.UserAvatarImage + user.UserAvatar )" style="max-width: 50px" />
+
+                                                        </td>
+                                                    }
+                                                    <td>@user.FirstName</td>
+                                                    <td>@user.LastName</td>
+                                                    <td>@user.Mobile</td>
+                                                    <td>
+                                                        @if (user.UserState == UserState.Active)
+                                                        {
+                                                            <i class="zmdi zmdi-check text-success"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="zmdi zmdi-close text-danger"></i>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (user.IsDelete)
+                                                        {
+                                                            <i class="zmdi zmdi-check text-success"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="zmdi zmdi-close text-danger"></i>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a data-toggle="tooltip" title="ویرایش" asp-action="" asp-route-id="">
+                                                            <i class="material-icons">create</i>
+                                                        </a>
+                                                        <a data-toggle="tooltip" title="کیف پول کاربر" asp-action="" asp-route-id="">
+                                                            <i class="material-icons">account_balance_wallet</i>
+                                                        </a>
+                                                        <a data-toggle="tooltip" title="بسته کاربر" asp-action="" asp-route-id="">
+                                                            <i class="material-icons">local_mall</i>
+                                                        </a>
+                                                        @if (user.IsDelete)
+                                                        {
+                                                            <a title="بازگرداندن" data-toggle="tooltip" asp-action="" asp-route-id="">
+                                                                <i class="material-icons">restore</i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a title="حذف کردن" data-toggle="tooltip" asp-action="" asp-route-id="">
+                                                                <i class="material-icons">delete</i>
+                                                            </a>
+                                                        }
+                                                        <a data-toggle="tooltip" title="اطلاعات کاربر" asp-action="" asp-route-id="">
+                                                            <i class="material-icons">info</i>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+                   
+                    else
+                    {
+                    <div class="alert alert-danger">
+                        <strong> متاسفیم!!! آیتمی برای نمایش پیدا نشد </strong>
+                    </div>
+                    }
+                </div>
+                @if (Model.AllPageCount > 1)
+                {
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                <ul class="pagination">
+                                    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                                    {
+                                        <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
+
+                                            <a Pagination="@i" PFormId="OurServiceForm" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div> 
+    </div>
+</div>

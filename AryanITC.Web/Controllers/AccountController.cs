@@ -1,21 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AryanITC.Core.Convertor;
-using AryanITC.Core.Generator;
-using AryanITC.Core.Senders;
-using AryanITC.Core.Services.Interfaces;
+﻿using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Localization;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
 
 
@@ -123,7 +115,7 @@ namespace AryanITC.Web.Controllers
                     case LoginUserResult.NotActive:
                         {
                             ModelState.AddModelError("Email", "کاریر گرامی، حساب کاربری شما فعال نیست");
-                            TempData[WarningMessage]=  "کاریر گرامی، حساب کاربری شما فعال نیست " ;
+                            TempData[WarningMessage] = "کاریر گرامی، حساب کاربری شما فعال نیست ";
                             break;
                         }
                     case LoginUserResult.UserNotFound:
@@ -136,9 +128,9 @@ namespace AryanITC.Web.Controllers
                         }
                     case LoginUserResult.Success:
 
-                        { 
+                        {
                             ViewBag.IsSuccess = true;
-                     
+
 
                             var email = loginUserViewModel.Email;
                             var user = await _userService.GetUserByEmail(email);
@@ -282,7 +274,7 @@ namespace AryanITC.Web.Controllers
                         ModelState.AddModelError("Email", "کاریر گرامی ، ایمیل با موفقیت جهت بازبابی کلمه عبور برای شما ارسال شد");
                         TempData[SuccessMessage] =
                             "کاریر گرامی ، ایمیل با موفقیت جهت بازبابی کلمه عبور برای شما ارسال شد";
-                        ViewBag.IsSuccess = true;   
+                        ViewBag.IsSuccess = true;
                         var user = await _userService.GetUserByEmail(forget.Email);
                         if (user == null)
                             return RedirectToAction("NotFound", "Home");
@@ -314,7 +306,7 @@ namespace AryanITC.Web.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel reset)
         {
             if (ModelState.IsValid)
-                
+
             {
                 var result = await _userService.ResetPassword(reset);
 
@@ -334,9 +326,9 @@ namespace AryanITC.Web.Controllers
                         ModelState.AddModelError("Email", "کاریر گرامی ، کلمه عبور شما با موفقیت تغییر کرد. می توانید وارد حساب کاربری خود شوید");
                         TempData[SuccessMessage] =
                             "کاریر گرامی ، کلمه عبور شما با موفقیت تغییر کرد. می توانید وارد حساب کاربری خود شوید";
-                        return RedirectToAction("Login", "Account");  
+                        return RedirectToAction("Login", "Account");
                 }
-              
+
             }
 
             return View(reset);

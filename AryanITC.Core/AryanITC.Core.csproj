@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FilePath\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Elmah.MVC" Version="2.1.2" />
     <PackageReference Include="ElmahCore" Version="2.1.2" />
     <PackageReference Include="HtmlSanitizer" Version="6.0.441" />

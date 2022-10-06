@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.ViewModels.Account;
+using AryanITC.Domain.ViewModels.ManagementUser;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
 using static AryanITC.Domain.ViewModels.Account.EmailActiveAccountViewModel;
 
@@ -33,7 +34,11 @@ namespace AryanITC.Core.Services.Interfaces
 
         #endregion
 
+        #region Admin
 
+        Task<FilterUserViewModel> FilterUsers(FilterUserViewModel filter);
+
+        #endregion
 
 
 

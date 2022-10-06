@@ -13,6 +13,7 @@ using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.Account;
+using AryanITC.Domain.ViewModels.ManagementUser;
 using static AryanITC.Domain.ViewModels.Account.LoginUserViewModel;
 
 
@@ -46,7 +47,6 @@ namespace AryanITC.Core.Services.Implementations
                 return RegisterUserResult.UserExist;
             }
 
-
             User user = new User()
             {
                 FirstName = registerUserViewModel.FirstName.SanitizeText(),
@@ -65,31 +65,24 @@ namespace AryanITC.Core.Services.Implementations
 
             await _userRepository.AddUser(user);
             await _userRepository.SaveChange();
-            
-            
             string body = _viewRender.RenderToStringAsync("ActiveEmail", user );
             SendEmail.Send(user.Email, "فعالسازی", body);
           
             return RegisterUserResult.Success;
 
         }
-
         public async Task<bool> CheckOtpCode(string otpCode)
         {
             return await _userRepository.CheckOtpCode(otpCode);
         }
-
         public async Task<User> GetUserByMobil(string mobile)
         {
             return await _userRepository.GetUserByMobil(mobile);
         }
-
-
         public async Task<User> GetUserByEmail(string email)
         {
             return await _userRepository.GetUserByEmail(email);
         }
-
         public async Task<ForgotPasswordResult> ForgotPassword(ForgotPasswordViewModel forgot)
         {  
             var user = await _userRepository.GetUserByEmail(forgot.Email);
@@ -113,7 +106,6 @@ namespace AryanITC.Core.Services.Implementations
         return ForgotPasswordResult.Success;
             
         }
-
         public async Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel)
 
         {
@@ -131,8 +123,6 @@ namespace AryanITC.Core.Services.Implementations
                 return LoginUserResult.UserNotFound;
             }
         }
-
-
 
         public async Task<User> GetUserByActiveCode(string activeCode)
         {
@@ -155,8 +145,6 @@ namespace AryanITC.Core.Services.Implementations
             }
             return ResetPasswordResult.NotValid;
         }
-
-
         public async Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode)
         {
             var activeEmailExist=await _userRepository.CheckEmailActiveCode(activeCode.EmailActiveCode);
@@ -181,7 +169,13 @@ namespace AryanITC.Core.Services.Implementations
         }
 
         #endregion
-         
 
+        #region Admin
+        public async Task<FilterUserViewModel> FilterUsers(FilterUserViewModel filter)
+        {
+            return await _userRepository.FilterUser(filter);
+        }
+
+        #endregion
     }
 }

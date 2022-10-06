@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.ViewModels.Account;
+using AryanITC.Domain.ViewModels.ManagementUser;
 
 namespace AryanITC.Domain.IRepository
 {
@@ -22,9 +23,14 @@ namespace AryanITC.Domain.IRepository
         Task<bool> CheckEmailActiveCode(string activeCode);
         Task<User> GetUserByEmail(string email);
         Task<User> GetUserByActiveCode(string activeCode);
-       
+
         #endregion
 
+        #region AdminPanel
+
+        Task<FilterUserViewModel> FilterUser (FilterUserViewModel filter);
+
+            #endregion
 
         #region SaveChange
 
