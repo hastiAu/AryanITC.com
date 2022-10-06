@@ -178,6 +178,7 @@
                         <div class="col-12 d-flex justify-content-center">
                             <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
                                 <ul class="pagination">
+
                                     @for (int i = Model.StartPage; i <= Model.EndPage; i++)
                                     {
                                         <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
