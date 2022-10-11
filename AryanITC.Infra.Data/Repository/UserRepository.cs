@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.ManagementUser;
@@ -149,6 +150,24 @@ namespace AryanITC.Infra.Data.Repository
             var users = await query.OrderBy(o => o.IsDelete).Pagination(pager).ToListAsync();
             filter.SetUsers(users);
             return filter.SetPaging(pager);
+        }
+
+        public async Task CreateUser(User user)
+        {
+            await _context.Users.AddAsync(user);
+        }
+
+        public async Task CreateRole(UserRole userRole)
+        {
+            await _context.UserRoles.AddAsync(userRole);
+        }
+
+        public void DeleteAlUserRole(long userId)
+        {
+            _context.UserRoles
+                .Where(u=>u.UserId==userId)
+                .ToList()
+                .ForEach(r=> _context.Remove(r));
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.ViewModels.Account;
 using AryanITC.Domain.ViewModels.ManagementUser;
@@ -29,6 +30,15 @@ namespace AryanITC.Domain.IRepository
         #region AdminPanel
 
         Task<FilterUserViewModel> FilterUser (FilterUserViewModel filter);
+        Task CreateUser(User user);
+
+
+        #endregion
+
+        #region User Roles
+
+        Task CreateRole(UserRole userRole);
+        void DeleteAlUserRole(long userId);
 
             #endregion
 

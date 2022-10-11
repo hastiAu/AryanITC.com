@@ -33,11 +33,11 @@
                     </li>
                 </ul>
             </li>
-            
+
 
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="zmdi zmdi-home"></i>
+
                     <span>کاربران</span>
                 </a>
                 <ul class="ml-menu">
@@ -45,15 +45,33 @@
                         <a asp-controller="User" asp-action="Index">  لیست کاربران    </a>
                     </li>
                     <li>
-                        <a>
+                        <a asp-controller="User" asp-action="CreateUser">
                             <span> افزدون کاربر جدید</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            
-            
-            
+
+
+
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+
+                    <span>نقش ها</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <a asp-controller=" " asp-action=" ">  لیست نقش ها    </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span> افزدون نقش جدید</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
 
         </ul>
     </div>

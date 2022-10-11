@@ -21,13 +21,14 @@ namespace AryanITC.Infra.IOC.Dependency
 
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<IViewRenderService, RenderViewToString>();
+            service.AddScoped<IAccessService, AccessService>();
 
             #endregion
 
             #region Repositories Injection 
 
             service.AddScoped<IUserRepository, UserRepository>();
-         
+            service.AddScoped<IAccessRepository, AccessRepository>();
 
             #endregion
         }

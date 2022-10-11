@@ -53,9 +53,14 @@ body * {
     padding-right: 0px
 }
 
-.table thead th {
+/*.table thead th {
     text-align: right
+}*/
+
+.table thead th {
+    text-align: center
 }
+
 
 @font-face {
     font-family: 'Material Icons';

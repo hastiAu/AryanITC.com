@@ -21,11 +21,12 @@ namespace AryanITC.Core.Services.Interfaces
         Task<bool> CheckOtpCode(string otpCode);
         Task<User> GetUserByMobil(string mobile);
         Task<User> GetUserByEmail(string email);
-       
+        Task<bool> IsExistMobileNumber(string mobileNumber);
+
         #endregion
 
         #region Login
- 
+
         Task<LoginUserResult> LoginUser(LoginUserViewModel loginUserViewModel);
         Task<ActiveEmailResult> ActiveAccount(EmailActiveAccountViewModel activeCode);
         Task<User> GetUserByActiveCode(string activeCode);
@@ -37,10 +38,17 @@ namespace AryanITC.Core.Services.Interfaces
         #region Admin
 
         Task<FilterUserViewModel> FilterUsers(FilterUserViewModel filter);
+        Task<UserTypeResult> CreateUser(CreateUserViewModel createUser);
+
 
         #endregion
 
+        #region User Role
 
+        Task CreateUserRole(long userId, List<long> selectedUserRoles);
+        Task DeleteAllUserRoles(long userId);
+
+        #endregion
 
 
     }

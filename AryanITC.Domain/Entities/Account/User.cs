@@ -69,6 +69,9 @@ namespace AryanITC.Domain.Entities.Account
         [Display(Name = "IsDelete")]
         public bool IsDelete { get; set; }
 
+        public bool IsSuperAdmin { get; set; }
+
+
         #endregion
 
         #region Relations
