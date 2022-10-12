@@ -156,7 +156,35 @@ namespace AryanITC.Infra.Data.Repository
         {
             await _context.Users.AddAsync(user);
         }
+        public async Task<User> GetUserByUserId(long userId)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == userId);
+        }
 
+        public async Task<EditUserViewModel> GetUserForEdit(long userId)
+        {
+            return await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(r => r.UserRoles)
+                .Select(u => new EditUserViewModel()
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    Mobile = u.Mobile,
+                    UserRoles = u.UserRoles.Select(r => r.RoleId).ToList(),
+                    IsSuperAdmin = u.IsSuperAdmin,
+                    ImageAvatar = u.UserAvatar,
+                    UserId = (int)u.Id,
+
+                }
+                ).SingleOrDefaultAsync();
+        }
+
+        public void EditUser(User user)
+        {
+            _context.Users.Update(user);
+        }
         public async Task CreateRole(UserRole userRole)
         {
             await _context.UserRoles.AddAsync(userRole);

@@ -232,6 +232,71 @@ namespace AryanITC.Core.Services.Implementations
 
         }
 
+        public async Task<EditUserViewModel> GetUserForEditById(long userId)
+        {
+            var user= await _userRepository.GetUserForEdit(userId);
+            if (user == null) return null;
+            return user;
+        }
+
+        public async Task<EditUserTypeResult> EditUser(EditUserViewModel editUserViewModel)
+        {
+            var user = await _userRepository.GetUserByUserId(editUserViewModel.UserId);
+            if (user == null)
+            {
+               return EditUserTypeResult.NotFound;
+            }
+
+            if (user.Email != editUserViewModel.Email)
+            {
+                if (await _userRepository.IsEmailExist(editUserViewModel.Email))
+                {
+                    return EditUserTypeResult.EmailExit;
+                }
+               
+            }
+
+            if (user.Mobile !=editUserViewModel.Mobile)
+            {
+                if (await _userRepository.IsExistMobileNumber(editUserViewModel.Mobile))
+                {
+                    return EditUserTypeResult.MobileExit;
+                }
+            }
+
+            user.FirstName = editUserViewModel.FirstName;
+            user.LastName = editUserViewModel.LastName;
+            user.Email =(editUserViewModel.Email == "null" ?null: editUserViewModel.Email.ToLower());
+            if (user.Password != null)
+            {
+                user.Password = PasswordHellper.EncodePasswordMd5(editUserViewModel.Password);
+            }
+
+            user.IsSuperAdmin = editUserViewModel.IsSuperAdmin;
+
+            //avatar
+            if (editUserViewModel.UserAvatar != null)
+            {
+                string image = NameGenerator.GenerateUniqCode() +
+                               Path.GetExtension(editUserViewModel.UserAvatar.FileName);
+                editUserViewModel.UserAvatar.AddImageToServer(image,FilePath.FilePath.UserAvatarServer,100,100,FilePath.FilePath.UserAvatarThumbServer);
+                user.UserAvatar = image;
+            }
+            _userRepository.EditUser(user);
+            await _userRepository.SaveChange();
+
+            //Role (first should delete previous roles (DeleteAllUserRoles Method),
+            //then create new roles for edit + save (because is in other DB)
+            if (user.UserRoles != null)
+            {
+                await DeleteAllUserRoles(user.Id);
+                await CreateUserRole(user.Id, editUserViewModel.UserRoles);
+            }
+
+           await _userRepository.SaveChange();
+            return EditUserTypeResult.Success;
+        }
+
         public async Task CreateUserRole(long userId, List<long> selectedUserRoles)
         {
             if (!selectedUserRoles.Any()) return;

@@ -31,6 +31,9 @@ namespace AryanITC.Domain.IRepository
 
         Task<FilterUserViewModel> FilterUser (FilterUserViewModel filter);
         Task CreateUser(User user);
+        Task<User> GetUserByUserId(long userId);
+        Task<EditUserViewModel> GetUserForEdit(long userId);
+        void EditUser(User user);
 
 
         #endregion

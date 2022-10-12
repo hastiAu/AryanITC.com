@@ -46,7 +46,8 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
 
         #endregion
-        #region Create User
+
+        #region Create Admin User
         [HttpGet]
         public async  Task<IActionResult> CreateUser()
         {
@@ -94,5 +95,48 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
+        #region Edit Admin User
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(long id)
+        {
+            if (id <= 0) return NotFound();
+            var user = await _userService.GetUserForEditById(id);
+            if (user == null) return RedirectToAction("NotFound", "Home");
+            await GetRoles();
+            return View(user);
+        }
+
+        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel, List<long> userRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = await _userService.EditUser(editUserViewModel);
+                switch (res)
+                {
+                    case EditUserTypeResult.EmailExit:
+                        ModelState.AddModelError("Email","با این ایمیل قبلا ثبت نام انجام شده است");
+                       await GetRoles();
+                        return View(editUserViewModel);
+
+                    case EditUserTypeResult.MobileExit:
+                        ModelState.AddModelError("Mobile","با این َماره موبایل قبلا ثبت نام انجام شده است");
+                        await GetRoles();
+                        return View(editUserViewModel);
+
+                    case EditUserTypeResult.NotFound:
+                        return RedirectToAction("NotFound");
+
+                    case EditUserTypeResult.Success:
+                        TempData[SuccessMessage] = " ویرایش با موفقیت انحام شد";
+                        return RedirectToAction("Index");
+
+                }
+
+            }
+            return View(editUserViewModel);
+
+        }
+        #endregion
     }
 }

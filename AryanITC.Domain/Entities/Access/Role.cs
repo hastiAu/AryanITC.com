@@ -29,7 +29,8 @@ namespace AryanITC.Domain.Entities.Access
         #region Relations
 
         public ICollection<UserRole> UserRoles { get; set; }
-
+        public ICollection<RolePermission> RolePermissions { get; set; }
+        // 1 Role can have N RolePermission
         #endregion
 
 
