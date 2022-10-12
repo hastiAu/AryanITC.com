@@ -65,3 +65,8 @@ $('[replay-comment]').on('click',
     });
 
  
+
+function ShowInformationMessage(text) {
+    swal('اعلام', text, 'info');
+}
+
