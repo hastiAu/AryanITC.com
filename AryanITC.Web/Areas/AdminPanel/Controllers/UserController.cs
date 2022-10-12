@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.ManagementUser;
@@ -35,7 +37,6 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
-
         #region Get Roles
 
         public async Task GetRoles()
@@ -47,7 +48,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
-        #region Create Admin User
+        #region Create User
         [HttpGet]
         public async  Task<IActionResult> CreateUser()
         {
@@ -95,7 +96,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
-        #region Edit Admin User
+        #region Edit User
 
         [HttpGet]
         public async Task<IActionResult> EditUser(long id)
@@ -137,6 +138,69 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             return View(editUserViewModel);
 
         }
+        #endregion
+
+        #region Delete User
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(long id)
+        {
+            var result = await _userService.DeleteUser(id);
+            switch (result)
+            {
+                case DeleteUserResult.UserNotFound:
+                    return Json(new
+                    {
+                        text = "کاربر مورد نظر یافت نشد"
+                    });
+
+
+                case DeleteUserResult.SuccessDeleted:
+                    return Json(new
+                    {
+                        text = " کاربر با موفقیت حذف شد",
+                        statusCode = HttpStatusCode.OK
+                        //for Page Refresh after Delete
+                    });
+
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
+        #endregion
+
+        #region Restore User
+
+        [HttpPost]
+        public async Task<IActionResult> RestoreUser(long id)
+        {
+            var result = await _userService.RestoreUser(id);
+ 
+            switch (result)
+            {
+                case RestoreUserResult.NotFound:
+                    return Json(new
+                    {
+                        text = "کاربر مورد نظر یافت نشد"
+                    });
+
+
+                case RestoreUserResult.SuccessRestore:
+                    return Json(new
+                    {
+                        text = " کاربر با موفقیت بازگردانی شد",
+                        statusCode = HttpStatusCode.OK
+                        //for Page Refresh after Delete
+                    });
+
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
         #endregion
     }
 }

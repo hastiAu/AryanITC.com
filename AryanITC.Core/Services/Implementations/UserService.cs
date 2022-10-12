@@ -187,7 +187,7 @@ namespace AryanITC.Core.Services.Implementations
         {
 
             if (createUser.Email != null)
-            { 
+            {
                 if (await _userRepository.IsEmailExist(createUser.Email))
                 {
                     return UserTypeResult.EmailExit;
@@ -223,7 +223,7 @@ namespace AryanITC.Core.Services.Implementations
 
             if (createUser.UserRoles != null)
             {
-                await CreateUserRole(user.Id , createUser.UserRoles);
+                await CreateUserRole(user.Id, createUser.UserRoles);
             }
             await _userRepository.CreateUser(user);
             await _userRepository.SaveChange();
@@ -234,7 +234,7 @@ namespace AryanITC.Core.Services.Implementations
 
         public async Task<EditUserViewModel> GetUserForEditById(long userId)
         {
-            var user= await _userRepository.GetUserForEdit(userId);
+            var user = await _userRepository.GetUserForEdit(userId);
             if (user == null) return null;
             return user;
         }
@@ -244,7 +244,7 @@ namespace AryanITC.Core.Services.Implementations
             var user = await _userRepository.GetUserByUserId(editUserViewModel.UserId);
             if (user == null)
             {
-               return EditUserTypeResult.NotFound;
+                return EditUserTypeResult.NotFound;
             }
 
             if (user.Email != editUserViewModel.Email)
@@ -253,10 +253,10 @@ namespace AryanITC.Core.Services.Implementations
                 {
                     return EditUserTypeResult.EmailExit;
                 }
-               
+
             }
 
-            if (user.Mobile !=editUserViewModel.Mobile)
+            if (user.Mobile != editUserViewModel.Mobile)
             {
                 if (await _userRepository.IsExistMobileNumber(editUserViewModel.Mobile))
                 {
@@ -266,7 +266,7 @@ namespace AryanITC.Core.Services.Implementations
 
             user.FirstName = editUserViewModel.FirstName;
             user.LastName = editUserViewModel.LastName;
-            user.Email =(editUserViewModel.Email == "null" ?null: editUserViewModel.Email.ToLower());
+            user.Email = (editUserViewModel.Email == "null" ? null : editUserViewModel.Email.ToLower());
             if (user.Password != null)
             {
                 user.Password = PasswordHellper.EncodePasswordMd5(editUserViewModel.Password);
@@ -279,7 +279,7 @@ namespace AryanITC.Core.Services.Implementations
             {
                 string image = NameGenerator.GenerateUniqCode() +
                                Path.GetExtension(editUserViewModel.UserAvatar.FileName);
-                editUserViewModel.UserAvatar.AddImageToServer(image,FilePath.FilePath.UserAvatarServer,100,100,FilePath.FilePath.UserAvatarThumbServer);
+                editUserViewModel.UserAvatar.AddImageToServer(image, FilePath.FilePath.UserAvatarServer, 100, 100, FilePath.FilePath.UserAvatarThumbServer);
                 user.UserAvatar = image;
             }
             _userRepository.EditUser(user);
@@ -293,8 +293,39 @@ namespace AryanITC.Core.Services.Implementations
                 await CreateUserRole(user.Id, editUserViewModel.UserRoles);
             }
 
-           await _userRepository.SaveChange();
+            await _userRepository.SaveChange();
             return EditUserTypeResult.Success;
+        }
+
+        public async Task<DeleteUserResult> DeleteUser(long id)
+        {
+            var user = await _userRepository.GetUserByUserId(id);
+            if (user == null)
+            {
+                return DeleteUserResult.UserNotFound;
+            }
+
+            user.IsDelete = true;
+            _userRepository.EditUser(user);
+            await _userRepository.SaveChange();
+            return DeleteUserResult.SuccessDeleted;
+
+
+
+        }
+
+        public async Task<RestoreUserResult> RestoreUser(long id)
+        {
+            var user = await _userRepository.GetUserByUserId(id);
+            if (user == null)
+            {
+                return RestoreUserResult.NotFound;
+            }
+
+            user.IsDelete = false;
+            _userRepository.EditUser(user);
+            await _userRepository.SaveChange();
+            return RestoreUserResult.SuccessRestore;
         }
 
         public async Task CreateUserRole(long userId, List<long> selectedUserRoles)

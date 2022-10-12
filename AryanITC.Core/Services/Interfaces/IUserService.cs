@@ -41,6 +41,8 @@ namespace AryanITC.Core.Services.Interfaces
         Task<UserTypeResult> CreateUser(CreateUserViewModel createUser);
         Task<EditUserViewModel> GetUserForEditById(long userId);
         Task<EditUserTypeResult> EditUser(EditUserViewModel editUserViewModel);
+        Task<DeleteUserResult> DeleteUser(long id);
+        Task<RestoreUserResult> RestoreUser(long id);
 
 
         #endregion

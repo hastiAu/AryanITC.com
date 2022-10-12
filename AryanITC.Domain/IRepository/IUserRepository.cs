@@ -34,6 +34,7 @@ namespace AryanITC.Domain.IRepository
         Task<User> GetUserByUserId(long userId);
         Task<EditUserViewModel> GetUserForEdit(long userId);
         void EditUser(User user);
+   
 
 
         #endregion

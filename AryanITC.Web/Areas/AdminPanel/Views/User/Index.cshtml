@@ -138,13 +138,13 @@
                                                         </a>
                                                         @if (user.IsDelete)
                                                         {
-                                                            <a title="بازگرداندن" data-toggle="tooltip" asp-action="" asp-route-id="">
+                                                            <a data-toggle="tooltip" title="بازگرداندن"  asp-action="RestoreUser" asp-route-id="@user.Id" remove-ajax>
                                                                 <i class="material-icons">restore</i>
                                                             </a>
                                                         }
                                                         else
                                                         {
-                                                            <a title="حذف کردن" data-toggle="tooltip" asp-action="" asp-route-id="">
+                                                            <a data-toggle="tooltip" title="حذف کردن"  asp-action="DeleteUser" asp-route-id="@user.Id" remove-ajax>
                                                                 <i class="material-icons">delete</i>
                                                             </a>
                                                         }
