@@ -26,6 +26,7 @@ namespace AryanITC.Infra.Data.Context
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Permission> Permission { get; set; }
 
         #endregion
     }

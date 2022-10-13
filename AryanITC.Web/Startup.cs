@@ -122,11 +122,11 @@ namespace AryanITC.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+          
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
 
             #region cultures
             var supportedCultures = new List<CultureInfo>()

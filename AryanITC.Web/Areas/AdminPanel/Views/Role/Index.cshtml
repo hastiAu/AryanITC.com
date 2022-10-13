@@ -1,0 +1,143 @@
+﻿@model AryanITC.Domain.ViewModels.Role.FilterRoleViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@section AdminBreadCrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index"> لیست نقش ها </a></li>
+    </ul>
+}
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-3 col-sm-12">
+            <a asp-controller="Role" asp-action="CreateRole" class="btn-success custom-btn-create">
+                اضافه کردن نقش
+            </a>
+            <div class="card ">
+                <div class="header">
+                    <h2>فیلتر نقش</h2>
+                </div>
+                <div class="body">
+                    <form method="get" asp-controller="Role" asp-action="Index">
+                        <input type="hidden" asp-for="PageId" />
+                        <div>
+                            <label asp-for="RoleTitle"></label>
+                            <input type="text" class="form-control mb-3" asp-for="RoleTitle" />
+
+                            <label asp-for="FilterRoleState"></label>
+                            <select class="form-control show-tick" tabindex="-98" asp-for="FilterRoleState">
+                                <option value="0">همه</option>
+                                <option value="1">حذف شده</option>
+                                <option value="2">حذف نشده</option>
+                            </select>
+
+                            <div class="">
+                                <input type="submit" class="btn btn-raised btn-primary btn-round waves-effect" value="جستجو" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="header">
+                    <h2> نقش ها <strong> آریان ITC </strong></h2>
+                </div>
+
+
+                <div class="body">
+
+                    @if (Model.Roles.Count == 0)
+                    {
+                        <div class="alert alert-danger">
+                            متاسفیم!!! آیتمی برای نمایش پیدا نشد
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive social_media_table">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>عنوان نقش</th>
+                                        <th>حذف شده</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Roles)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.RoleTitle
+                                            </td>
+                                            <td>
+                                                @if (item.IsDelete)
+                                                {
+                                                    <span class="text-success">
+                                                        <i class="material-icons">done</i>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </span>
+
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (!item.IsDelete)
+                                                {
+                                                    <a title="ویرایش" asp-controller="Role" asp-action="" asp-route-id=" ">
+                                                        <i class="material-icons">create</i>
+                                                    </a>
+                                                    <a title="حذف" asp-controller="Role" asp-action="" asp-route-id=" " remove-ajax>
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a title="بازگردانی" asp-controller="Role" asp-action="" asp-route-id="" remove-ajax>
+                                                        <i class="material-icons">restore</i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    }
+                </div>
+                <div class="row">
+
+                    @if (Model.AllPageCount > 1)
+                    {
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                <ul class="pagination">
+                                    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                                    {
+                                        <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
+                                            <a href="/AdminPanel/Role?PageId=@i" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.IRepository;
+using AryanITC.Domain.ViewModels.Pagination;
+using AryanITC.Domain.ViewModels.Permission;
 using AryanITC.Domain.ViewModels.Role;
 using AryanITC.Infra.Data.Context;
+using ElmahCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AryanITC.Infra.Data.Repository
 {
-  public class AccessRepository:IAccessRepository
-  {
+    public class AccessRepository : IAccessRepository
+    {
         #region Constructor
 
         private readonly AryanDbContext _context;
@@ -20,7 +24,7 @@ namespace AryanITC.Infra.Data.Repository
         {
             _context = context;
         }
-        
+
 
         #endregion
 
@@ -40,11 +44,70 @@ namespace AryanITC.Infra.Data.Repository
             return await _context.Roles
                 .Where(r => !r.IsDelete)
                 .Select(r => new RoleViewModel()
-                    {
+                {
                     RoleId = r.Id,
                     RoleTitle = r.RoleTitle
-                    } ).ToListAsync();
+                }).ToListAsync();
 
+        }
+
+        public async Task<FilterRoleViewModel> FilterRoles(FilterRoleViewModel filterRole)
+        {
+            var query = _context.Roles.AsQueryable();
+
+            #region Filter
+
+            switch (filterRole.FilterRoleState)
+            {
+                case FilterRoleState.All:
+                    break;
+
+                case FilterRoleState.Deleted:
+                    {
+                        query = query.Where(u => u.IsDelete);
+                        break;
+                    }
+                case FilterRoleState.NotDeleted:
+                {
+                    query = query.Where(u => !u.IsDelete);
+                    break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(filterRole.RoleTitle))
+            {
+                query = query.Where(u => u.RoleTitle.Contains(u.RoleTitle.ToLower()));
+            }
+
+            #endregion
+
+            int allEntitiesCount = await query.CountAsync();
+            var pager = Pagination.BuildPagination(filterRole.PageId, allEntitiesCount);
+            var users = await query.OrderBy(o => o.IsDelete).Pagination(pager).ToListAsync();
+            filterRole.SetRoles(users);
+            return filterRole.SetPaging(pager);
+        }
+
+        public async Task<bool> IsRoleExistsByRoleTitle(string roleTitle)
+        {
+            return await _context.Roles.AnyAsync(u => u.RoleTitle== roleTitle.ToLower());
+        }
+
+        public async Task CreateRole(Role role)
+        {
+              await _context.AddAsync(role);
+        }
+
+        public async Task<List<PermissionViewModel>> GetAllPermission()
+        {
+            return await _context.Permission
+                .Select(a => new PermissionViewModel()
+                {
+                    ParentId = a.ParentId,
+                    PermissionId = a.Id,
+                    PermissionTitle = a.PermissionTitle
+
+                }).ToListAsync();
         }
     }
 }

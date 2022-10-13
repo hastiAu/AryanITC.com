@@ -42,7 +42,7 @@
         <form class="form1 " asp-action="Login" method="post">
 
 
-            <input type="hidden" name=" " value= ""/>
+            <input type="hidden" name=" " value="" />
             <span class="field-validation-valid login-error" data-valmsg-for="Error" data-valmsg-replace="true"></span>
 
             <p class="p1 margin-p ">ایمیل</p>
@@ -54,8 +54,11 @@
             <span asp-validation-for="Password" class="field-validation-valid col-md-12 text-danger"></span>
 
             <button class="submit-login  text-center" onclick="SendVerificationCode.html"> ورود</button>
+            <p  class="rememberMe text-center"> <input type="checkbox" /> <span.>مرا به خاطر بسپار</span.> </p>
             <p class="forgot text-center"><a href="https://localhost:44385/forgotpassword">رمز ورود خود را فراموش کردم!</a></p>
-            <br/>
+
+
+            <br />
 
         </form>
     </div>

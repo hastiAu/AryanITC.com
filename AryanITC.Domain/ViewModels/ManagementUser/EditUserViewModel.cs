@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace AryanITC.Domain.ViewModels.ManagementUser
 {
-    public class EditUserViewModel : BaseEntity
+    public class EditUserViewModel  
     {
 
         public long UserId { get; set; }

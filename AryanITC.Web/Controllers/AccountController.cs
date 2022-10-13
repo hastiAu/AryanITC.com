@@ -227,6 +227,8 @@ namespace AryanITC.Web.Controllers
 
         }
 
+        #endregion
+
         #region LogOut
 
         [Route("LogOut")]
@@ -238,11 +240,6 @@ namespace AryanITC.Web.Controllers
         }
 
         #endregion
-
-
-        #endregion
-
-
 
         #region ForgotPassword
 
