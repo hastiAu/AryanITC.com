@@ -88,7 +88,7 @@ namespace AryanITC.Infra.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RolePermission");
+                    b.ToTable("RolePermissions");
                 });
 
             modelBuilder.Entity("AryanITC.Domain.Entities.Access.UserRole", b =>

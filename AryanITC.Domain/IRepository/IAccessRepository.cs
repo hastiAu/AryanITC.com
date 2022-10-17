@@ -25,7 +25,12 @@ namespace AryanITC.Domain.IRepository
         Task<FilterRoleViewModel> FilterRoles(FilterRoleViewModel filterRole);
         Task<bool> IsRoleExistsByRoleTitle(string roleTitle);
         Task CreateRole(Role role);
-
+        Task<EditRoleViewModel> GetRoleInformationByRoleId(long roleId);
+        Task<Role> GetRoleById(long roleId);
+        void EditRole(Role role);
+        Task<bool> IsRoleNotDeleted(string roleTitle);
+        void DeleteAllRolePermissions(long roleId);
+        Task CreateRolePermission(RolePermission rolePermission);
 
         #endregion
 

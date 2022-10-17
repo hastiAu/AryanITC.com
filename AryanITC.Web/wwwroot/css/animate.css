@@ -1684,11 +1684,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 .animated.flip {
-  -webkit-backface-visibility: visible;
-  -ms-backface-visibility: visible;
-  backface-visibility: visible;
-  -webkit-animation-name: flip;
-  animation-name: flip;
+    -webkit-backface-visibility: visible;
+    -ms-backface-visibility: visible;
+    backface-visibility: visible;
+    -webkit-animation-name: flip;
+    animation-name: fadeInLeft;
+ 
 }
 
 @-webkit-keyframes flipInX {
@@ -1807,8 +1808,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     -webkit-backface-visibility: visible !important;
     -ms-backface-visibility: visible !important;
     backface-visibility: visible !important;
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
+    -webkit-animation-name: flipInY;
+    animation-name: flipInY;
 }
 
 @-webkit-keyframes flipOutX {

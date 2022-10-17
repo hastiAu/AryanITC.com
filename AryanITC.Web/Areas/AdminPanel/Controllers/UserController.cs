@@ -57,7 +57,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(CreateUserViewModel createUser)
+        public async Task<IActionResult> CreateUser(CreateUserViewModel createUser, List<long> userRoles)
         {
             if (!ModelState.IsValid)
             {
@@ -108,7 +108,8 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             return View(user);
         }
 
-        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel, List<long> userRoles)
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel )
         {
             if (ModelState.IsValid)
             {

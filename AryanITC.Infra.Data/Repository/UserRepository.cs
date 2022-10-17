@@ -163,7 +163,7 @@ namespace AryanITC.Infra.Data.Repository
 
         public async Task<EditUserViewModel> GetUserForEdit(long userId)
         {
-            return await _context.Users
+            var res= await _context.Users
                 .Where(u => u.Id == userId)
                 .Include(r => r.UserRoles)
                 .Select(u => new EditUserViewModel()
@@ -179,6 +179,8 @@ namespace AryanITC.Infra.Data.Repository
 
                 }
                 ).SingleOrDefaultAsync();
+
+            return res;
         }
 
         public void EditUser(User user)
@@ -190,10 +192,10 @@ namespace AryanITC.Infra.Data.Repository
             await _context.UserRoles.AddAsync(userRole);
         }
 
-        public void DeleteAlUserRole(long userId)
+        public void DeleteAllUserRoles(long userId)
         {
             _context.UserRoles
-                .Where(u=>u.UserId==userId)
+                .Where(r=>r.UserId==userId)
                 .ToList()
                 .ForEach(r=> _context.Remove(r));
         }

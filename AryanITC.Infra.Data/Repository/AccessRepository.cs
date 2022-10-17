@@ -98,6 +98,21 @@ namespace AryanITC.Infra.Data.Repository
               await _context.AddAsync(role);
         }
 
+        public async Task<Role> GetRoleById(long roleId)
+        {
+            return await _context.Roles.SingleOrDefaultAsync(u => u.Id == roleId);
+        }
+
+        public void EditRole(Role role)
+        {
+              _context.Update(role);
+        }
+
+        public async Task<bool> IsRoleNotDeleted(string roleTitle)
+        {
+          return await _context.Roles.AnyAsync(u => u.RoleTitle == roleTitle.ToLower());
+        }
+
         public async Task<List<PermissionViewModel>> GetAllPermission()
         {
             return await _context.Permission
@@ -108,6 +123,37 @@ namespace AryanITC.Infra.Data.Repository
                     PermissionTitle = a.PermissionTitle
 
                 }).ToListAsync();
+        }
+
+        public async Task CreateRolePermission(RolePermission rolePermission)
+        {
+            await _context.RolePermissions.AddAsync(rolePermission);
+        }
+        public void DeleteAllRolePermissions(long roleId)
+        {
+            _context.RolePermissions
+                .Where(r => r.RoleId == roleId)
+                .ToList()
+                .ForEach(r => _context.RolePermissions.Remove(r));
+        }
+
+        public async Task<EditRoleViewModel> GetRoleInformationByRoleId(long roleId)
+        {
+            if (roleId != 0)
+            {
+                var role = await _context.Roles
+                    .Where(u => u.Id == roleId && !u.IsDelete)
+                    .Select(u => new EditRoleViewModel()
+               {
+                        RoleTitle = u.RoleTitle,
+                        RolePermissions = u.RolePermissions.Select(u=>u.Id).ToList(),
+                        RoleId = u.Id,
+                        }
+                    ).SingleOrDefaultAsync();
+                return role;
+            }
+
+            return null;
         }
     }
 }

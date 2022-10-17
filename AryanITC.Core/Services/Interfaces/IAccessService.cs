@@ -16,6 +16,8 @@ namespace AryanITC.Core.Services.Interfaces
         Task<FilterRoleViewModel> FilterRoles(FilterRoleViewModel filterRoles);
         Task<RoleTypeResult> CreateRole(CreateRoleViewModel createRoleViewModel);
         Task<bool> IsRoleExistsByRoleTitle(string roleTitle);
+        Task<EditRoleViewModel> GetRoleInformationByRoleId(long roleId);
+        Task<EditRoleTypeResult> EditRole(EditRoleViewModel editRoleViewModel);
 
 
         #endregion
@@ -23,6 +25,9 @@ namespace AryanITC.Core.Services.Interfaces
         #region Pemission
 
         Task<List<PermissionViewModel>> GetAllPermissions();
+        Task DeleteAllRolePermissions(long roleId);
+        Task CreateRolePermission(long roleId, List<long> selectedRolePermissions);
+
 
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿@model AryanITC.Domain.ViewModels.Role.FilterRoleViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "لیست نقش ها";
 }
 
 
@@ -94,7 +94,7 @@
                                             <td>
                                                 @if (!item.IsDelete)
                                                 {
-                                                    <a title="ویرایش" asp-controller="Role" asp-action="" asp-route-id=" ">
+                                                    <a title="ویرایش" asp-controller="Role" asp-action="EditRole" asp-route-id="@item.Id">
                                                         <i class="material-icons">create</i>
                                                     </a>
                                                     <a title="حذف" asp-controller="Role" asp-action="" asp-route-id=" " remove-ajax>

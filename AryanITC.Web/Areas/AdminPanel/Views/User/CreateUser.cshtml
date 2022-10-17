@@ -24,14 +24,14 @@
                 </div>
                 <div class="body">
 
-                    <form asp-controller="User" asp-action="CreateUser" method="post" enctype="multipart/form-data" >
+                    <form  asp-action="CreateUser" method="post" enctype="multipart/form-data">
 
                         @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-12 col-md-6 mb-2">
                                 <div class="form-group">
                                     <label asp-for="FirstName"></label>
-                                    <input type="text" class="form-control" asp-for="FirstName"/>
+                                    <input type="text" class="form-control" asp-for="FirstName" />
                                     <span asp-validation-for="FirstName"></span>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
 
                             <div class="col-10 col-md-6 mb-2">
                                 <p class="help-block">
-                                   آواتار
+                                    آواتار
                                 </p>
                                 <input type="file" asp-for="UserAvatar" />
                                 <span asp-validation-for="UserAvatar" class="text-danger"></span>
@@ -79,20 +79,20 @@
                                 </div>
                             </div>
                         </div>
-                     @if (roles != null)
-                     {
-                         <ul>
-                             <span asp-validation-for="UserRoles"></span>
-                             @foreach (var role in roles)
-                             {
-                                 <li>
-                                     <input type="checkbox" name="UserRole" value="@role.RoleId"/>
-                                     <label>@role.RoleTitle</label>
-                                 </li>
-                             }
+                        @if (roles != null)
+                        {
+                            <ul>
+                                <span asp-validation-for="UserRoles"></span>
+                                @foreach (var role in roles)
+                                {
+                                    <li>
+                                        <input type="checkbox" name="UserRoles" value="@role.RoleId" />
+                                        <label>@role.RoleTitle</label>
+                                    </li>
+                                }
 
-                         </ul>
-                     }
+                            </ul>
+                        }
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-success btn-raised btn-round waves-effect" id="filterServiceBtn">افزودن کاربر جدید</button>

@@ -1,6 +1,4 @@
-﻿ 
-
-@using AryanITC.Domain.ViewModels.Role
+﻿@using AryanITC.Domain.ViewModels.Role
 @using Microsoft.AspNetCore.Identity
 @model AryanITC.Domain.ViewModels.ManagementUser.EditUserViewModel
 @{
@@ -27,11 +25,12 @@
                 </div>
                 <div class="body">
 
-                    <form asp-controller="User" asp-action="EditUser" method="post" enctype="multipart/form-data">
+                    <form asp-controller="User" asp-action="EditUser"    method="post" enctype="multipart/form-data">
 
                         @Html.AntiForgeryToken()
                         <input type="hidden" asp-for="UserId" />
                         <input type="hidden" asp-for="ImageAvatar" />
+   
                         <div class="row">
                             <div class="col-12 col-md-6 mb-2">
                                 <div class="form-group">
@@ -65,7 +64,7 @@
                             <div class="col-12 col-md-6 mb-2">
                                 <div class="form-group">
                                     <label asp-for="Password"></label>
-                                    <input type="text" class="form-control" asp-for="Password">
+                                    <input type="password" class="form-control" asp-for="Password">
                                     <span asp-validation-for="Password"></span>
                                 </div>
                             </div>
@@ -79,8 +78,10 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="checkbox m-t-35">
+                                   
                                     <input id="checkbox" type="checkbox" asp-for="IsSuperAdmin">
-                                    <label for="checkbox" asp-for="IsSuperAdmin"> مدیر ویژه</label>
+                                    <label for="checkbox" asp-for="IsSuperAdmin">ادمین ویژه</label>
+
                                 </div>
                             </div>
                         </div>
@@ -91,7 +92,12 @@
                                 @foreach (var role in roles)
                                 {
                                     <li>
-                                        <input type="checkbox" name="UserRole" value="@role.RoleId" />
+                                        
+                                        <input type="checkbox" name="UserRoles" value="@role.RoleId"
+                                               @if (Model.UserRoles != null)
+                                               {
+                                                   @((Model.UserRoles.Any(r => r == role.RoleId) ? "checked" : ""))
+                                               }/>
                                         <label>@role.RoleTitle</label>
                                     </li>
                                 }

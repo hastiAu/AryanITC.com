@@ -221,12 +221,15 @@ namespace AryanITC.Core.Services.Implementations
                 user.UserAvatar = imageName;
             }
 
+            await _userRepository.CreateUser(user);
+            await _userRepository.SaveChange();
+
+
             if (createUser.UserRoles != null)
             {
                 await CreateUserRole(user.Id, createUser.UserRoles);
+                await _userRepository.SaveChange();
             }
-            await _userRepository.CreateUser(user);
-            await _userRepository.SaveChange();
             return UserTypeResult.Success;
 
 
@@ -287,9 +290,9 @@ namespace AryanITC.Core.Services.Implementations
 
             //Role (first should delete previous roles (DeleteAllUserRoles Method),
             //then create new roles for edit + save (because is in other DB)
-            if (user.UserRoles != null)
+            if (editUserViewModel.UserRoles != null)
             {
-                await DeleteAllUserRoles(user.Id);
+               await DeleteAllUserRoles(user.Id);
                 await CreateUserRole(user.Id, editUserViewModel.UserRoles);
             }
 
@@ -349,7 +352,7 @@ namespace AryanITC.Core.Services.Implementations
 
         public async Task DeleteAllUserRoles(long userId)
         {
-            _userRepository.DeleteAlUserRole(userId);
+            _userRepository.DeleteAllUserRoles(userId);
             await _userRepository.SaveChange();
         }
 

@@ -42,7 +42,7 @@ namespace AryanITC.Domain.IRepository
         #region User Roles
 
         Task CreateRole(UserRole userRole);
-        void DeleteAlUserRole(long userId);
+        void DeleteAllUserRoles(long userId);
 
             #endregion
 

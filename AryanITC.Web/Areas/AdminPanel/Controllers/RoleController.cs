@@ -42,6 +42,8 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             ViewData["permissions"] = permissions;
         }
 
+        #region Create Role
+
         [HttpGet]
         public async Task<IActionResult> CreateRole()
         {
@@ -73,10 +75,62 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
                 case RoleTypeResult.Success:
                     return RedirectToAction("Index");
-                   
+
             }
 
             return View(createRoleViewModel);
         }
+
+        #endregion
+
+        #region Edit Role
+
+        [HttpGet]
+        public async Task<IActionResult> EditRole(long id)
+        {
+            if (id <= 0 )
+            {
+                return NotFound();
+            }
+
+            var role = await _accessService.GetRoleInformationByRoleId(id);
+
+            if (role == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+            await GetPermissions();
+            return View(role);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel editRoleViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                await GetPermissions();
+                return View(editRoleViewModel);
+            }
+
+            var result = await _accessService.EditRole(editRoleViewModel);
+
+            switch (result)
+            {
+                case EditRoleTypeResult.NotFound:
+                    return RedirectToAction("NotFound");
+
+                case EditRoleTypeResult.Exists:
+                    ModelState.AddModelError("RoleTitle", "این نقش قبلا تعریف شده است");
+                    break;
+                case EditRoleTypeResult.Success:
+                    return RedirectToAction("Index");
+
+            }
+         
+            await GetPermissions();
+            return View(editRoleViewModel);
+        }
+
+        #endregion
     }
 }
