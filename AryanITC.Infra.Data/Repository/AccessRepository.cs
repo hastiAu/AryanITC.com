@@ -113,6 +113,15 @@ namespace AryanITC.Infra.Data.Repository
           return await _context.Roles.AnyAsync(u => u.RoleTitle == roleTitle.ToLower());
         }
 
+
+        public async Task<List<long>> GetRolePermission(long roleId)
+        {
+            return await _context.RolePermissions
+                .Where(r => r.RoleId == roleId)
+                .Select(r => r.PermissionId)
+                .ToListAsync();
+        }
+
         public async Task<List<PermissionViewModel>> GetAllPermission()
         {
             return await _context.Permission

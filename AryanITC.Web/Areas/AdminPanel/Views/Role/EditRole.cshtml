@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "ویرایش نقش";
     List<PermissionViewModel> permissions = ViewData["Permissions"] as List<PermissionViewModel>;
+    List<long> selectedPermissions = ViewData["SelectedPermission"] as List<long>;
 }
 
 @section AdminBreadCrumb
@@ -45,40 +46,71 @@
                                     {
                                         //value= default value from input
                                         //"id" in input ==> link with ==> "for" in lable
-                                        <li>
-                                            <input type="checkbox" class="ArticleCategory" name="RolePermissions" value="@permission.PermissionId" id="categoryCheckbox">
-                                            <label for="categoryCheckbox">@permission.PermissionTitle</label>
+                                <li>
+                                    
+                                    <input  type="checkbox" class="ArticleCategory" name="RolePermissions" value="@permission.PermissionId" id="categoryCheckbox"
 
-
-                                            @if (permissions.Any(g => g.ParentId == permission.PermissionId))
+                                            @if (selectedPermissions != null)
                                             {
-                                                <ul id="subcategory-@permission.PermissionId" class="d-none">
+                                       
+                                                @((selectedPermissions.Any(p=>p==permission.PermissionId)?"checked":""))
+                                            
 
-                                                    @foreach (var sub in permissions.Where(g => g.ParentId == permission.PermissionId))
-                                                    {
-                                                        <li>
-                                                            <input type="checkbox" class="articleSubCategory" name="RolePermissions" value="@sub.PermissionId" id="SubCategoryCheckbox">
-                                                            <label for="SubCategoryCheckbox"> @sub.PermissionTitle </label>
+                                            } />
+ 
+                                    <label for="categoryCheckbox">@permission.PermissionTitle</label>
 
-                                                            <ul id="subsetCheckBox-@sub.PermissionId" class="d-none">
-                                                                @foreach (var subset in permissions.Where(p => p.ParentId == sub.PermissionId))
-                                                                {
-                                                                    <li>
-                                                                        <input type="checkbox" name="RolePermissions" value="@subset.PermissionId" id="subsetCheckBox"/>
-                                                                        <label for="subsetCheckBox">@subset.PermissionTitle</label>
 
-                                                                    </li>
+                                    @if (permissions.Any(g => g.ParentId == permission.PermissionId))
+                                    {
 
-                                                                }
+                                        //in class="d-none" baes mishod vared safhe edit mishodim list role ha baste bashad aval
 
-                                                            </ul>
-                                                        </li>
-                                                    }
-                                                </ul>
+                                        <ul id="subcategory-@permission.PermissionId" @*class="d-none"*@>
+                                            
 
+                                            @foreach (var sub in permissions.Where(g => g.ParentId == permission.PermissionId))
+                                            {
+                                                <li>
+                                                    <input type="checkbox" class="articleSubCategory" name="RolePermissions" value="@sub.PermissionId" id="SubCategoryCheckbox"
+
+                                                           @if (selectedPermissions != null)
+                                                           {
+                                                               @((selectedPermissions.Any(p => p == sub.PermissionId) ? "checked" : ""))
+
+                                                           }/>
+
+
+                                                    <label for="SubCategoryCheckbox"> @sub.PermissionTitle </label>
+
+                                                    <ul id="subsetCheckBox-@sub.PermissionId" >
+                                                        @foreach (var subset in permissions.Where(p => p.ParentId == sub.PermissionId))
+                                                        {
+                                                            <li>
+
+                                                                <input type="checkbox" name="RolePermissions" value="@subset.PermissionId" id="subsetCheckBox"
+                                                                       @if (selectedPermissions != null)
+                                                                       {
+                                                                           @((selectedPermissions.Any(p => p == sub.PermissionId) ? "checked" : ""))
+
+
+                                                                       }/>
+
+
+                                                                <label for="subsetCheckBox">@subset.PermissionTitle</label>
+
+                                                            </li>
+
+                                                        }
+
+                                                    </ul>
+                                                </li>
                                             }
+                                        </ul>
 
-                                        </li>
+                                    }
+
+                                </li>
                                     }
 
                                 </ul>

@@ -32,6 +32,7 @@ namespace AryanITC.Domain.IRepository
         void DeleteAllRolePermissions(long roleId);
         Task CreateRolePermission(RolePermission rolePermission);
 
+        Task<List<long>> GetRolePermission(long roleId);
         #endregion
 
         #region Permission

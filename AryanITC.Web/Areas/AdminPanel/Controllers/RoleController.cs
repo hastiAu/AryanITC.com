@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.Role;
@@ -100,6 +101,8 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
             await GetPermissions();
+            var rolePermission = await _accessService.GetRolePermission(id);
+            ViewData["SelectedPermission"] = rolePermission;
             return View(role);
         }
 
@@ -132,5 +135,75 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         }
 
         #endregion
+
+        #region Delete Roles
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(long id)
+        {
+            var result = await _accessService.DeleteRole(id);
+            switch (result)
+            {
+                case DeleteRoleResult.NotFound:
+                    return Json(new
+                    {
+                        text = "نقش مورد نظر یافت نشد"
+                    });
+
+                case DeleteRoleResult.Error:
+                    return Json(new
+                    {
+                        text = "درخواست شما با خطا مواجه شد"
+                    });
+
+                case DeleteRoleResult.Success:
+                    return Json(new
+                    {
+                        text = "نقش مورد نظر حذف شد",
+                        statusCode = HttpStatusCode.OK
+                    });
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Restore Role
+
+        [HttpPost]
+        public async Task<IActionResult> RestoreRole(long id)
+        {
+            var result = await _accessService.RestoreDeletedRole(id);
+            switch (result)
+            {
+                case DeleteRoleResult.NotFound:
+                    return Json(new
+                    {
+                        text = "نقش مورد نظر یافت نشد"
+                    });
+
+                case DeleteRoleResult.Error:
+                    return Json(new
+                    {
+                        text = "درخواست شما با خطا مواجه شد"
+                    });
+
+                case DeleteRoleResult.Success:
+                    return Json(new
+                    {
+                        text = "نقش مورد نظر بازگردانی شد",
+                        statusCode=HttpStatusCode.OK
+                    });
+
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
+        #endregion
+
+        }
     }
-}

@@ -97,13 +97,13 @@
                                                     <a title="ویرایش" asp-controller="Role" asp-action="EditRole" asp-route-id="@item.Id">
                                                         <i class="material-icons">create</i>
                                                     </a>
-                                                    <a title="حذف" asp-controller="Role" asp-action="" asp-route-id=" " remove-ajax>
+                                                    <a title="حذف" asp-controller="Role" asp-action="DeleteRole" asp-route-id="@item.Id" remove-ajax>
                                                         <i class="material-icons">delete</i>
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                    <a title="بازگردانی" asp-controller="Role" asp-action="" asp-route-id="" remove-ajax>
+                                                    <a title="بازگردانی" asp-controller="Role" asp-action="RestoreRole" asp-route-id="@item.Id" remove-ajax>
                                                         <i class="material-icons">restore</i>
                                                     </a>
                                                 }

@@ -100,6 +100,41 @@ namespace AryanITC.Core.Services.Implementations
 
         }
 
+        public  async Task<DeleteRoleResult> DeleteRole(long roleId)
+        {
+            Role role = await _accessRepository.GetRoleById(roleId);
+
+            if (role == null)
+            {
+                return DeleteRoleResult.NotFound;
+            }
+
+            role.IsDelete = true;
+             _accessRepository.EditRole(role);
+             await _accessRepository.SaveChange();
+             return DeleteRoleResult.Success;
+        }
+
+        public async Task<DeleteRoleResult> RestoreDeletedRole(long roleId)
+        {
+            Role role = await _accessRepository.GetRoleById(roleId);
+
+            if (role == null)
+            {
+                return DeleteRoleResult.NotFound;
+            }
+
+            role.IsDelete = false;
+            _accessRepository.EditRole(role);
+            await _accessRepository.SaveChange();
+            return DeleteRoleResult.Success;
+        }
+
+        public async Task<List<long>> GetRolePermission(long roleId)
+        {
+            return await _accessRepository.GetRolePermission(roleId);
+        }
+
         public async Task<List<PermissionViewModel>> GetAllPermissions()
         {
             return await _accessRepository.GetAllPermission();

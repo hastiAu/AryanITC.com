@@ -18,7 +18,9 @@ namespace AryanITC.Core.Services.Interfaces
         Task<bool> IsRoleExistsByRoleTitle(string roleTitle);
         Task<EditRoleViewModel> GetRoleInformationByRoleId(long roleId);
         Task<EditRoleTypeResult> EditRole(EditRoleViewModel editRoleViewModel);
-
+        Task<DeleteRoleResult> DeleteRole(long roleId);
+        Task<DeleteRoleResult> RestoreDeletedRole(long roleId);
+        Task<List<long>> GetRolePermission(long roleId);
 
         #endregion
 
