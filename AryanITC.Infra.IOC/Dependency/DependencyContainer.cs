@@ -22,6 +22,8 @@ namespace AryanITC.Infra.IOC.Dependency
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<IViewRenderService, RenderViewToString>();
             service.AddScoped<IAccessService, AccessService>();
+            service.AddScoped<ISiteService, SiteService>();
+          
 
             #endregion
 
@@ -29,6 +31,8 @@ namespace AryanITC.Infra.IOC.Dependency
 
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<IAccessRepository, AccessRepository>();
+            service.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
+ 
 
             #endregion
         }

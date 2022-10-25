@@ -9,7 +9,7 @@ namespace AryanITC.Core.FilePath
 {
    public class FilePath
     {
-        #region UserAvatar
+        #region UserAvatar Path
 
         //we use these two methods for Showing image
         public static readonly string UserAvatarImage = "/Images/AvatarImage/Origin/";
@@ -18,6 +18,17 @@ namespace AryanITC.Core.FilePath
         //we use these two methods for saving image
         public static readonly string UserAvatarServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AvatarImage/Origin/");
         public static readonly string UserAvatarThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AvatarImage/Thumb/");
+
+        #endregion
+
+        #region SiteSetting Path
+
+        public static readonly string SiteSettingLogoServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/SiteLogo/");
+
+        public static readonly string SiteSettingLogo = Path.Combine(Directory.GetCurrentDirectory(), "/Images/SiteLogo/");
+
+
+
 
         #endregion
     }
