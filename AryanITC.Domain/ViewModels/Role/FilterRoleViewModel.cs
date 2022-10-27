@@ -10,6 +10,8 @@ namespace AryanITC.Domain.ViewModels.Role
 {
     public class FilterRoleViewModel:BasePagination
     {
+
+    
         [Display(Name = "RoleTitle")]
         public string RoleTitle { get; set; }
         public List<Entities.Access.Role> Roles { get; set; }

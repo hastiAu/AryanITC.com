@@ -50,7 +50,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #region Create User
         [HttpGet]
-        public async  Task<IActionResult> CreateUser()
+        public async Task<IActionResult> CreateUser()
         {
             await GetRoles();
             return View();

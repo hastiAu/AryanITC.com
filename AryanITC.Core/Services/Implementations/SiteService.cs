@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using AryanITC.Core.Extensions;
 using AryanITC.Core.Generator;
 using AryanITC.Core.Services.Interfaces;
+using AryanITC.Domain.Entities.AboutUs;
 using AryanITC.Domain.IRepository;
+using AryanITC.Domain.ViewModels.AboutUs;
 using AryanITC.Domain.ViewModels.SiteSetting;
 
 namespace AryanITC.Core.Services.Implementations
@@ -19,20 +21,24 @@ namespace AryanITC.Core.Services.Implementations
         #region Costructor
 
         private readonly ISiteSettingRepository _siteSettingRepository;
+        private readonly IAboutUsRepository _aboutUsRepository;
 
-        public SiteService(ISiteSettingRepository siteSettingRepository)
+        public SiteService(ISiteSettingRepository siteSettingRepository, IAboutUsRepository aboutUsRepository)
         {
-            _siteSettingRepository = siteSettingRepository; 
+            _siteSettingRepository = siteSettingRepository;
+            _aboutUsRepository = aboutUsRepository;
         }
 
-    
 
         #endregion
 
+        #region SiteSetting
+
+
         public async Task<SiteSettingViewModel> GetSiteSettingForEdit()
         {
-          return await _siteSettingRepository.GetSiteSettingForEdit();
-             
+            return await _siteSettingRepository.GetSiteSettingForEdit();
+
         }
 
         public async Task<SiteSettingEditResult> UpdateSiteSetting(SiteSettingViewModel siteSettingViewModel)
@@ -67,8 +73,8 @@ namespace AryanITC.Core.Services.Implementations
 
             if (siteSettingViewModel.LogoFile != null)
             {
-                string imgName= NameGenerator.GenerateUniqCode()+ Path.GetExtension(siteSettingViewModel.LogoFile.FileName);
-                siteSettingViewModel.LogoFile.AddImageToServer(imgName,FilePath.FilePath.SiteSettingLogoServer,150,150);
+                string imgName = NameGenerator.GenerateUniqCode() + Path.GetExtension(siteSettingViewModel.LogoFile.FileName);
+                siteSettingViewModel.LogoFile.AddImageToServer(imgName, FilePath.FilePath.SiteSettingLogoServer, 150, 150);
                 siteSetting.SiteLogo = imgName;
             }
 
@@ -76,5 +82,49 @@ namespace AryanITC.Core.Services.Implementations
             await _siteSettingRepository.SaveChange();
             return SiteSettingEditResult.Success;
         }
+        #endregion
+
+        #region About US
+
+        public async Task<FilterAboutUsViewModel> FilterAdminAboutUs(FilterAboutUsViewModel filterAboutUsViewModel)
+        {
+            return await _aboutUsRepository.FilterAdminAboutUs(filterAboutUsViewModel);
+        }
+
+        public async Task<CreateAboutUsResult> CreateAboutUs(CreateAboutUsViewModel createAboutUsViewModel)
+        {
+
+            if (createAboutUsViewModel == null)
+            {
+                return CreateAboutUsResult.NotFound;
+            }
+
+            AboutUs about = new AboutUs()
+            {
+             AboutUsTitle = createAboutUsViewModel.AboutUsTitle,
+             AboutUsDescription = createAboutUsViewModel.AboutUsDescription,
+             AboutUsLink = createAboutUsViewModel.AboutUsLink,
+             IsActive = createAboutUsViewModel.IsActive,
+             IsDelete = createAboutUsViewModel.IsDelete,
+            
+            };
+
+            if (createAboutUsViewModel.AboutUsImage != null)
+            {
+                string imageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(createAboutUsViewModel.AboutUsImage.FileName);
+                createAboutUsViewModel.AboutUsImage.AddImageToServer(imageName, FilePath.FilePath.AboutUsServer, 100, 100, FilePath.FilePath.AboutUsThumbServer);
+                about.AboutUsImage = imageName;
+            }
+            
+
+            await _aboutUsRepository.CreateAboutUs(about);
+            await _aboutUsRepository.SaveChange();
+
+            return CreateAboutUsResult.Success;
+        }
+
+        #endregion
+
+
     }
 }

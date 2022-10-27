@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Domain.Entities.AboutUs;
 using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.Entities.Account;
 using AryanITC.Domain.Entities.SiteSetting;
@@ -31,6 +32,11 @@ namespace AryanITC.Infra.Data.Context
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<SiteSetting> SiteSettings { get; set; }
 
+        #endregion
+
+        #region About US
+
+        public DbSet<AboutUs>AboutUs { get; set; }
 
         #endregion
     }

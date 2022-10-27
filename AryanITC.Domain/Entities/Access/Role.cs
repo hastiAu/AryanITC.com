@@ -12,15 +12,15 @@ namespace AryanITC.Domain.Entities.Access
     {
         #region Properties
 
-        [Display(Name = "عنوان نقش")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Display(Name = "RoleTitle")]
+        [Required(ErrorMessage = "Required")]
+        [MaxLength(200, ErrorMessage = "MaxLength")]
         public string RoleTitle { get; set; }
 
-        [Display(Name = "حذف شده")]
+        [Display(Name = "IsDeleted")]
         public bool IsDelete { get; set; }
 
-        [Display(Name = "فعال")]
+        [Display(Name = "Active")]
         public bool IsActive { get; set; }
 
         #endregion

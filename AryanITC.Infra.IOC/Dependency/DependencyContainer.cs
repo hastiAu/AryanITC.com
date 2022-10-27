@@ -32,7 +32,8 @@ namespace AryanITC.Infra.IOC.Dependency
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<IAccessRepository, AccessRepository>();
             service.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
- 
+            service.AddScoped<IAboutUsRepository, AboutUsRepository>();
+
 
             #endregion
         }

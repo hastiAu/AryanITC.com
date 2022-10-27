@@ -24,11 +24,19 @@ namespace AryanITC.Core.FilePath
         #region SiteSetting Path
 
         public static readonly string SiteSettingLogoServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/SiteLogo/");
-
         public static readonly string SiteSettingLogo = Path.Combine(Directory.GetCurrentDirectory(), "/Images/SiteLogo/");
+        #endregion
 
+        #region AboutUs Path
 
+        //This is for show on Admin -Origin & Thumb
 
+        public static readonly string AboutUsImage = "/Images/AboutUs/Origin/";
+        public static readonly string UAboutUsrThumbImage = "/Images/AboutUs/Thumb/";
+
+        //For Our Upload _Origin & Thumb
+        public static readonly string AboutUsServer =Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AboutUs/Origin/");
+        public static readonly string AboutUsThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AboutUs/Thumb/");
 
         #endregion
     }
