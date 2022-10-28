@@ -127,7 +127,7 @@
                                     @for (int i = Model.StartPage; i <= Model.EndPage; i++)
                                     {
                                         <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
-                                            <a href="/AdminPanel/Role?PageId=@i" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                                            <a  asp-action="Index" asp-route-pageId="@i"  aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
                                         </li>
                                     }
                                 </ul>

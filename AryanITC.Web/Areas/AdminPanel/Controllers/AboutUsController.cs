@@ -22,7 +22,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
-        #region Filter AboutUs
+        #region Filter About Us
        
         public async Task<IActionResult> Index(FilterAboutUsViewModel filterAboutUsViewModel)
         {
@@ -41,7 +41,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         #endregion
 
 
-        #region Create AboutUs
+        #region Create About Us
 
         [HttpGet]
         public  IActionResult CreateAboutUs()
@@ -84,6 +84,49 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             }
 
             return View(createAboutUsView);
+        }
+
+        #endregion
+
+        #region Edit About Us
+
+        [HttpGet]
+        public  async Task<IActionResult> EditAboutUs(long id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+            var result = await _siteService.GetEditAboutUsForEdit(id);
+            return   View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAboutUs(EditAboutUsViewModel editAboutUsViewModel)
+        {
+
+            //if (!ModelState.IsValid)
+            //{
+                
+            //    return View(editAboutUsViewModel);
+            //}
+            var result = await _siteService.UpdateAboutUs(editAboutUsViewModel);
+                switch (result)
+                {
+                    case EditAboutUsResult.NotFound:
+                        return View("NotFound");
+
+                    case EditAboutUsResult.Error:
+                        ModelState.AddModelError("AboutUsTitle", "درخواست شما با خطا مواجه شد");
+                        break;
+
+                    case EditAboutUsResult.Success:
+                        return RedirectToAction("Index");
+                }
+          
+
+            return View(editAboutUsViewModel);
+
         }
 
         #endregion

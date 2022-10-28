@@ -183,7 +183,7 @@
                                     {
                                         <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
 
-                                            <a Pagination="@i" PFormId="OurServiceForm" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                                            <a  asp-action="Index" asp-route-pageId="@i"  PFormId="OurServiceForm" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
                                         </li>
                                     }
                                 </ul>

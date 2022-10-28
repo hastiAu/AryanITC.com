@@ -83,6 +83,45 @@ namespace AryanITC.Infra.Data.Repository
             await _context.AboutUs.AddAsync(aboutUs);
         }
 
+        public async Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId)
+        {
+            if (aboutUsId != 0)
+            {
+                var result = await _context.AboutUs
+                    .Where(i => i.Id == aboutUsId)
+                    .Select(s => new EditAboutUsViewModel()
+                    {
+                        AboutUsTitle = s.AboutUsTitle,
+                        AboutUsDescription = s.AboutUsDescription,
+                        AboutUsLink = s.AboutUsLink,
+                        IsActive = s.IsActive,
+                        IsDelete = s.IsDelete,
+                        AboutUsImage = s.AboutUsImage,
+                        AboutUsId = s.Id,
+                      
+                        // Should Tell Id because knows which id must be edited
+                        
+                    })
+
+                    .SingleOrDefaultAsync();
+
+                return result;
+            }
+
+            return null;
+        }
+
+        public void UpdateAboutUs(AboutUs aboutUs)
+        {
+            _context.AboutUs.Update(aboutUs);
+        }
+
+        public async Task<AboutUs> GetAboutUsById(long aboutUsId)
+        {
+            var aboutUs = await _context.AboutUs.SingleOrDefaultAsync(i => i.Id == aboutUsId);
+            return aboutUs;
+        }
+
         #endregion
 
     }

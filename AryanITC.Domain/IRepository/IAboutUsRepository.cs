@@ -22,6 +22,9 @@ namespace AryanITC.Domain.IRepository
 
         Task<FilterAboutUsViewModel> FilterAdminAboutUs(FilterAboutUsViewModel filterAboutUsViewModel);
         Task CreateAboutUs(AboutUs aboutUs);
+        Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId);
+        void UpdateAboutUs(AboutUs aboutUs);
+        Task<AboutUs> GetAboutUsById(long aboutUsId);
 
         #endregion
     }

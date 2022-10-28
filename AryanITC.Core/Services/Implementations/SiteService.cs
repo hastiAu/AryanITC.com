@@ -123,6 +123,39 @@ namespace AryanITC.Core.Services.Implementations
             return CreateAboutUsResult.Success;
         }
 
+        public async Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId)
+        {
+            return await _aboutUsRepository.GetEditAboutUsForEdit(aboutUsId);
+        }
+
+        public async Task<EditAboutUsResult> UpdateAboutUs(EditAboutUsViewModel editAboutUsViewModel)
+        {
+            var aboutUs = await _aboutUsRepository.GetAboutUsById(editAboutUsViewModel.AboutUsId);
+
+            if (aboutUs == null)
+            {
+               return EditAboutUsResult.NotFound;
+            }
+
+            aboutUs.AboutUsTitle = editAboutUsViewModel.AboutUsTitle;
+            aboutUs.AboutUsDescription = editAboutUsViewModel.AboutUsDescription;
+            aboutUs.AboutUsLink = editAboutUsViewModel.AboutUsLink;
+            aboutUs.IsActive = editAboutUsViewModel.IsActive;
+            aboutUs.IsDelete = editAboutUsViewModel.IsDelete;
+
+            if (aboutUs.AboutUsImage != null)
+            {
+                string imageName = NameGenerator.GenerateUniqCode() +
+                                   Path.GetExtension(editAboutUsViewModel.AboutUsImageFile.FileName);
+                editAboutUsViewModel.AboutUsImageFile.AddImageToServer(imageName, FilePath.FilePath.AboutUsServer, 100, 100, FilePath.FilePath.AboutUsThumbServer);
+                aboutUs.AboutUsImage = imageName;
+            }
+
+            await _aboutUsRepository.SaveChange();
+            return EditAboutUsResult.Success;
+
+        }
+
         #endregion
 
 

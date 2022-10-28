@@ -32,7 +32,7 @@ namespace AryanITC.Core.FilePath
         //This is for show on Admin -Origin & Thumb
 
         public static readonly string AboutUsImage = "/Images/AboutUs/Origin/";
-        public static readonly string UAboutUsrThumbImage = "/Images/AboutUs/Thumb/";
+        public static readonly string UAboutUsThumbImage = "/Images/AboutUs/Thumb/";
 
         //For Our Upload _Origin & Thumb
         public static readonly string AboutUsServer =Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AboutUs/Origin/");

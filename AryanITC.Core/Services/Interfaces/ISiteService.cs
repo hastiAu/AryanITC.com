@@ -20,6 +20,8 @@ namespace AryanITC.Core.Services.Interfaces
 
         Task<FilterAboutUsViewModel> FilterAdminAboutUs(FilterAboutUsViewModel filterAboutUsViewModel);
         Task<CreateAboutUsResult> CreateAboutUs(CreateAboutUsViewModel createAboutUsViewModel);
+        Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId);
+        Task<EditAboutUsResult> UpdateAboutUs(EditAboutUsViewModel editAboutUsViewModel);
 
         #endregion
 

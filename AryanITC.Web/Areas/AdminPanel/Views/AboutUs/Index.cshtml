@@ -147,22 +147,22 @@
 
                                                 </td>
                                                 <td>
-                                                    @if (item.IsDelete)
+                                                    @if (!item.IsDelete)
                                                     {
-                                                        <a title="ویرایش" asp-controller="" asp-action=""  >
+                                                        <a title="ویرایش" asp-controller="AboutUs" asp-action="EditAboutUs" asp-route-id="@item.Id"    >
                                                             <i class="material-icons">create</i>
                                                         </a>
                                                         <a title="حذف" asp-controller="" asp-action="" >
                                                             <i class="material-icons">delete</i>
                                                         </a>
+                                                    
                                                        
                                                     }
                                                     else
                                                     {
-                                                    
-                                                    <a title="بازگردانی" asp-controller="" asp-action="" >
-                                                        <i class="material-icons">restore</i>
-                                                    </a>
+                                                        <a title="بازگردانی" asp-controller="" asp-action="" >
+                                                            <i class="material-icons">restore</i>
+                                                        </a>
                                                     }
                                                 </td>
                                                
@@ -187,10 +187,7 @@
                                                 <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
                                                     <a asp-action="Index" asp-route-pageId="@i" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link" PFormId="AboutUsForm">@i</a>
                                                 </li>
-
-                                               @*<li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
-                                                <a Pagination="@i" PFormId="OurServiceForm" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
-                                                </li>*@
+ 
                                             }
                                         </ul>
                                     </div>
