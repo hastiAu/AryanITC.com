@@ -150,6 +150,10 @@ namespace AryanITC.Core.Services.Implementations
                 editAboutUsViewModel.AboutUsImageFile.AddImageToServer(imageName, FilePath.FilePath.AboutUsServer, 100, 100, FilePath.FilePath.AboutUsThumbServer);
                 aboutUs.AboutUsImage = imageName;
             }
+            else
+            {
+                aboutUs.AboutUsImage = null;
+            }
 
             await _aboutUsRepository.SaveChange();
             return EditAboutUsResult.Success;
@@ -159,5 +163,40 @@ namespace AryanITC.Core.Services.Implementations
         #endregion
 
 
+        public async Task<DeleteAboutUsResult> DeleteAboutUs(long aboutUsId)
+        {
+            var aboutUs = await _aboutUsRepository.GetAboutUsById(aboutUsId);
+
+            if (aboutUs == null)
+            {
+                return DeleteAboutUsResult.AboutUsNotFound;
+            }
+
+            aboutUs.IsDelete = true;
+            _aboutUsRepository.UpdateAboutUs(aboutUs);
+            await _aboutUsRepository.SaveChange();
+            return DeleteAboutUsResult.SuccessDeleted;
+
+        }
+
+        public async Task<RestoreAboutUsResult> RestoreAboutUs(long aboutUsId)
+        {
+            var aboutUs = await _aboutUsRepository.GetAboutUsById(aboutUsId);
+
+            if (aboutUs == null)
+            {
+                return RestoreAboutUsResult.AboutUsNotFound;
+            }
+
+            aboutUs.IsDelete = false;
+            _aboutUsRepository.UpdateAboutUs(aboutUs);
+            await _aboutUsRepository.SaveChange();
+            return RestoreAboutUsResult.SuccessRestored;
+        }
+
+        public async Task<List<AboutUsViewModel>> GetAllAboutUsForShowInSite()
+        {
+            return await _aboutUsRepository.GetAllAboutUsForShowInSite();
+        }
     }
 }

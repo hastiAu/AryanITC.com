@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.AboutUs;
@@ -91,7 +92,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         #region Edit About Us
 
         [HttpGet]
-        public  async Task<IActionResult> EditAboutUs(long id)
+        public async Task<IActionResult> EditAboutUs(long id)
         {
             if (id <= 0)
             {
@@ -105,11 +106,11 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         public async Task<IActionResult> EditAboutUs(EditAboutUsViewModel editAboutUsViewModel)
         {
 
-            //if (!ModelState.IsValid)
-            //{
-                
-            //    return View(editAboutUsViewModel);
-            //}
+            if (!ModelState.IsValid)
+            {
+
+                return View(editAboutUsViewModel);
+            }
             var result = await _siteService.UpdateAboutUs(editAboutUsViewModel);
                 switch (result)
                 {
@@ -121,12 +122,69 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
                         break;
 
                     case EditAboutUsResult.Success:
-                        return RedirectToAction("Index");
+                        TempData["SuccessOperation"] = "ویرایش درباره ما با موفقیت انجام شد";
+                    return RedirectToAction("Index");
+                     
                 }
-          
 
-            return View(editAboutUsViewModel);
 
+                return View();
+        }
+
+        #endregion
+
+        #region Delete About Us
+
+        public async Task<IActionResult> DeleteAboutUs(long id)
+        {
+            var result = await _siteService.DeleteAboutUs(id);
+
+            switch (result)
+            {
+                case DeleteAboutUsResult.AboutUsNotFound:
+                    return Json(new
+                    {
+                        text = "درباره ما مورد نظر یافت نشد"
+                    });
+
+                case DeleteAboutUsResult.SuccessDeleted:
+
+                    return Json(new
+                    {
+                        text = " درباره ما با موفقیت حذف شد",
+                        statusCode = HttpStatusCode.OK
+                    });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Restore About Us
+
+        public async Task<IActionResult> RestoreAboutUs(long id)
+        {
+            var result = await _siteService.RestoreAboutUs(id);
+
+            switch (result)
+            {
+                case RestoreAboutUsResult.AboutUsNotFound:
+                    return Json(new
+                    {
+                        text = "درباره ما مورد نظر یافت نشد"
+                    });
+
+                case RestoreAboutUsResult.SuccessRestored:
+
+                    return Json(new
+                    {
+                        text = " درباره ما با موفقیت بازگردانی شد",
+                        statusCode = HttpStatusCode.OK
+                    });
+            }
+
+            return RedirectToAction("Index");
         }
 
         #endregion

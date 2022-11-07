@@ -6,26 +6,16 @@
 @section AdminBreadCrumb
 {
     <ul class="breadcrumb float-md-left">
-        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
-        <li class="breadcrumb-item float-right"><a asp-action="Index">  ویرایش درباره ما </a></li>
+        <li class="breadcrumb-item float-right">
+            <a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a>
+        </li>
+        <li class="breadcrumb-item float-right">
+            <a asp-action="Index"> ویرایش درباره ما </a>
+        </li>
     </ul>
 }
 
-@*<div>
-    @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
-    {
-        <div class="alert alert-danger">
-            <p>@ViewBag.ErrorText</p>
-        </div>
-    }
-
-    @if (!string.IsNullOrEmpty(ViewBag.SuccessText))
-    {
-        <div class="alert alert-success">
-            <p>@ViewBag.SuccessText</p>
-        </div>
-    }
-</div>*@
+ 
 
 
 <div class="container-fluid">
@@ -38,36 +28,29 @@
                 </div>
                 <div class="body">
 
-                    @*@if (!string.IsNullOrEmpty(ViewBag.ErrorText))
-                        {
-                            <div class="alert alert-danger">
-                                <p>@ViewBag.ErrorText</p>
-                            </div>
-                        }
-                        else
-                        {*@
+
                     <form method="post" asp-controller="AboutUs" asp-action="EditAboutUs" enctype="multipart/form-data">
-                        <input type="hidden" asp-for="AboutUsId" />
-                        <input type="hidden" asp-for="AboutUsImage" />
+                        <input type="hidden" asp-for="AboutUsId"/>
+                        <input type="hidden" asp-for="AboutUsImage"/>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-2">
                                 <div class="form-group">
                                     <label class="control-label" asp-for="AboutUsTitle"></label>
-                                    <input asp-for="AboutUsTitle" class="form-control" />
+                                    <input asp-for="AboutUsTitle" class="form-control"/>
                                     <span asp-validation-for="AboutUsTitle"></span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 mb-2">
                                 <div class="form-group">
                                     <label class="control-label" asp-for="AboutUsLink"></label>
-                                    <input asp-for="AboutUsLink" class="form-control" />
+                                    <input asp-for="AboutUsLink" class="form-control"/>
                                     <span asp-validation-for="AboutUsLink"></span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label" asp-for="AboutUsDescription"></label>
-                                    <input asp-for="AboutUsDescription" class="form-control" />
+                                    <input asp-for="AboutUsDescription" class="form-control"/>
                                     <span asp-validation-for="AboutUsDescription"></span>
                                 </div>
                             </div>
@@ -89,21 +72,18 @@
                             </div>
 
 
-
                             <div class="col-12 ">
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-success btn-raised btn-round waves-effect" id="filterServiceBtn" value="ویرایش" />
+                                    <input type="submit" class="btn btn-success btn-raised btn-round waves-effect" id="filterServiceBtn" value="ویرایش"/>
                                 </div>
                             </div>
                         </div>
 
                     </form>
-                    @*}*@
 
                 </div>
             </div>
         </div>
         <!-- #END# Input -->
-    </div></div>
-
-
+    </div>
+</div>

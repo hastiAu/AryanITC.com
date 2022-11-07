@@ -12,27 +12,21 @@
         <li class="breadcrumb-item float-right"><a asp-action="Index"> لیست درباره ما </a></li>
     </ul>
 }
-
-@*<div>
-    @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
-    {
-        <div class="alert alert-danger">
-            <p>@ViewBag.ErrorText</p>
-        </div>
-    }
-
-    @if (!string.IsNullOrEmpty(ViewBag.SuccessText))
-    {
-        <div class="alert alert-success">
-            <p>@ViewBag.SuccessText</p>
-        </div>
-    }
-</div>*@
-
+ 
+@if (TempData["SuccessOperation"] != null)
+{
+    <div class="alert  alert-info fade show" role="alert">
+        <strong>@TempData["SuccessOperation"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+ 
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-md-3 col-sm-12">
-            
+
             <a asp-controller="AboutUs" asp-action="CreateAboutUs" class="btn-success custom-btn-create waves-effec">
                 افزودن درباره ما
             </a>
@@ -41,7 +35,7 @@
                     <h2>فیلتر درباره ما</h2>
                 </div>
                 <div class="body">
-                    <form method="get" asp-controller="AboutUs" asp-action="Index"   id="AboutUsForm">
+                    <form method="get" asp-controller="AboutUs" asp-action="Index" id="AboutUsForm">
                         <input type="hidden" asp-for="PageId" />
                         <div class="form-group">
                             <label asp-for="AboutUsTitle">  </label>
@@ -82,101 +76,101 @@
                     }
                     else
                     {
-            
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>عکس</th>
+                                        <th>عنوان</th>
+                                        <th>فعال</th>
+                                        <th>حذف شده</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AboutUs)
+                                    {
                                         <tr>
-                                            <th>عکس</th>
-                                            <th>عنوان</th>
-                                            <th>فعال</th>
-                                            <th>حذف شده</th>
-                                            <th>عملیات</th>
+
+                                            @if (item.AboutUsImage == null)
+                                            {
+                                                <td>
+                                                    <img class="thumbnail" src="@(FilePath.AboutUsImage + item.AboutUsImage + "Default.jpg")" style="max-width: 50px" />
+
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <img class="thumbnail" src="@(FilePath.AboutUsImage + item.AboutUsImage)" style="max-width: 50px" />
+
+                                                </td>
+                                            }
+
+                                            <td>@item.AboutUsTitle</td>
+                                            <td>
+                                                @if (item.IsActive)
+                                                {
+                                                    <span class="text-success">
+                                                        <i class="material-icons">done</i>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @if (item.IsDelete)
+                                                {
+                                                    <span class="text-success">
+                                                        <i class="material-icons">done</i>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @if (!item.IsDelete)
+                                                {
+                                                    <a title="ویرایش" asp-controller="AboutUs" asp-action="EditAboutUs" asp-route-id="@item.Id">
+                                                        <i class="material-icons">create</i>
+                                                    </a>
+                                                    <a title="حذف" asp-controller="AboutUs" asp-action="DeleteAboutUs" asp-route-id="@item.Id" remove-ajax>
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+
+
+                                                }
+                                                else
+                                                {
+                                                    <a title="بازگردانی" asp-controller="AboutUs" asp-action="RestoreAboutUs" asp-route-id="@item.Id" remove-ajax>
+                                                        <i class="material-icons">restore</i>
+                                                    </a>
+                                                }
+                                            </td>
+
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach (var item in Model.AboutUs)
-                                        {
-                                            <tr>
-                                                 
-                                                    @if (item.AboutUsImage == null)
-                                                    {
-                                                        <td>
-                                                            <img class="thumbnail" src="@(FilePath.AboutUsImage + item.AboutUsImage + "Default.jpg")" style="max-width: 50px" />
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
-                                                        </td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>
-                                                            <img class="thumbnail" src="@(FilePath.AboutUsImage + item.AboutUsImage)" style="max-width: 50px"/>
 
-                                                        </td>
-                                                    }
-
-                                                    <td>@item.AboutUsTitle</td>
-                                                <td>
-                                                    @if (item.IsActive)
-                                                    {
-                                                        <span class="text-success">
-                                                            <i class="material-icons">done</i>
-                                                        </span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="text-danger">
-                                                            <i class="material-icons">clear</i>
-                                                        </span>
-                                                    }
-
-                                                </td>
-                                                <td>
-                                                    @if (item.IsDelete)
-                                                    {
-                                                        <span class="text-success">
-                                                            <i class="material-icons">done</i>
-                                                        </span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="text-danger">
-                                                            <i class="material-icons">clear</i>
-                                                        </span>
-                                                    }
-
-                                                </td>
-                                                <td>
-                                                    @if (!item.IsDelete)
-                                                    {
-                                                        <a title="ویرایش" asp-controller="AboutUs" asp-action="EditAboutUs" asp-route-id="@item.Id"    >
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a title="حذف" asp-controller="" asp-action="" >
-                                                            <i class="material-icons">delete</i>
-                                                        </a>
-                                                    
-                                                       
-                                                    }
-                                                    else
-                                                    {
-                                                        <a title="بازگردانی" asp-controller="" asp-action="" >
-                                                            <i class="material-icons">restore</i>
-                                                        </a>
-                                                    }
-                                                </td>
-                                               
-                                            </tr>
-                                        }
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                      
                     }
-                    
+
                     <div class="row">
-                    @if (Model.AllPageCount >0)
+                        @if (Model.AllPageCount > 0)
                         {
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center">
@@ -187,7 +181,7 @@
                                                 <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
                                                     <a asp-action="Index" asp-route-pageId="@i" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link" PFormId="AboutUsForm">@i</a>
                                                 </li>
- 
+
                                             }
                                         </ul>
                                     </div>
@@ -195,9 +189,9 @@
 
                             </div>
                         }
-                  
+
                     </div>
-            
+
                 </div>
             </div>
         </div>

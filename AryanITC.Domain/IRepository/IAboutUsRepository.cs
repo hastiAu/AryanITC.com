@@ -25,6 +25,8 @@ namespace AryanITC.Domain.IRepository
         Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId);
         void UpdateAboutUs(AboutUs aboutUs);
         Task<AboutUs> GetAboutUsById(long aboutUsId);
+        Task<List<AboutUsViewModel>> GetAllAboutUsForShowInSite();
+
 
         #endregion
     }

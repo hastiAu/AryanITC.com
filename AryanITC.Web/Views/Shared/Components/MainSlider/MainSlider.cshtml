@@ -1,38 +1,56 @@
-﻿
-@{
-    ViewData["Title"] = "MainSlider";
-}
-
+﻿@using AryanITC.Core.FilePath
+@model List<AryanITC.Domain.ViewModels.AboutUs.AboutUsViewModel>
 <!--Main Slider-->
-<main dir="ltr">
-    <section id="top_content" class="top_cont_outer">
-        <div class="top_cont_inner">
-            <div class="container">
-                <div class="top_content">
-                    <div class="row">
-                        <div class=" ">
-                            <div class="top_left_cont fadeInLeft wow animated">
  
-                                <h3>Colourful &amp; sexy!</h3>
-                                <h2>
-                                    درباره آریان؟?/
+@if (Model.Any())
+{
+    <main dir="ltr">
 
-                                </h2>
-                                <p class="text-right">
-                                    Accusantium آریان,
-                                    <br/>
-                                    aliquam eget آریان آریانآریان .
-                                    <br/>
-                                    درباره درباره درباره درباره درباره
-                                </p>
-                                <a href="#service" class="learn_more2">Learn more</a>
+        <div class="container-fluid">
+            <div class="clearfix">
+                <div class="col-md-6 col-sm-12">
+
+                    @foreach (var item in Model)
+                    {
+                        <img width="617" height="480" src="@(FilePath.AboutUsImage + item.AboutUsImage)" alt="">
+                    }
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="">
+                        <div class="top_content">
+                            <div class="row">
+                                <div class=" ">
+                                    <div class="top_left_cont fadeInLeft wow animated">
+
+                                        <h3> @ViewData["AboutUsTitle"] </h3>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <h2>
+                                                @item.AboutUsTitle
+
+                                            </h2>
+
+                                            <p class="text-right">
+                                                @item.AboutUsDescription
+                                            </p>
+                                            <a href="#service" class="learn_more2">@item.AboutUsLink</a>
+
+
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-sm-5"> </div>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-sm-5"> </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
-    </section>
-</main>
-<!--TMain Slider-->
+    </main>
+}
+       
+  <!--Main Slider-->

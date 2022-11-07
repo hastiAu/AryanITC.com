@@ -22,6 +22,9 @@ namespace AryanITC.Core.Services.Interfaces
         Task<CreateAboutUsResult> CreateAboutUs(CreateAboutUsViewModel createAboutUsViewModel);
         Task<EditAboutUsViewModel> GetEditAboutUsForEdit(long aboutUsId);
         Task<EditAboutUsResult> UpdateAboutUs(EditAboutUsViewModel editAboutUsViewModel);
+        Task<DeleteAboutUsResult> DeleteAboutUs(long aboutUsId);
+        Task<RestoreAboutUsResult> RestoreAboutUs(long aboutUsId);
+        Task<List<AboutUsViewModel>> GetAllAboutUsForShowInSite();
 
         #endregion
 

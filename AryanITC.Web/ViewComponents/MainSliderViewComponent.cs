@@ -13,22 +13,26 @@ namespace AryanITC.Web.ViewComponents
     public class MainSliderViewComponent : ViewComponent
     {
 
-        //#region Constructor
+        #region Constructor
 
-        //private readonly ISiteService _siteService;
+        private readonly ISiteService _siteService;
 
-        //public MainSliderViewComponent(ISiteService siteService)
-        //{
-        //    _siteService = siteService;
-        //}
+        public MainSliderViewComponent(ISiteService siteService)
+        {
+            _siteService = siteService;
+        }
 
-        //#endregion
+        #endregion
 
-        public  async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
 
+            var text = await _siteService.GetSiteSettingForEdit();
+            ViewData["AboutUsTitle"] = text.AboutUs;
+            var aboutUs = await _siteService.GetAllAboutUsForShowInSite();
+            return await Task.FromResult((IViewComponentResult) View("MainSlider", aboutUs));
 
-            return  View("/Views/Shared/Components/MainSlider/MainSlider.cshtml");
+            //return  View("/Views/Shared/Components/MainSlider/MainSlider.cshtml");
         }
     }
 }

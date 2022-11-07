@@ -122,6 +122,22 @@ namespace AryanITC.Infra.Data.Repository
             return aboutUs;
         }
 
+        public async Task<List<AboutUsViewModel>> GetAllAboutUsForShowInSite()
+        {
+            return await _context.AboutUs
+                .Where(i => !i.IsDelete && i.IsActive)
+                .Select(n => new AboutUsViewModel()
+
+                {
+                    AboutUsImage = n.AboutUsImage,
+                    AboutUsTitle = n.AboutUsTitle,
+                    AboutUsDescription = n.AboutUsDescription,
+                    AboutUsLink = n.AboutUsLink,
+                    AboutUsId = n.Id
+
+                }).ToListAsync();
+        }
+
         #endregion
 
     }
