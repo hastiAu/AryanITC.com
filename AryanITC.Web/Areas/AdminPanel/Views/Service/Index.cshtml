@@ -1,0 +1,201 @@
+﻿@using AryanITC.Core.FilePath
+@model AryanITC.Domain.ViewModels.Service.FilterServiceViewModel
+@{
+    ViewData["Title"] = "سرویس";
+}
+
+
+@section AdminBreadCrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index"> لیست سرویس ها  </a></li>
+    </ul>
+}
+
+
+@if (TempData["SuccessOperation"] != null)
+{
+    <div class="alert  alert-info fade show" role="alert">
+        <strong>@TempData["SuccessOperation"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-3 col-sm-12">
+
+            <a asp-controller="Service" asp-action="CreateService" class="btn-success custom-btn-create ">
+                افزودن سرویس  
+            </a>
+            <div class="card">
+                <div class="header">
+                    <h2>فیلتر سرویس </h2>
+                </div>
+                <div class="body">
+                    <form method="get" asp-controller="Service" asp-action="Index" id="ServiceForm">
+                        <input type="hidden" asp-for="PageId" />
+                        <div class="form-group">
+                            <label asp-for="ServiceTitle">عنوان سرویس </label>
+                            <input type="text" asp-for="ServiceTitle" class="form-control" />
+                        </div>
+
+
+                        <label class="margin-bottom-0" asp-for="ServiceState">وضعیت</label>
+                        <select class="form-control show-tick" tabindex="-98" asp-for="ServiceState">
+                            <option value="0">همه</option>
+                            <option value="1">حذف شده</option>
+                            <option value="2">حذف نشده</option>
+
+                        </select>
+
+                        <div class="">
+                            <input type="submit" class="btn btn-raised btn-primary btn-round waves-effect" value="جستجو" />
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="header">
+                    <h2>سرویس <strong> آریان ITC </strong></h2>
+                </div>
+                <div class="body">
+
+                    @if (Model.Service.Count == 0)
+                    {
+                        <div class="alert alert-danger">
+                            متاسفیم!!! آیتمی برای نمایش پیدا نشد
+                        </div>
+                    }
+                    else
+                    {
+
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>عکس</th>
+                                        <th>عنوان</th>
+                                        <th>فعال</th>
+                                        <th>حذف شده</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Service)
+                                    {
+                                        <tr>
+
+                                            @if (item.ServiceDescription == null)
+                                            {
+                                                <td>
+                                                    <img class="thumbnail" src="@(FilePath.ServiceImage + item.ServiceImage + "Default.jpg")" style="max-width: 50px" />
+
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <img class="thumbnail" src="@(FilePath.ServiceImage + item.ServiceImage)" style="max-width: 50px" />
+
+                                                </td>
+                                            }
+
+                                            <td>@item.ServiceTitle</td>
+                                            <td>
+                                                @if (item.IsActive)
+                                                {
+                                                    <span class="text-success">
+                                                        <i class="material-icons">done</i>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @if (item.IsDelete)
+                                                {
+                                                    <span class="text-success">
+                                                        <i class="material-icons">done</i>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @if (!item.IsDelete)
+                                                {
+                                                    <a title="ویرایش" asp-controller="Service" asp-action="" asp-route-id="@item.Id">
+                                                        <i class="material-icons">create</i>
+                                                    </a>
+                                                    <a title="حذف" asp-controller="Service" asp-action="" asp-route-id="@item.Id" remove-ajax>
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+
+
+                                                }
+                                                else
+                                                {
+                                                    <a title="بازگردانی" asp-controller="Service" asp-action=" " asp-route-id="@item.Id" remove-ajax>
+                                                        <i class="material-icons">restore</i>
+                                                    </a>
+                                                }
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    }
+
+                    <div class="row">
+                        @if (Model.AllPageCount > 0)
+                        {
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                        <ul class="pagination">
+                                            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                                            {
+                                                <li class="paginate_button page-item @((Model.PageId == i) ? "active" : "")">
+                                                    <a asp-action="Index" asp-route-pageId="@i" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link" PFormId="ServiceForm">@i</a>
+
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

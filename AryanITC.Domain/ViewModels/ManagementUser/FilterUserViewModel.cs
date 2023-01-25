@@ -12,8 +12,10 @@ namespace AryanITC.Domain.ViewModels.ManagementUser
 {
     public class FilterUserViewModel:BasePagination
     {
+
         public string FullName { get; set; }
         public string Email  { get; set; }
+
         public string MobileNumber { get; set; }
         public DateTime RegisterDate { get; set; }
         public List<User> Users { get; set; }

@@ -1,0 +1,123 @@
+﻿@model AryanITC.Domain.ViewModels.Service.CreateServiceViewModel
+@{
+    ViewData["Title"] = "ایجاد سرویس جدید";
+}
+
+@section AdminBreadCrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item float-right"><a asp-action=" " asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action=" ">  افزودن سرویس جدید   </a></li>
+    </ul>
+}
+
+
+<div>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
+    {
+        <div class="alert alert-danger">
+            <p>@ViewBag.ErrorText</p>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessText))
+    {
+        <div class="alert alert-success">
+            <p>@ViewBag.SuccessText</p>
+        </div>
+    }
+</div>
+
+
+<div class="container-fluid">
+    <!-- Input -->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2> سرویس </h2>
+                </div>
+                <div class="body">
+
+                    @*@if (!string.IsNullOrEmpty(ViewBag.ErrorText))
+                        {
+                            <div class="alert alert-danger">
+                                <p>@ViewBag.ErrorText</p>
+                            </div>
+                        }
+                        else
+                        {*@
+                    <form asp-controller="Service" asp-action="CreateService" enctype="multipart/form-data">
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="ServiceTitle"></label>
+                                    <input asp-for="ServiceTitle" class="form-control" />
+                                    <span asp-validation-for="ServiceTitle"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="ServiceDescription"></label>
+                                    <input asp-for="ServiceDescription" class="form-control" />
+                                    <span asp-validation-for="ServiceDescription"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="ServiceLink"></label>
+                                    <input asp-for="ServiceLink" class="form-control" />
+                                    <span asp-validation-for="ServiceLink"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-md-6 ">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="ServiceImageFile"></label>
+                                    <input type="file" asp-for="ServiceImageFile">
+                                    <span asp-validation-for="ServiceImageFile"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6 ">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="FontAwesome"></label>
+                                    <input  class="form-control" asp-for="FontAwesome">
+                                    <span asp-validation-for="FontAwesome"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6 ">
+                                <div class="color-code">
+                                    <label class="control-label" asp-for="FontAwesomeColor"></label>
+                                    <input class="form-control" asp-for="FontAwesomeColor">
+                                    <span asp-validation-for="FontAwesomeColor"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="checkbox m-t-35">
+                                    <input id="checkbox" type="checkbox" asp-for="IsActive">
+                                    <label for="checkbox" asp-for="IsActive"></label>
+                                </div>
+                            </div>
+                             
+
+
+                            <div class="col-12 ">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success btn-raised btn-round waves-effect" id="filterServiceBtn" value="افزودن" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    @*}*@
+
+                </div>
+            </div>
+        </div>
+        <!-- #END# Input -->
+    </div>
+</div>

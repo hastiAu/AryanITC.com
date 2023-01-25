@@ -8,8 +8,10 @@ using AryanITC.Core.Extensions;
 using AryanITC.Core.Generator;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.AboutUs;
+using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.AboutUs;
+using AryanITC.Domain.ViewModels.Service;
 using AryanITC.Domain.ViewModels.SiteSetting;
 
 namespace AryanITC.Core.Services.Implementations
@@ -22,11 +24,13 @@ namespace AryanITC.Core.Services.Implementations
 
         private readonly ISiteSettingRepository _siteSettingRepository;
         private readonly IAboutUsRepository _aboutUsRepository;
+        private readonly IServiceRepository _serviceRepository;
 
-        public SiteService(ISiteSettingRepository siteSettingRepository, IAboutUsRepository aboutUsRepository)
+        public SiteService(ISiteSettingRepository siteSettingRepository, IAboutUsRepository aboutUsRepository, IServiceRepository serviceRepository)
         {
             _siteSettingRepository = siteSettingRepository;
             _aboutUsRepository = aboutUsRepository;
+            _serviceRepository = serviceRepository; 
         }
 
 
@@ -106,7 +110,7 @@ namespace AryanITC.Core.Services.Implementations
              AboutUsLink = createAboutUsViewModel.AboutUsLink,
              IsActive = createAboutUsViewModel.IsActive,
              IsDelete = createAboutUsViewModel.IsDelete,
-            
+
             };
 
             if (createAboutUsViewModel.AboutUsImage != null)
@@ -160,8 +164,6 @@ namespace AryanITC.Core.Services.Implementations
 
         }
 
-        #endregion
-
 
         public async Task<DeleteAboutUsResult> DeleteAboutUs(long aboutUsId)
         {
@@ -198,5 +200,59 @@ namespace AryanITC.Core.Services.Implementations
         {
             return await _aboutUsRepository.GetAllAboutUsForShowInSite();
         }
+
+
+
+        #endregion
+
+
+
+
+
+        #region Service
+
+        public async Task<FilterServiceViewModel> FilterAdminService(FilterServiceViewModel filterServiceViewModel)
+        {
+            return await _serviceRepository.FilterAdminService(filterServiceViewModel);
+
+        }
+
+        public async Task<CreateServiceResult> CreateService(CreateServiceViewModel createServiceViewModel)
+        {
+            if (createServiceViewModel == null)
+            {
+                return CreateServiceResult.NotFound;
+            }
+
+            Service service = new Service()
+            {
+                ServiceTitle = createServiceViewModel.ServiceTitle,
+                ServiceDescription = createServiceViewModel.ServiceDescription,
+                IsActive = createServiceViewModel.IsActive,
+                IsDelete = createServiceViewModel.IsDelete,
+                FontAwesome = createServiceViewModel.FontAwesome,
+                ServiceLink = createServiceViewModel.ServiceLink,
+                FontAwesomeColor = createServiceViewModel.FontAwesomeColor
+
+            };
+
+            if (createServiceViewModel.ServiceImageFile != null)
+            {
+                string imageName = NameGenerator.GenerateUniqCode() +
+                                   Path.GetExtension(createServiceViewModel.ServiceImageFile.FileName);
+
+                createServiceViewModel.ServiceImageFile.AddImageToServer(imageName, FilePath.FilePath.ServiceServer, 100,
+                    100, FilePath.FilePath.ServiceThumbImage);
+                service.ServiceImage = imageName;
+            }
+
+            await _serviceRepository.CreateService(service);
+            await _serviceRepository.SaveChange();
+
+            return CreateServiceResult.Success;
+        }
+
+        #endregion
+
     }
 }

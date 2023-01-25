@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.ViewModels.AboutUs;
+using AryanITC.Domain.ViewModels.Service;
 using AryanITC.Domain.ViewModels.SiteSetting;
 
 namespace AryanITC.Core.Services.Interfaces
@@ -25,6 +27,13 @@ namespace AryanITC.Core.Services.Interfaces
         Task<DeleteAboutUsResult> DeleteAboutUs(long aboutUsId);
         Task<RestoreAboutUsResult> RestoreAboutUs(long aboutUsId);
         Task<List<AboutUsViewModel>> GetAllAboutUsForShowInSite();
+
+        #endregion
+
+        #region Service
+
+        Task<FilterServiceViewModel> FilterAdminService(FilterServiceViewModel filterServiceViewModel);
+        Task<CreateServiceResult> CreateService(CreateServiceViewModel createServiceViewModel);
 
         #endregion
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AryanITC.Domain.Entities.AboutUs;
 using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.Entities.Account;
+using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.Entities.SiteSetting;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,12 @@ namespace AryanITC.Infra.Data.Context
         #region About US
 
         public DbSet<AboutUs>AboutUs { get; set; }
+
+        #endregion
+
+        #region Service
+
+        public DbSet<Service>Services { get; set; }
 
         #endregion
     }

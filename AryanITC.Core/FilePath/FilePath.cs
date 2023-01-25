@@ -39,5 +39,20 @@ namespace AryanITC.Core.FilePath
         public static readonly string AboutUsThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/AboutUs/Thumb/");
 
         #endregion
+
+        #region Service
+
+        //This is for show on Admin -Origin & Thumb
+
+        public static readonly string ServiceImage = "/Images/Service/Origin/";
+        public static readonly string ServiceThumbImage = "/Images/Service/Thumb/";
+
+        //For Our Upload _Origin & Thumb
+        public static readonly string ServiceServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Service/Origin/");
+
+        public static readonly string ServiceThumbServer =
+            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Service/Thumb/");
+
+        #endregion
     }
 }
