@@ -30,11 +30,14 @@ namespace AryanITC.Domain.ViewModels.Service
 
         [Display(Name = "ServiceImage")]
  
-        public IFormFile ServiceImage { get; set; }
+        public IFormFile ServiceImageFile { get; set; }
 
         [Display(Name = "FontAwesome")]
         public string FontAwesome { get; set; }
 
+        [Display(Name = "ServiceImage")]
+        [MaxLength(600, ErrorMessage = "MaxLength")]
+        public string ServiceImage { get; set; }
 
         [Display(Name = "ServiceState")]
         public ServiceState ServiceState { get; set; }

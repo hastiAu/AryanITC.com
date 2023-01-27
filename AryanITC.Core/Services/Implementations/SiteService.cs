@@ -242,7 +242,7 @@ namespace AryanITC.Core.Services.Implementations
                                    Path.GetExtension(createServiceViewModel.ServiceImageFile.FileName);
 
                 createServiceViewModel.ServiceImageFile.AddImageToServer(imageName, FilePath.FilePath.ServiceServer, 100,
-                    100, FilePath.FilePath.ServiceThumbImage);
+                    100, FilePath.FilePath.ServiceThumbServer);
                 service.ServiceImage = imageName;
             }
 

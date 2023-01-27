@@ -95,10 +95,10 @@
                                     {
                                         <tr>
 
-                                            @if (item.ServiceDescription == null)
+                                            @if (item.ServiceImage == null)
                                             {
                                                 <td>
-                                                    <img class="thumbnail" src="@(FilePath.ServiceImage + item.ServiceImage + "Default.jpg")" style="max-width: 50px" />
+                                                    <img class="thumbnail" src="@(FilePath.ServiceImage + "Default.jpg")" style="max-width: 50px" />
 
                                                 </td>
                                             }
@@ -150,7 +150,7 @@
                                                     <a title="حذف" asp-controller="Service" asp-action="" asp-route-id="@item.Id" remove-ajax>
                                                         <i class="material-icons">delete</i>
                                                     </a>
-
+ 
 
                                                 }
                                                 else

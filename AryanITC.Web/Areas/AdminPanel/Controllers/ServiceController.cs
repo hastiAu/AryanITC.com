@@ -78,5 +78,14 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         }
         #endregion
 
+        #region Edit Service
+
+        [HttpGet]
+        public IActionResult UpdateService(long id)
+        {
+            return View();
+        }
+
+        #endregion
     }
 }

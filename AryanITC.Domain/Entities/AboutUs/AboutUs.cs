@@ -30,7 +30,6 @@ namespace AryanITC.Domain.Entities.AboutUs
         public string AboutUsLink { get; set; }
 
         [Display(Name = "AboutUsImage")]
-        [Required(ErrorMessage = "Required")]
         [MaxLength(600,ErrorMessage = "MaxLength")]
         public string AboutUsImage { get; set; }
     }

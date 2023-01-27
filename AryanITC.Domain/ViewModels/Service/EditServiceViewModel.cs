@@ -4,17 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AryanITC.Domain.Entities.Common;
+using Microsoft.AspNetCore.Http;
 
-namespace AryanITC.Domain.Entities.Service
+namespace AryanITC.Domain.ViewModels.Service
 {
-   public class Service: BaseEntity
+    public class EditServiceViewModel
     {
+        public long serviceId { get; set; }
 
         [Display(Name = "ServiceTitle")]
         [Required(ErrorMessage = "Required")]
         [MaxLength(250, ErrorMessage = "MaxLength")]
-        public string  ServiceTitle { get; set; }
+        public string ServiceTitle { get; set; }
 
         [Display(Name = "ServiceDescription")]
         [Required(ErrorMessage = "Required")]
@@ -29,22 +30,25 @@ namespace AryanITC.Domain.Entities.Service
 
         [Display(Name = "ServiceLink")]
         [Required(ErrorMessage = "Required")]
-        [MaxLength(350, ErrorMessage = "MaxLength")]
+        [MaxLength(600, ErrorMessage = "MaxLength")]
         [Url(ErrorMessage = "Url")]
         public string ServiceLink { get; set; }
 
         [Display(Name = "ServiceImage")]
-        [MaxLength(600, ErrorMessage = "MaxLength")]
-
-        public string ServiceImage { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public IFormFile ServiceImageFile { get; set; }
 
         [Display(Name = "FontAwesome")]
         public string FontAwesome { get; set; }
 
         [Display(Name = "FontAwesomeColor")]
         public string FontAwesomeColor { get; set; }
-      
+    }
 
-
+    public enum EditServiceResult
+    {
+        Success,
+        NotFound,
+        Error
     }
 }

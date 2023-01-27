@@ -4,10 +4,11 @@
 }
 
 @section AdminBreadCrumb
+
 {
     <ul class="breadcrumb float-md-left">
-        <li class="breadcrumb-item float-right"><a asp-action=" " asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
-        <li class="breadcrumb-item float-right"><a asp-action=" ">  افزودن سرویس جدید   </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index">  افزودن سرویس جدید   </a></li>
     </ul>
 }
 
@@ -80,19 +81,25 @@
                                     <span asp-validation-for="ServiceImageFile"></span>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 col-md-6 ">
                                 <div class="form-group">
                                     <label class="control-label" asp-for="FontAwesome"></label>
-                                    <input  class="form-control" asp-for="FontAwesome">
+                                    <input class="form-control" asp-for="FontAwesome">
                                     <span asp-validation-for="FontAwesome"></span>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 col-md-6 ">
-                                <div class="color-code">
-                                    <label class="control-label" asp-for="FontAwesomeColor"></label>
-                                    <input class="form-control" asp-for="FontAwesomeColor">
+                                <div class="">
+                                    <label for="color" class=" " asp-for="FontAwesomeColor"></label>
+                                    @*<input class="form-control" asp-for="FontAwesomeColor">*@
+                                   
+                                    <input asp-for="FontAwesomeColor" type="text" id="color" name="color" value="#123456"/>
+
+                                 
+
+                                    <div id="colorpicker"></div>
                                     <span asp-validation-for="FontAwesomeColor"></span>
                                 </div>
                             </div>
@@ -103,7 +110,7 @@
                                     <label for="checkbox" asp-for="IsActive"></label>
                                 </div>
                             </div>
-                             
+
 
 
                             <div class="col-12 ">
@@ -121,3 +128,4 @@
         <!-- #END# Input -->
     </div>
 </div>
+
