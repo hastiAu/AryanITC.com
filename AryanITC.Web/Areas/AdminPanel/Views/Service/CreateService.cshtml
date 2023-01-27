@@ -12,7 +12,7 @@
     </ul>
 }
 
-
+ 
 <div>
     @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
     {
@@ -94,12 +94,10 @@
                                 <div class="">
                                     <label for="color" class=" " asp-for="FontAwesomeColor"></label>
                                     @*<input class="form-control" asp-for="FontAwesomeColor">*@
-                                   
-                                    <input asp-for="FontAwesomeColor" type="text" id="color" name="color" value="#123456"/>
 
-                                 
+                                    <input asp-for="FontAwesomeColor" type="text" id="color" name="color" value="#123456" />
 
-                                    <div id="colorpicker"></div>
+                                    <div id="picker"></div>
                                     <span asp-validation-for="FontAwesomeColor"></span>
                                 </div>
                             </div>
@@ -128,4 +126,3 @@
         <!-- #END# Input -->
     </div>
 </div>
-

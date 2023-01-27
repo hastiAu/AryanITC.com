@@ -176,8 +176,9 @@ function MyNotifications(e) {
     });
 }
 
-
-$(document).ready(function () {
-    $('#demo').hide();
-    $('#picker').farbtastic('#color');
-});
+ 
+    $(document).ready(function () {
+        $('#demo').hide();
+        $('#picker').farbtastic('#color');
+    });
+ 

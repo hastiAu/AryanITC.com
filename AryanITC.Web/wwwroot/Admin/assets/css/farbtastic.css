@@ -33,19 +33,18 @@
   width: 101px;
   height: 101px;
 }
-.farbtastic .wheel {
-  background: url(wheel.png) no-repeat;
-  width: 195px;
-  height: 195px;
-}
-.farbtastic .overlay {
-  background: url(mask.png) no-repeat;
-}
-.farbtastic .marker {
-  width: 17px;
-  height: 17px;
-  margin: -8px 0 0 -8px;
-  overflow: hidden; 
-  background: url(marker.png) no-repeat;
-}
+    .farbtastic .wheel {
+        background: url("../images/colorPicker/wheel.png") no-repeat; width: 195px;
+        height: 195px;
+    }
+    .farbtastic .overlay {
+        background: url("../images/colorPicker/mask.png") no-repeat;
+    }
+    .farbtastic .marker {
+        width: 17px;
+        height: 17px;
+        margin: -8px 0 0 -8px;
+        overflow: hidden;
+        background: url("../images/colorPicker/marker.png") no-repeat;
+    }
 
