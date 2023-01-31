@@ -48,7 +48,7 @@
                         }
                         else
                         {*@
-                    <form asp-controller="Service" asp-action="CreateService" enctype="multipart/form-data">
+                    <form asp-controller="Service" asp-action="CreateService" enctype="multipart/form-data" method="post">
 
                         <div class="row">
                             <div class="col-12 col-md-6 mb-2">
@@ -92,10 +92,10 @@
 
                             <div class="col-12 col-md-6 ">
                                 <div class="">
-                                    <label for="color" class=" " asp-for="FontAwesomeColor"></label>
+                                    <label for="color" class=" " asp-for="FontAwesomeColor" ></label>
                                     @*<input class="form-control" asp-for="FontAwesomeColor">*@
 
-                                    <input asp-for="FontAwesomeColor" type="text" id="color" name="color" value="#123456" />
+                                    <input asp-for="FontAwesomeColor" type="text" id="color"  value="#123456" />
 
                                     <div id="picker"></div>
                                     <span asp-validation-for="FontAwesomeColor"></span>

@@ -32,8 +32,6 @@ namespace AryanITC.Domain.ViewModels.Service
  
         public IFormFile ServiceImageFile { get; set; }
 
-        [Display(Name = "FontAwesome")]
-        public string FontAwesome { get; set; }
 
         [Display(Name = "ServiceImage")]
         [MaxLength(600, ErrorMessage = "MaxLength")]

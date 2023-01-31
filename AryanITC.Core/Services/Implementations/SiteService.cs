@@ -232,9 +232,12 @@ namespace AryanITC.Core.Services.Implementations
                 IsDelete = createServiceViewModel.IsDelete,
                 FontAwesome = createServiceViewModel.FontAwesome,
                 ServiceLink = createServiceViewModel.ServiceLink,
-                FontAwesomeColor = createServiceViewModel.FontAwesomeColor
+                FontAwesomeColor =createServiceViewModel.FontAwesomeColor,
+                   
 
             };
+
+           
 
             if (createServiceViewModel.ServiceImageFile != null)
             {

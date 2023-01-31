@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AryanITC.Infra.Data.Migrations
 {
     [DbContext(typeof(AryanDbContext))]
-    [Migration("20230123091409_Services")]
-    partial class Services
+    [Migration("20230131142434_Service_DB")]
+    partial class Service_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,6 @@ namespace AryanITC.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AboutUsImage")
-                        .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
 
@@ -238,7 +237,6 @@ namespace AryanITC.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceImage")
-                        .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
 
