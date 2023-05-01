@@ -255,6 +255,11 @@ namespace AryanITC.Core.Services.Implementations
             return CreateServiceResult.Success;
         }
 
+        public async Task<List<ServiceViewModel>> GetAllServiceForShowInSite()
+        {
+            return await _serviceRepository.GetAllServiceForShowInSite();
+        }
+
         #endregion
 
     }

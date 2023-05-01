@@ -72,7 +72,7 @@ namespace AryanITC.Infra.Data.Repository
                 query = query.Where(u => u.ServiceTitle.Contains(u.ServiceTitle.ToLower()));
             }
 
-            #endregion
+
 
             int allEntitiesCount = await query.CountAsync();
             var pager = Pagination.BuildPagination(filterServiceViewModel.PageId, allEntitiesCount);
@@ -84,17 +84,32 @@ namespace AryanITC.Infra.Data.Repository
 
         public async Task CreateService(Service service)
         {
-              await _context.AddAsync(service);
+            await _context.AddAsync(service);
         }
 
+        public async Task<List<ServiceViewModel>> GetAllServiceForShowInSite()
+        {
+            var service= await _context.Services
+                .Where(u => u.IsActive && !u.IsDelete)
+                .Select(n => new ServiceViewModel()
+                    {
+                        ServiceTitle = n.ServiceTitle,
+                        ServiceDescription = n.ServiceDescription,
+                        FontAwesome = n.FontAwesome,
+                        FontAwesomeColor = n.FontAwesomeColor,
+                        ServiceImage = n.ServiceImage,
+                        ServiceLink = n.ServiceLink
+                    }
+                ).ToListAsync();
+
+            return service;
+
+            #endregion
 
 
- 
 
-
-
+        }
 
     }
 
 }
- 

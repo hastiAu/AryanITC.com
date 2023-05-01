@@ -21,8 +21,9 @@ namespace AryanITC.Domain.IRepository
 
         Task<FilterServiceViewModel> FilterAdminService(FilterServiceViewModel filterServiceViewModel);
         Task CreateService(Service service);
+        Task<List<ServiceViewModel>> GetAllServiceForShowInSite();
 
         #endregion
- 
+
     }
 }

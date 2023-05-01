@@ -357,18 +357,20 @@ a.learn_more2:hover{
 	padding:83px 0px;
 	}
 
-.service_area{
-	padding:40px 0 40px; 
-	}
+.services_area {
+	padding: 40px 0 40px;
+    display: contents
+}
 	
 .service_section{
 	}
-	
-.service_block{
-	text-align:center;
+
+.services_block {
+	text-align: center;
 	padding-left: 15px;
-    padding-right: 15px;
-	}
+	padding-right: 15px;
+	padding-bottom: 50px
+}
 	
 .service_icon{
 	border:2px solid #f56eab;

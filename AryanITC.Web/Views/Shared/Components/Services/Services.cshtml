@@ -1,41 +1,55 @@
-﻿@{
+﻿@using AryanITC.Core.FilePath
+@model List<AryanITC.Domain.ViewModels.Service.ServiceViewModel>
+@{
     ViewData["Title"] = "Services";
 }
 
-<!--Service-->
-<section id="service">
-    <div class="container">
 
-        <div class="section-title">
-            <h2>سرویس</h2>
-        </div>
-        <div class="service_area">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="service_block">
-                        <div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa-flash"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">سرویس</h3>
-                        <p class="animated fadeInDown wow"> سرویس سرویس سرویسtincidunt.</p>
+
+<!--Service-->
+@*<div class="container-fluid">*@
+
+@if (Model.Any())
+{
+
+    <!-- Services List -->
+
+    <section id="service">
+        <div class="row clearfix">
+
+            <div class="container">
+                <div class="services_block">
+                    <div class="section-title">
+                        <h2>@ViewData["ServiceTitle"]</h2>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="service_block">
-                        <div class="service_icon icon2
-                             
-                             delay-03s animated wow zoomIn"> <span style="background: red"><i class="fa-comments"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">Friendly Support</h3>
-                        <p class="animated fadeInDown wow">Proin iaculis purus consequat sem cure digni. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="service_block">
-                        <div class="service_icon icon3  delay-03s animated wow zoomIn"> <span><i class="fa-shield"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">top Security</h3>
-                        <p class="animated fadeInDown wow">Proin iaculis purus consequat sem cure digni. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt.</p>
-                    </div>
+                    @foreach (var item in Model)
+                    {
+                        <div class="services_area">
+
+
+                            <div class="col-lg-4">
+                                <div class="services_block">
+                                    @*<img width="617" height="480" src="@(FilePath.ServiceImage + item.ServiceImage)" alt="آریان">*@
+                                    <div class="service_icon icon2
+
+                             delay-03s animated wow zoomIn"> <span style="background: @item.FontAwesomeColor"><i class=@item.FontAwesome></i></span> </div>
+                                    <h3 class="animated fadeInUp wow">@item.ServiceTitle</h3>
+                                    <p class="animated fadeInDown wow">@item.ServiceDescription</p>
+                                    <br />
+                                    <a href="@item.ServiceLink" class="animated fadeInDown wow">@item.ServiceLink</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-</section>
+
+    </section>
+
+
+}
+
 <!--Service-->
+@*</div>*@

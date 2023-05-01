@@ -39,15 +39,6 @@
                     <h2> سرویس </h2>
                 </div>
                 <div class="body">
-
-                    @*@if (!string.IsNullOrEmpty(ViewBag.ErrorText))
-                        {
-                            <div class="alert alert-danger">
-                                <p>@ViewBag.ErrorText</p>
-                            </div>
-                        }
-                        else
-                        {*@
                     <form asp-controller="Service" asp-action="CreateService" enctype="multipart/form-data" method="post">
 
                         <div class="row">
@@ -86,6 +77,17 @@
                                 <div class="form-group">
                                     <label class="control-label" asp-for="FontAwesome"></label>
                                     <input class="form-control" asp-for="FontAwesome">
+                                    <br/>
+                                    <span>برای نام کلاس فونت، از نام کلاس ها از این  <a href="https://fontawesome.com/search" > لینک   </a>  استفاده کنید</span>
+                                    <br/>
+                                    <p>برای مثال</p>
+                                    <ul class="col-lg">
+                                        <li>fa-comments</li>
+                                        <li>fa-shield</li>
+                                        <li>fa-flash</li>
+                                         
+                                    </ul>
+                              
                                     <span asp-validation-for="FontAwesome"></span>
                                 </div>
                             </div>
