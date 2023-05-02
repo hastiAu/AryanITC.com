@@ -260,6 +260,11 @@ namespace AryanITC.Core.Services.Implementations
             return await _serviceRepository.GetAllServiceForShowInSite();
         }
 
+        public async Task<EditServiceViewModel> GetServiceForEdit(long serviceId)
+        {
+            return await _serviceRepository.GetServiceForEdit(serviceId);
+        }
+
         #endregion
 
     }

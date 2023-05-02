@@ -66,6 +66,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
                     case CreateServiceResult.Error:
                         ViewBag.ErrorText = "در خواست شما با خطا مواجه شد";
                         return View(createServiceViewModel);
+
                     case CreateServiceResult.Success:
                         ViewBag.SuccessText = "سرویس  با موفقیت اضافه شد";
                         return RedirectToAction("Index");
@@ -81,9 +82,15 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
         #region Edit Service
 
         [HttpGet]
-        public IActionResult UpdateService(long id)
+        public async Task<IActionResult> EditService(long id)
         {
-            return View();
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var result = await _siteService.GetServiceForEdit(id);
+            return  View(result);
         }
 
         #endregion

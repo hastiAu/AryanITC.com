@@ -110,6 +110,32 @@ namespace AryanITC.Infra.Data.Repository
 
         }
 
+        public async Task<EditServiceViewModel> GetServiceForEdit(long serviceId)
+        {
+            if (serviceId != 0)
+            {
+                var result = await _context.Services
+                    .Where(i => i.Id == serviceId)
+                    .Select(s => new EditServiceViewModel()
+                        {
+                         FontAwesome = s.FontAwesome,
+                         FontAwesomeColor = s.FontAwesomeColor,
+                         IsActive = s.IsActive,
+                         IsDelete = s.IsDelete,
+                         ServiceDescription = s.ServiceDescription,
+                         ServiceLink = s.ServiceLink,
+                         ServiceTitle = s.ServiceTitle,
+                         serviceId = s.Id,
+                         ServiceImage = s.ServiceImage
+                        }
+
+                    ).SingleOrDefaultAsync();
+
+                return result;
+            }
+
+            return null;
+        }
     }
 
 }

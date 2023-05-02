@@ -35,6 +35,7 @@ namespace AryanITC.Core.Services.Interfaces
         Task<FilterServiceViewModel> FilterAdminService(FilterServiceViewModel filterServiceViewModel);
         Task<CreateServiceResult> CreateService(CreateServiceViewModel createServiceViewModel);
         Task<List<ServiceViewModel>> GetAllServiceForShowInSite();
+        Task<EditServiceViewModel> GetServiceForEdit(long serviceId);
 
 
         #endregion

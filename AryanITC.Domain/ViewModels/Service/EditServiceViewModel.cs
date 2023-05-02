@@ -34,6 +34,10 @@ namespace AryanITC.Domain.ViewModels.Service
         [Url(ErrorMessage = "Url")]
         public string ServiceLink { get; set; }
 
+        [Display(Name = "Image")]
+        [Required(ErrorMessage = "Required")]
+        public string ServiceImage { get; set; }
+
         [Display(Name = "ServiceImage")]
         [Required(ErrorMessage = "Required")]
         public IFormFile ServiceImageFile { get; set; }

@@ -144,7 +144,7 @@
                                             <td>
                                                 @if (!item.IsDelete)
                                                 {
-                                                    <a title="ویرایش" asp-controller="Service" asp-action="" asp-route-id="@item.Id">
+                                                    <a title="ویرایش" asp-controller="Service" asp-action="EditService" asp-route-id="@item.Id">
                                                         <i class="material-icons">create</i>
                                                     </a>
                                                     <a title="حذف" asp-controller="Service" asp-action="" asp-route-id="@item.Id" remove-ajax>
