@@ -136,6 +136,17 @@ namespace AryanITC.Infra.Data.Repository
 
             return null;
         }
+
+        public void UpdateService(Service service)
+        {
+            _context.Services.Update(service);
+        }
+
+        public async Task<Service> GetServiceById(long serviceId)
+        {
+            return await _context.Services.Where(u => u.Id == serviceId)
+                .SingleOrDefaultAsync();
+        }
     }
 
 }

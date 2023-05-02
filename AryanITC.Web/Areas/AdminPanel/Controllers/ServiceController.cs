@@ -93,6 +93,35 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             return  View(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditService(EditServiceViewModel editServiceViewModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(editServiceViewModel);
+            }
+
+            var result = await _siteService.UpdateService(editServiceViewModel);
+
+            switch (result)
+            {
+                case EditServiceResult.NotFound:
+                    return RedirectToAction("NotFound");
+
+                case EditServiceResult.Error:
+                    ViewBag.ErrorText = "در خواست شما با خطا مواجه شد";
+                    return View(editServiceViewModel);
+
+                case EditServiceResult.Success:
+                    ViewBag.SuccessText = "سرویس  با موفقیت اضافه شد";
+                    return RedirectToAction("Index");
+
+            }
+
+            return View();
+        }
+
         #endregion
     }
 }

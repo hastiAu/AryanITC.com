@@ -30,7 +30,7 @@ namespace AryanITC.Core.Services.Implementations
         {
             _siteSettingRepository = siteSettingRepository;
             _aboutUsRepository = aboutUsRepository;
-            _serviceRepository = serviceRepository; 
+            _serviceRepository = serviceRepository;
         }
 
 
@@ -105,11 +105,11 @@ namespace AryanITC.Core.Services.Implementations
 
             AboutUs about = new AboutUs()
             {
-             AboutUsTitle = createAboutUsViewModel.AboutUsTitle,
-             AboutUsDescription = createAboutUsViewModel.AboutUsDescription,
-             AboutUsLink = createAboutUsViewModel.AboutUsLink,
-             IsActive = createAboutUsViewModel.IsActive,
-             IsDelete = createAboutUsViewModel.IsDelete,
+                AboutUsTitle = createAboutUsViewModel.AboutUsTitle,
+                AboutUsDescription = createAboutUsViewModel.AboutUsDescription,
+                AboutUsLink = createAboutUsViewModel.AboutUsLink,
+                IsActive = createAboutUsViewModel.IsActive,
+                IsDelete = createAboutUsViewModel.IsDelete,
 
             };
 
@@ -119,7 +119,7 @@ namespace AryanITC.Core.Services.Implementations
                 createAboutUsViewModel.AboutUsImage.AddImageToServer(imageName, FilePath.FilePath.AboutUsServer, 100, 100, FilePath.FilePath.AboutUsThumbServer);
                 about.AboutUsImage = imageName;
             }
-            
+
 
             await _aboutUsRepository.CreateAboutUs(about);
             await _aboutUsRepository.SaveChange();
@@ -138,7 +138,7 @@ namespace AryanITC.Core.Services.Implementations
 
             if (aboutUs == null)
             {
-               return EditAboutUsResult.NotFound;
+                return EditAboutUsResult.NotFound;
             }
 
             aboutUs.AboutUsTitle = editAboutUsViewModel.AboutUsTitle;
@@ -232,12 +232,12 @@ namespace AryanITC.Core.Services.Implementations
                 IsDelete = createServiceViewModel.IsDelete,
                 FontAwesome = createServiceViewModel.FontAwesome,
                 ServiceLink = createServiceViewModel.ServiceLink,
-                FontAwesomeColor =createServiceViewModel.FontAwesomeColor,
-                   
+                FontAwesomeColor = createServiceViewModel.FontAwesomeColor,
+
 
             };
 
-           
+
 
             if (createServiceViewModel.ServiceImageFile != null)
             {
@@ -265,7 +265,44 @@ namespace AryanITC.Core.Services.Implementations
             return await _serviceRepository.GetServiceForEdit(serviceId);
         }
 
-        #endregion
+        public async Task<EditServiceResult> UpdateService(EditServiceViewModel editServiceViewModel)
+        {
+            var service = await _serviceRepository.GetServiceById(editServiceViewModel.serviceId);
+            if (service == null)
+            {
+                return EditServiceResult.NotFound;
+            }
+
+            service.FontAwesome = editServiceViewModel.FontAwesome;
+            service.FontAwesomeColor = editServiceViewModel.FontAwesomeColor;
+            service.IsActive = editServiceViewModel.IsActive;
+            service.IsDelete = editServiceViewModel.IsDelete;
+            service.ServiceDescription = editServiceViewModel.ServiceDescription;
+            service.ServiceLink = editServiceViewModel.ServiceLink;
+            service.ServiceTitle = editServiceViewModel.ServiceTitle;
+
+            if (service.ServiceImage != null)
+            {
+                string imageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(editServiceViewModel.ServiceImageFile.FileName);
+                editServiceViewModel.ServiceImageFile.AddImageToServer(imageName, FilePath.FilePath.ServiceServer, 100, 100,
+                    FilePath.FilePath.ServiceThumbServer);
+                service.ServiceImage = imageName;
+            }
+
+            else
+            {
+                service.ServiceImage = null;
+            }
+
+            await _serviceRepository.SaveChange();
+            return EditServiceResult.Success;
+
+            #endregion
+        }
+
 
     }
+
+
 }
+
