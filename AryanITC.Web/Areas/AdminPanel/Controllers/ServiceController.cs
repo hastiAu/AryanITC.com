@@ -150,7 +150,6 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             return RedirectToAction("Index");
         }
 
-
         #endregion
 
         #region Restore Service
