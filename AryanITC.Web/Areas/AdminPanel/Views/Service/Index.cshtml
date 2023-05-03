@@ -147,14 +147,14 @@
                                                     <a title="ویرایش" asp-controller="Service" asp-action="EditService" asp-route-id="@item.Id">
                                                         <i class="material-icons">create</i>
                                                     </a>
-                                                    <a title="حذف" asp-controller="Service" asp-action="" asp-route-id="@item.Id" remove-ajax>
+                                                    <a title="حذف" asp-controller="Service" asp-action="DeleteService" asp-route-id="@item.Id" remove-ajax>
                                                         <i class="material-icons">delete</i>
                                                     </a>
 
                                                 }
                                                 else
                                                 {
-                                                    <a title="بازگردانی" asp-controller="Service" asp-action=" " asp-route-id="@item.Id" remove-ajax>
+                                                    <a title="بازگردانی" asp-controller="Service" asp-action="RestoreService" asp-route-id="@item.Id" remove-ajax>
                                                         <i class="material-icons">restore</i>
                                                     </a>
                                                 }

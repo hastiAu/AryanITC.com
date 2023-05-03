@@ -300,7 +300,35 @@ namespace AryanITC.Core.Services.Implementations
             #endregion
         }
 
+        public async Task<DeleteServiceViewModel> DeleteService(long serviceId)
+        {
+            var service = await _serviceRepository.GetServiceById(serviceId);
 
+            if (service == null)
+            {
+                return DeleteServiceViewModel.ServiceNotFound;
+            }
+
+            service.IsDelete = true;
+            _serviceRepository.UpdateService(service);
+             await _serviceRepository.SaveChange();
+            return DeleteServiceViewModel.SuccessDeleted;
+        }
+
+        public  async Task<RestoreServiceViewModel> RestoreService(long serviceId)
+        {
+            var service = await _serviceRepository.GetServiceById(serviceId);
+
+            if (service == null)
+            {
+                return RestoreServiceViewModel.ServiceNotFound;
+            }
+
+            service.IsDelete = false;
+            _serviceRepository.UpdateService(service);
+            await _serviceRepository.SaveChange();
+            return RestoreServiceViewModel.SuccessRestored;
+        }
     }
 
 

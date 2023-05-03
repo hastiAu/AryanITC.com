@@ -123,6 +123,9 @@
   <data name="FontAwesomeColor" xml:space="preserve">
     <value>کد رنگ</value>
   </data>
+  <data name="Image" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>فعال</value>
   </data>

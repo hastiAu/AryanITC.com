@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.ViewModels.Service;
@@ -90,7 +91,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             }
 
             var result = await _siteService.GetServiceForEdit(id);
-            return  View(result);
+            return View(result);
         }
 
         [HttpPost]
@@ -120,6 +121,65 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             }
 
             return View();
+        }
+
+        #endregion
+
+        #region Delete Service
+
+        public async Task<IActionResult> DeleteService(long id)
+        {
+            var service = await _siteService.DeleteService(id);
+
+            switch (service)
+            {
+                case DeleteServiceViewModel.ServiceNotFound:
+                    return Json(new
+                    {
+                        text = "سرویس مورد نظر یافت نشد"
+                    });
+
+                case DeleteServiceViewModel.SuccessDeleted:
+                    return Json(new
+                    {
+                        text = " سرویس با موفقیت حذف شد",
+                        statusCode = HttpStatusCode.OK
+                    });
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        #endregion
+
+        #region Restore Service
+
+        public async Task<IActionResult> RestoreService(long id)
+        {
+            var service = await _siteService.RestoreService(id);
+
+            switch (service)
+            {
+                case RestoreServiceViewModel.ServiceNotFound:
+                    return Json(new
+                    {
+                        text = "سرویس مورد نظر یافت نشد"
+
+                    });
+
+                case RestoreServiceViewModel.SuccessRestored:
+                    return Json(new
+                    {
+                        text = "سرویس مورد نظر بازگردانی شد",
+                        StatusCode = HttpStatusCode.OK
+                        
+                    });
+                
+            }
+
+            return RedirectToAction("Index");
         }
 
         #endregion

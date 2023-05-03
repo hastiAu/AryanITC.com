@@ -25,6 +25,8 @@ namespace AryanITC.Domain.IRepository
         Task<EditServiceViewModel> GetServiceForEdit(long serviceId);
         void UpdateService(Service service);
         Task<Service> GetServiceById(long serviceId);
+       
+        
 
         #endregion
 

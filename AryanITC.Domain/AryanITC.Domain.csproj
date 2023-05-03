@@ -56,11 +56,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CreateServiceViewModel.fa-IR.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ViewModels\Service\FilterServiceViewModel.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>FilterServiceViewModel.fa-IR.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using AryanITC.Domain.Entities.Service;
@@ -37,6 +38,8 @@ namespace AryanITC.Core.Services.Interfaces
         Task<List<ServiceViewModel>> GetAllServiceForShowInSite();
         Task<EditServiceViewModel> GetServiceForEdit(long serviceId);
         Task<EditServiceResult> UpdateService(EditServiceViewModel editServiceViewModel);
+        Task<DeleteServiceViewModel> DeleteService(long serviceId);
+        Task<RestoreServiceViewModel> RestoreService(long serviceId);
 
 
         #endregion
