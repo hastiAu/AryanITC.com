@@ -146,8 +146,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
                         statusCode = HttpStatusCode.OK
                     });
             }
-
-
+                
             return RedirectToAction("Index");
         }
 
