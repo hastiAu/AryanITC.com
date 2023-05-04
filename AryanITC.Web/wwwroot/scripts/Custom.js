@@ -1,4 +1,6 @@
-﻿var isOpenSearch = false;
+﻿
+
+var isOpenSearch = false;
 $(document).ready(function () {
     // Add smooth scrolling to all links
     var _haveClass = false;

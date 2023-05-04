@@ -165,4 +165,5 @@ function changepicture(position) {
     $(".bg").css("display", "none");
     $(".bg--back").css("display", "block");
     }
-    }
+}
+
