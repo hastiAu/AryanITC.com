@@ -1,0 +1,92 @@
+﻿@model AryanITC.Domain.ViewModels.Portfolio.CreatePortfolioCategoryViewModel
+@{
+    ViewData["Title"] = "ایجاد سر گروه نمونه کار";
+}
+
+@section AdminBreadCrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item float-right"><a asp-action="Index" asp-controller="Home"><i class="zmdi zmdi-home"></i> آریان ITC </a></li>
+        <li class="breadcrumb-item float-right"><a asp-action="Index"> افزودن سرگروه نمونه کار </a></li>
+    </ul>
+
+}
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
+        {
+            <div class="alert alert-danger">
+                <p>@ViewBag.ErrorText</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessText))
+        {
+            <div class="alert alert-success">
+                <p>@ViewBag.SuccessText</p>
+            </div>
+        }
+    </div>
+
+    <div class="container-fluid">
+        <!-- Input -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> افزودن دسته بندی نمونه کار </h2>
+                    </div>
+                    <div class="body">
+ 
+                            <form asp-controller="Portfolio" asp-action="CreatePortfolioCategory" enctype="multipart/form-data" method="post">
+                                <div class="row clearfix">
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="form-group">
+                                            <label class="control-label" asp-for="PortfolioTitle"></label>
+                                            <input asp-for="PortfolioTitle" class="form-control"/>
+                                            <span asp-validation-for="PortfolioTitle"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="form-group">
+                                            <label class="control-label" asp-for="Order"></label>
+                                            <input asp-for="Order" class="form-control"/>
+                                            <span asp-validation-for="Order"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="form-group">
+                                            <label class="control-label" asp-for="NameInUrl"></label>
+                                            <input asp-for="NameInUrl" class="form-control"/>
+                                            <span asp-validation-for="NameInUrl"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="checkbox">
+                                            <input type="checkbox" asp-for="IsActive">
+                                            <label asp-for="IsActive"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row ">
+                                    <div class="col-12 left">
+                                        <div class="form-group">
+                                            <input type="submit" value="افزودن" class="btn btn-success"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Input -->
+    </div>

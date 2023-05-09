@@ -34,6 +34,7 @@ namespace AryanITC.Infra.IOC.Dependency
             service.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
             service.AddScoped<IAboutUsRepository, AboutUsRepository>();
             service.AddScoped<IServiceRepository, ServiceRepository>();
+            service.AddScoped<IPortfolioRepository, PortfolioRepository>();
 
 
             #endregion

@@ -8,9 +8,11 @@ using AryanITC.Core.Extensions;
 using AryanITC.Core.Generator;
 using AryanITC.Core.Services.Interfaces;
 using AryanITC.Domain.Entities.AboutUs;
+using AryanITC.Domain.Entities.Portfolio;
 using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.IRepository;
 using AryanITC.Domain.ViewModels.AboutUs;
+using AryanITC.Domain.ViewModels.Portfolio;
 using AryanITC.Domain.ViewModels.Service;
 using AryanITC.Domain.ViewModels.SiteSetting;
 
@@ -25,12 +27,14 @@ namespace AryanITC.Core.Services.Implementations
         private readonly ISiteSettingRepository _siteSettingRepository;
         private readonly IAboutUsRepository _aboutUsRepository;
         private readonly IServiceRepository _serviceRepository;
+        private readonly IPortfolioRepository _portfolioRepository;
 
-        public SiteService(ISiteSettingRepository siteSettingRepository, IAboutUsRepository aboutUsRepository, IServiceRepository serviceRepository)
+        public SiteService(ISiteSettingRepository siteSettingRepository, IAboutUsRepository aboutUsRepository, IServiceRepository serviceRepository, IPortfolioRepository portfolioRepository)
         {
             _siteSettingRepository = siteSettingRepository;
             _aboutUsRepository = aboutUsRepository;
             _serviceRepository = serviceRepository;
+            _portfolioRepository = portfolioRepository;
         }
 
 
@@ -205,10 +209,6 @@ namespace AryanITC.Core.Services.Implementations
 
         #endregion
 
-
-
-
-
         #region Service
 
         public async Task<FilterServiceViewModel> FilterAdminService(FilterServiceViewModel filterServiceViewModel)
@@ -296,8 +296,6 @@ namespace AryanITC.Core.Services.Implementations
 
             await _serviceRepository.SaveChange();
             return EditServiceResult.Success;
-
-            #endregion
         }
 
         public async Task<DeleteServiceViewModel> DeleteService(long serviceId)
@@ -311,11 +309,11 @@ namespace AryanITC.Core.Services.Implementations
 
             service.IsDelete = true;
             _serviceRepository.UpdateService(service);
-             await _serviceRepository.SaveChange();
+            await _serviceRepository.SaveChange();
             return DeleteServiceViewModel.SuccessDeleted;
         }
 
-        public  async Task<RestoreServiceViewModel> RestoreService(long serviceId)
+        public async Task<RestoreServiceViewModel> RestoreService(long serviceId)
         {
             var service = await _serviceRepository.GetServiceById(serviceId);
 
@@ -329,8 +327,37 @@ namespace AryanITC.Core.Services.Implementations
             await _serviceRepository.SaveChange();
             return RestoreServiceViewModel.SuccessRestored;
         }
-    }
+        #endregion
 
+
+        #region Portfolio
+
+       
+        public async Task<CreatePortfolioCategoryResult> CreatePortfolioCategory(CreatePortfolioCategoryViewModel createPortfolioCategoryViewModel)
+        {
+            if (createPortfolioCategoryViewModel.ParentId != null && !await _portfolioRepository.IsExistPortfolioCategory(createPortfolioCategoryViewModel.ParentId.Value))
+                return  CreatePortfolioCategoryResult.NotFound;
+
+            PortfolioCategory portfolioCategory = new PortfolioCategory()
+            {
+                PortfolioTitle = createPortfolioCategoryViewModel.PortfolioTitle,
+                NameInUrl = createPortfolioCategoryViewModel.NameInUrl,
+                IsDelete = createPortfolioCategoryViewModel.IsDelete,
+                IsActive = createPortfolioCategoryViewModel.IsActive,
+                Order = createPortfolioCategoryViewModel.Order,
+                ParentId = createPortfolioCategoryViewModel.ParentId
+            };
+
+            await _portfolioRepository.CreatePortfolioCategory(portfolioCategory);
+            await _portfolioRepository.SaveChange();
+            return CreatePortfolioCategoryResult.Created;
+
+        }
+
+       
+
+        #endregion
+    }
 
 }
 

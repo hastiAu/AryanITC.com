@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.ViewModels.AboutUs;
+using AryanITC.Domain.ViewModels.Portfolio;
 using AryanITC.Domain.ViewModels.Service;
 using AryanITC.Domain.ViewModels.SiteSetting;
 
 namespace AryanITC.Core.Services.Interfaces
 {
-   public interface ISiteService
+    public interface ISiteService
     {
 
         #region Site Setting
@@ -44,5 +45,13 @@ namespace AryanITC.Core.Services.Interfaces
 
         #endregion
 
+        #region Portfolio
+
+        Task<CreatePortfolioCategoryResult> CreatePortfolioCategory(
+            CreatePortfolioCategoryViewModel createPortfolioCategoryViewModel);
+
+ 
+
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AryanITC.Domain.Entities.AboutUs;
 using AryanITC.Domain.Entities.Access;
 using AryanITC.Domain.Entities.Account;
+using AryanITC.Domain.Entities.Portfolio;
 using AryanITC.Domain.Entities.Service;
 using AryanITC.Domain.Entities.SiteSetting;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,13 @@ namespace AryanITC.Infra.Data.Context
         #region Service
 
         public DbSet<Service>Services { get; set; }
+
+        #endregion
+
+        #region Portfolio
+        public DbSet<Portfolio> Portfolios { get; set; }
+        public DbSet<PortfolioCategory> PortfolioCategories { get; set; }
+        public DbSet<PortfolioSelectedCategory> PortfolioSelectedCategories { get; set; }
 
         #endregion
     }
