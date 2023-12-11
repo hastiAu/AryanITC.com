@@ -23,10 +23,11 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
 
         #endregion
 
-        public IActionResult Index()
+        public IActionResult Index (string? successText)
         {
+            ViewBag.SuccessText = successText;
             return View();
-        }
+    }
 
         #region Create Portfolio Category
         [HttpGet]
@@ -64,7 +65,7 @@ namespace AryanITC.Web.Areas.AdminPanel.Controllers
             }
            
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { successText = ViewBag.SuccessText });
             }
 
      

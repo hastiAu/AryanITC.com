@@ -11,7 +11,7 @@ namespace AryanITC.Web.ViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View("/Views/Shared/Components/CloudHosting/CloudHosting.cshtml");
+            return  View("/Views/Shared/Components/CloudHosting/CloudHosting.cshtml");
         }
     }
 }

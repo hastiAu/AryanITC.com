@@ -187,7 +187,7 @@ function MyNotifications(e) {
 //Portfolio
 
     jQuery(document).ready(function ($) {
-        // Portfolio Isotope
+         Portfolio Isotope
         var container = $('#portfolio-wrap');
 
 
